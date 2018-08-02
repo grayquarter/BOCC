@@ -2,11 +2,13 @@
 if (cap.isCompleteCap()) {
 	arrInspRecord = new Array();
 	oInspList = aa.inspection.getInspectionListForSchedule(capId.getID1(), capId.getID2(), capId.getID3());
-	if (oInspList.getSuccess())
+	if (oInspList.getSuccess()) {
 		inspectionTypes = oInspList.getOutput();
-	for (type in inspectionTypes)
+	}
+	for (type in inspectionTypes) {
 		//replaced branch(ASA:AddInspectionToASITable:LOOP)
 		addInspectionsToASITable();
+	}
 }
 
 // DISABLED: ASA:Planning/Growth Mgmt/Zoning Permits/Tree:3

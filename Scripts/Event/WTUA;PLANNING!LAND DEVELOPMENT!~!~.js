@@ -30,9 +30,11 @@
 		emailSubject = 'Release of power to structure notification';
 		emailText = 'Permit Number : ' + capIDString + '\n';
 		ca = getOwnerArray();
-		for (ca1 in ca)
-			for (ca2 in ca[ca1])
+		for (ca1 in ca) {
+			for (ca2 in ca[ca1]) {
 				emailText += ca2 + ' = ' ca[ca1][ca2] + '\n';
+			}
+		}
 		ad = aa.address.getAddressByCapId(capId).getOutput();
 		emailText += 'Address = ' + ad[0].getHouseNumberStart() + ' ' + ad[0].getStreetPrefix() + ' ' + ad[0].getStreetName();
 		emailText += ' ' + ad[0].getStreetSuffix() + ' ' + ad[0].getUnitStart() + ', ' + ad[0].getCity + ' ' + ad[0].getZip() + '\n';

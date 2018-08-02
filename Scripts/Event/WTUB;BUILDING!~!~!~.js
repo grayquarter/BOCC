@@ -11,42 +11,46 @@ if (wfTask == 'Finaled' && matches(wfStatus, 'Finaled', 'C of O Issued', 'C of C
 	asiInspectionType = '';
 	capApprovedInspectionType = '';
 	oInspList = aa.inspection.getInspections(capId);
-	if (oInspList.getSuccess())
+	if (oInspList.getSuccess()) {
 		inspectionTypes = oInspList.getOutput();
-	for (type in inspectionTypes)
+	}
+	for (type in inspectionTypes) {
 		//start replaced branch: ISB:AddApprovedInspectionsToArray:LOOP
-	{
-		capApprovedInspectionType = inspectionTypes[type].getInspectionType();
-		capInspectionStatus = inspectionTypes[type].getInspectionStatus();
-		if (matches(capInspectionStatus, 'Pass', 'Approved as Noted', 'Approved', 'Approved with Conditions', 'Not Required'))
-			arrApprovedInspections.push(capApprovedInspectionType);
+		{
+			capApprovedInspectionType = inspectionTypes[type].getInspectionType();
+			capInspectionStatus = inspectionTypes[type].getInspectionStatus();
+			if (matches(capInspectionStatus, 'Pass', 'Approved as Noted', 'Approved', 'Approved with Conditions', 'Not Required')) {
+				arrApprovedInspections.push(capApprovedInspectionType);
+			}
 
+		}
 	}
 	//end replaced branch: ISB:AddApprovedInspectionsToArray:LOOP;
 	logDebug('arrApprovedInspections.length: ' + arrApprovedInspections.length.toString());
-	if (arrApprovedInspections.length == 0)
+	if (arrApprovedInspections.length == 0) {
 		arrApprovedInspections.push('NO APPROVED INSPECTIONS');
-	for (pInsp in INSPECTIONSNEEDED)
+	}
+	for (pInsp in INSPECTIONSNEEDED) {
 		if (bApproved)
 			//start replaced branch: ISB:ValidateApprovedInspections:LOOP
 		{
 			bApproved = false;
 			asiInspectionType = INSPECTIONSNEEDED[pInsp]['Inspection Type'].toString();
 			logDebug('asiInspectionType to search for in array: ' + asiInspectionType);
-			for (i = 0;
-				i < arrApprovedInspections.length;
-				i++)
-				if (arrApprovedInspections[i].equals(asiInspectionType.toString()))
+			for (i = 0; i < arrApprovedInspections.length; i++) {
+				if (arrApprovedInspections[i].equals(asiInspectionType.toString())) {
 					bApproved = true;
+				}
+			}
 
 		}
+	}
 	//end replaced branch: ISB:ValidateApprovedInspections:LOOP;
-	if (!bApproved)
+	if (!bApproved) {
 		showMessage = true;
-	if (!bApproved)
 		comment('Inspection ' + asiInspectionType + ' must be Approved prior to updating the Finaled task.');
-	if (!bApproved)
 		cancel = true;
+	}
 }
 
 // DISABLED: WTUB:Building/*/*/*:5
@@ -63,12 +67,11 @@ if (wfTask == 'Finaled' && matches(wfStatus, 'Finaled', 'C of O Issued', 'C of C
 // 	}
 
 if (wfTask == 'Permit Issuance') {
-	if (LPValidation())
+	if (LPValidation()) {
 		showMessage = true;
-	if (LPValidation())
 		cancel = true;
-	if (LPValidation())
 		comment('Your General liability, Workmans Compensation or (if applicable) your Longshoremans Insurance is expired or not on file. Please contact Community Development on 941-743-1201.');
+	}
 }
 
 if (wfTask == 'Finaled' && checkForInsp(capId) == true) {

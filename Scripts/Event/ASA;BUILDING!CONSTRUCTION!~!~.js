@@ -4,4 +4,3 @@ var frACA = mCap.isCreatedByACA();
 //replaced branch(SeaTurtle)
 seaTurtle();
 //frACA==false;
-

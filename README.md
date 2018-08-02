@@ -1,2 +1,0 @@
-# BOCC
-Charlotte County, FL

@@ -1,7 +1,7 @@
 
 if (proximity('AGIS_CHARCO', 'Community Planning Areas', 1)) {
-	addStdCondition('CC PERMIT',  'Community Planning Area');
-	}
+	addStdCondition('CC PERMIT', 'Community Planning Area');
+}
 
 // DISABLED: ASA:Planning/*/*/*:2
 // if (proximity('AGIS_CHARCO', 'Babcock_Lots', 1)) {
@@ -14,10 +14,9 @@ if (proximity('AGIS_CHARCO', 'Community Planning Areas', 1)) {
 // 	}
 
 if (proximity('AGIS_CHARCO', 'Babcock_Lots', 1)) {
-	addStdCondition('CC PERMIT','Babcock Ranch');
-	}
+	addStdCondition('CC PERMIT', 'Babcock Ranch');
+}
 
 if (proximity('AGIS_CHARCO', 'CH', 1)) {
 	addStdCondition('CC PERMIT', 'Charlotte Harbor CRA');
-	}
-
+}

@@ -5,11 +5,13 @@ if (!appMatch('Building/Trade Permits/Residential/Irrigation System') && !appMat
 }
 
 if (!appMatch('Building/Trade Permits/Residential/Irrigation System') && !appMatch('Building/Trade Permits/Residential/Electrical') && (LicProfList.length > 0)) {
-	for (x in LicProfList)
+	for (x in LicProfList) {
 		var lpn = LicProfList[x].getLicenseNbr();
+	}
 	comment(GetLicInfo(lpn)[1]);
-	if (GetLicInfo(lpn)[0] == true)
+	if (GetLicInfo(lpn)[0] == true) {
 		cancel = true;
+	}
 }
 
 if (!appMatch('Building/Trade Permits/Residential/Irrigation System') && !appMatch('Building/Trade Permits/Residential/Electrical') && LPValidation()) {

@@ -11,9 +11,11 @@ if (documentUploadedFrom == 'ACA' && (myMatch == false)) {
 	var wfInfo = '';
 	var nCt = 0;
 	if ((wfObj != null)) {
-		for (var index in wfObj)
-			if ((wfObj[index].getDisposition() == 'Rejection Resubmitted') || (wfObj[index].getDisposition() == 'Rejected') || (wfObj[index].getDisposition() == 'Rejection Resubmittal'))
+		for (var index in wfObj) {
+			if ((wfObj[index].getDisposition() == 'Rejection Resubmitted') || (wfObj[index].getDisposition() == 'Rejected') || (wfObj[index].getDisposition() == 'Rejection Resubmittal')) {
 				var wfInfo = wfObj[index].getTaskDescription() + ', ' + wfObj[index].getDisposition();
+			}
+		}
 		nCt = nCt + 1;
 	}
 
@@ -69,14 +71,6 @@ if (documentUploadedFrom == 'ACA' && (myMatch == false)) {
 
 		//start replaced branch: AffNoZon
 		{
-			if (currentUserID == 'LAPHAMK') {
-				showMessage = true;
-				showDebug = true;
-			} else {
-				showMessage = false;
-				
-			}
-
 			var myMatch = capIDString.indexOf('TMP') != -1;
 			var documentModels = documentModelArray.toArray();
 			comment('documentModels.length=' + documentModels.length);
@@ -95,3 +89,4 @@ if (documentUploadedFrom == 'ACA' && (myMatch == false)) {
 		}
 		//end replaced branch: AffNoZon;
 	}
+}

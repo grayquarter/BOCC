@@ -30,9 +30,11 @@ var profArr = new Array();
 profArr = getLicenseProfessional(capId);
 var pLicNo;
 if ((profArr != null && profArr.length > 0)) {
-	for (x in profArr)
-		if (profArr[x].getPrintFlag() == 'Y')
+	for (x in profArr) {
+		if (profArr[x].getPrintFlag() == 'Y') {
 			pLicNo = profArr[x].getLicenseNbr();
+		}
+	}
 }
 
 if (appMatch('Building/Trade Permits/*/Mechanical') && (pLicNo.substr(0, 3) == 'CGC')) {
@@ -93,8 +95,9 @@ if (appMatch('Building/Construction/Residential/Single Family-Babcock') && frACA
 
 if (proximity('AGIS_CHARCO', 'DRI', 1)) {
 	email('Kevin.Lapham@charlottecountyfl.gov', 'aca.DRI@AGIS-accela.com', 'ACA Application in DRI for ' + capId + ' / ' + capIDString, 'Application in DRI for ' + capId + ' / ' + capIDString);
-	if (ckCapDRI(capIDString) == false)
+	if (ckCapDRI(capIDString) == false) {
 		addStdCondition('CC PERMIT', 'DRI Notice');
+	}
 }
 
 // DISABLED: ConvertToRealCapAfter:40

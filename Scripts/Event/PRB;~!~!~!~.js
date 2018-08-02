@@ -1,7 +1,7 @@
 //start replaced branch: CC_240_PaymentBefore
 {
 	comment('CC_240_PaymentBefore started');
-	
+
 	showMessage = false;
 	// DISABLED: CC_240_PaymentBefore:2
 	// if (PaymentMethod == 'Credit Card' && aa.env.getValue('PaymentCCAuthCode')  =='') {

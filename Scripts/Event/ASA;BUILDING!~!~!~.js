@@ -18,13 +18,16 @@ if (!appMatch('Building/POS/*/*')) {
 	showMessage = true;
 	attrArray = new Array;
 	loadAddressAttributes(attrArray, capId);
-	for (x in attrArray)
-		if (x == 'AddressAttribute.HISTORICAL' && attrArray[x] == 'Y')
+	for (x in attrArray) {
+		if (x == 'AddressAttribute.HISTORICAL' && attrArray[x] == 'Y') {
 			addStdCondition('CC PERMIT', 'Historical Address Notice');
+		}
+	}
 }
 
-if (proximity('AGIS_CHARCO', 'DRI', 1) && !appMatch('Building/POS/*/*')) {
-	editAppSpecific('Project Name', getGISInfo('AGIS_CHARCO', 'DRI', 'NAME'));
+if (proximity('AGIS_CHARCO', 'DRI', 1) && !appMatch('Building/POS/*/*')) { {
+		editAppSpecific('Project Name', getGISInfo('AGIS_CHARCO', 'DRI', 'NAME'));
+	}
 }
 
 // DISABLED: ASA:Building/*/*/*:14
@@ -50,12 +53,15 @@ if (proximity('AGIS_CHARCO', 'Babcock_Lots', 1) && !appMatch('Building/POS/*/*')
 	editAppSpecific('Lot Width', getGISInfo('AGIS_CHARCO', 'Babcock_Lots', 'LotWidth'));
 	editAppSpecific('Lot Depth', getGISInfo('AGIS_CHARCO', 'Babcock_Lots', 'LotDepth'));
 	editAppSpecific('Septic No.', getGISInfo('AGIS_CHARCO', 'Babcock_Lots', 'Utilities'));
-	if (getGISInfo('AGIS_CHARCO', 'Babcock_Lots', 'CornerLot') == 'Yes')
+	if (getGISInfo('AGIS_CHARCO', 'Babcock_Lots', 'CornerLot') == 'Yes') {
 		editAppSpecific('Corner Lot', 'CHECKED');
-	if (getGISInfo('AGIS_CHARCO', 'Babcock_Lots', 'InsideLot') == 'Yes')
+	}
+	if (getGISInfo('AGIS_CHARCO', 'Babcock_Lots', 'InsideLot') == 'Yes') {
 		editAppSpecific('Inside Lot', 'CHECKED');
-	if (getGISInfo('AGIS_CHARCO', 'Babcock_Lots', 'Waterfrnt') == 'Yes')
+	}
+	if (getGISInfo('AGIS_CHARCO', 'Babcock_Lots', 'Waterfrnt') == 'Yes') {
 		editAppSpecific('Waterfront', 'CHECKED');
+	}
 }
 
 if (!appMatch('Building/POS/*/*')) {
@@ -78,10 +84,11 @@ if (!appMatch('Building/POS/*/*')) {
 if (cap.isCompleteCap() && !appMatch('Building/POS/*/*')) {
 	bContinue = true;
 	arrCAPS = capIdsGetByParcel();
-	if (!arrCAPS)
+	if (!arrCAPS) {
 		bContinue = false;
+	}
 	sumVariable = 0;
-	if (bContinue)
+	if (bContinue) {
 		for (xy in arrCAPS)
 			//start replaced branch: ASA:SumConstructionCosts:LOOP
 		{
@@ -89,32 +96,37 @@ if (cap.isCompleteCap() && !appMatch('Building/POS/*/*')) {
 			relatedCapID = aa.cap.getCap(arrCAPS[xy]).getOutput();
 			oFileDate = relatedCapID.getFileDate();
 			strFileDate = dateFormatted(oFileDate.getMonth(), oFileDate.getDayOfMonth(), oFileDate.getYear(), '');
-			if (DateWithinXyears(strFileDate, 5))
+			if (DateWithinXyears(strFileDate, 5)) {
 				bProceed = true;
-			if (bProceed)
+			}
+			if (bProceed) {
 				constructionCost = getAppSpecific('Construction Cost', arrCAPS[xy]);
-			if (bProceed)
-				if (constructionCost != '')
+			}
+			if (bProceed) {
+				if (constructionCost != '') {
 					sumVariable = sumVariable + parseFloat(constructionCost);
+				}
+			}
 
 		}
+	}
 	//end replaced branch: ASA:SumConstructionCosts:LOOP;
-	if (bContinue)
+	if (bContinue) {
 		improvedValue = AInfo['ParcelAttribute.ImprovedValue'];
-	if (bContinue)
 		logDebug('improvedValue: ' + improvedValue.toString());
-	if (bContinue)
-		if (improvedValue != '')
+		if (improvedValue != '') {
 			improvedValue = parseFloat(improvedValue);
-	if (bContinue)
+		}
 		logDebug('sumVariable: ' + sumVariable.toString());
-	if (bContinue)
-		if ((improvedValue * 0.5) < sumVariable && !parcelConditionExists('Construction Cost'))
+		if ((improvedValue * 0.5) < sumVariable && !parcelConditionExists('Construction Cost')) {
 			addParcelCondition(null, 'Construction Cost', 'Applied', '50 Percent Notice', 'The total construction value over the past 5 years is greater than 50 percent of the total property value.', 'Notice');
+		}
+	}
 }
 
 if ((frACA == false) && proximity('AGIS_CHARCO', 'DRI', 1)) {
 	email('Kevin.Lapham@charlottecountyfl.gov', 'DRI@AGIS-accela.com', 'NON-ACA Application in DRI for ' + capId + ' / ' + capIDString, 'Application in DRI for ' + capId + ' / ' + capIDString);
-	if (ckCapDRI(capIDString) == false)
+	if (ckCapDRI(capIDString) == false) {
 		addStdCondition('CC PERMIT', 'DRI Notice');
+	}
 }

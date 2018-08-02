@@ -16,9 +16,11 @@ var profArr = new Array();
 profArr = getLicenseProfessional(capId);
 var emailAddress;
 if (profArr.length > 0) {
-	for (x in profArr)
-		if (profArr[x].getPrintFlag() == 'Y')
+	for (x in profArr) {
+		if (profArr[x].getPrintFlag() == 'Y') {
 			emailAddress = profArr[x].getEmail();
+		}
+	}
 }
 
 if (emailAddress == 'na' || emailAddress == null || emailAddress == 'NONE' || emailAddress == 'NA' || emailAddress == 'none') {
