@@ -15,6 +15,7 @@ editAppSpecific('Expiration Date', dateAdd(null, 180));
 // 	}
 
 if (!appMatch('Building/POS/*/*')) {
+	// TODO, setting showmessage to true could result in popups without meaningful messages
 	showMessage = true;
 	attrArray = new Array;
 	loadAddressAttributes(attrArray, capId);
@@ -41,6 +42,7 @@ if (proximity('AGIS_CHARCO', 'DRI', 1) && !appMatch('Building/POS/*/*')) { {
 // 	}
 
 if (proximity('AGIS_CHARCO', 'Babcock_Lots', 1) && !appMatch('Building/POS/*/*')) {
+	// TODO showMessage should default to false and only be set to true when needed.
 	showMessage = false;
 	comment('Updating Babcock ASI.');
 	// DISABLED: ASA:Building/*/*/*:21
@@ -97,12 +99,7 @@ if (cap.isCompleteCap() && !appMatch('Building/POS/*/*')) {
 			oFileDate = relatedCapID.getFileDate();
 			strFileDate = dateFormatted(oFileDate.getMonth(), oFileDate.getDayOfMonth(), oFileDate.getYear(), '');
 			if (DateWithinXyears(strFileDate, 5)) {
-				bProceed = true;
-			}
-			if (bProceed) {
 				constructionCost = getAppSpecific('Construction Cost', arrCAPS[xy]);
-			}
-			if (bProceed) {
 				if (constructionCost != '') {
 					sumVariable = sumVariable + parseFloat(constructionCost);
 				}
