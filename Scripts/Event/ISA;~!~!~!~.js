@@ -6,9 +6,10 @@ oInspList = aa.inspection.getInspections(capId);
 inspArray = oInspList.getOutput();
 comment(inspArray);
 if (inspArray.length > 0) {
-	for (insp in inspArray)
+	for (insp in inspArray) {
 		//replaced branch(fullInsps)
 		fullInsps();
+	}
 }
 
 var BabFin = checkInspectionResult('Babcock Final', 'Scheduled');

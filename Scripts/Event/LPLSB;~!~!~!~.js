@@ -1,4 +1,5 @@
 
+// TODO, setting showmessage to true could result in popups without meaningful messages
 showMessage = true;
 bAllowAdd = false;
 lookupResult = '';
@@ -19,5 +20,5 @@ if (lookupResult != undefined) {
 	}
 }
 
-//TODO: embed this code?
+//TODO: there is only one instance of this script, why not embed this code?
 include('LPLUSB:' + appTypeArray[0] + '/*/*/*');

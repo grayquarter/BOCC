@@ -1,5 +1,5 @@
 
-
+// TODO, setting showmessage to true could result in popups without meaningful messages
 showMessage = true;
 if (capStatus != 'Permit Issued' && capStatus != 'Issued' && capStatus != 'Temp C of O Issued') {
 	showMessage = true;

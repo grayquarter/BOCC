@@ -2,23 +2,23 @@
 if (appMatch('Building/*/*/*')) {
 	arrInspRecord = new Array();
 	oInspList = aa.inspection.getInspectionListForSchedule(capId.getID1(), capId.getID2(), capId.getID3());
-	if (oInspList.getSuccess())
+	if (oInspList.getSuccess()) {
 		inspectionTypes = oInspList.getOutput();
-	for (type in inspectionTypes)
+	}
+	for (type in inspectionTypes) {
 		//replaced branch(ASA:AddInspectionToASITable:LOOP)
 		addInspectionsToASITable();
+	}
 }
 
 editAppSpecific('Expiration Date', dateAdd(null, 180));
 if (proximity('AGIS_CHARCO', 'Sea Turtle Lighting Zones', 1)) {
 	addStdCondition('CC PERMIT', 'Sea Turtle Monitoring');
-
 	//replaced branch(SeaTurtleMonitor)
 	seaTurtleMonitor();
 }
 
 if (appMatch('Building/Construction/*/*')) {
-
 	//replaced branch(SeaTurtle)
 	seaTurtle();
 }

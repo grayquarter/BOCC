@@ -1,4 +1,5 @@
 
+// TODO more optimal to use asi = AInfo["AG Exemption"];
 var asi = getAppSpecific('AG Exemption', capId);
 comment('AG Exemption = ' + asi);
 if ((asi == 'Yes')) {

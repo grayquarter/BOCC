@@ -37,12 +37,6 @@ if (documentUploadedFrom == 'ACA' && (myMatch == false)) {
 if (documentUploadedFrom == 'ACA' && (myMatch == false)) {
 
 	//start replaced branch: resubmittal2
-	{
-		if (currentUserID == 'LAPHAMK') {
-			showMessage = true;
-			showDebug = true;
-		}
-
 		var myMatch = capIDString.indexOf('TMP') != -1;
 		//comment('match='+myMatch);
 		var documentModels = documentModelArray.toArray();

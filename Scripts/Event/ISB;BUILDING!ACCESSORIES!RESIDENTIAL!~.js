@@ -1,3 +1,4 @@
+// TODO, setting showmessage to true could result in popups without meaningful messages
 showMessage = true;
 if ((appMatch('Building/Accessories/Residential/Carport') && inspType == 'Building Final' && balanceDue > 0)) {
 	comment('Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');

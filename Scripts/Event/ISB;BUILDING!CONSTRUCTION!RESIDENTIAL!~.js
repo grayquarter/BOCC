@@ -1,3 +1,4 @@
+// TODO, setting showmessage to true could result in popups without meaningful messages
 showMessage = true;
 // DISABLED: ISB:Building/Construction/Residential/*:2
 // if ((inspType == 'Building Final' && balanceDue > 0)) {
