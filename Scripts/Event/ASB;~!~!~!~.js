@@ -24,6 +24,7 @@ if (currentUserID.substr(0, 6) != 'PUBLIC' && !matches(aa.env.getValue('LicProfL
 		}
 
 		if (!bAllowAdd) {
+			// TODO would need showMessage = true here to pop up the message
 			comment('<b>** You are trying to add an unapproved Licensed Professional type to this CAP **</b>');
 			cancel = true;
 		}
