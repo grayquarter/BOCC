@@ -92,7 +92,7 @@ if (PaymentMethod.equals('Cash')) {
 		//start replaced branch: PRB:WEB_SERVICE:OPEN_DRAWER
 	{
 		xmlOpenDrawer = '';
-		xmlOpenDrawer += '<soap:Envelope xmlns:soap=' http: //www.w3.org/2003/05/soap-envelope' xmlns:char='http://accela.com/CharlotteCounty/'>';
+		xmlOpenDrawer += "<soap:Envelope xmlns:soap='http://www.w3.org/2003/05/soap-envelope' xmlns:char='http://accela.com/CharlotteCounty/'>";
 		xmlOpenDrawer += '   <soap:Header/>';
 		xmlOpenDrawer += '   <soap:Body>';
 		xmlOpenDrawer += '      <char:OpenDrawer/>';
