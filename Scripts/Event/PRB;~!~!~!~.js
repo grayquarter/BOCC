@@ -60,7 +60,7 @@ if (PaymentMethod.equals('Cash')) {
 		//start replaced branch: PRB:WEB_SERVICE:CHECK_STATUS
 	{
 		xmlCheckDrawerStatus = '';
-		xmlCheckDrawerStatus += '<soap:Envelope xmlns:soap=' http: //www.w3.org/2003/05/soap-envelope' xmlns:char='http://accela.com/CharlotteCounty/'>';
+		xmlCheckDrawerStatus += "<soap:Envelope xmlns:soap='http://www.w3.org/2003/05/soap-envelope' xmlns:char='http://accela.com/CharlotteCounty/'>";
 		xmlCheckDrawerStatus += '   <soap:Header/>';
 		xmlCheckDrawerStatus += '   <soap:Body>';
 		xmlCheckDrawerStatus += '      <char:CheckDrawerStatus/>';

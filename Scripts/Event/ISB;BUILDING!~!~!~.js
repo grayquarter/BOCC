@@ -2,7 +2,7 @@
 if ((inspType != 'Plans Change Submitted' || inspType != 'On-Line Resubmittal') && capStatus != 'Permit Issued' && capStatus != 'Issued' && capStatus != 'Temp C of O Issued') {
 	showMessage = true;
 	cancel = true;
-	comment('Cannot schedule inspections when the permit does not currently have a status of ' Issued '');
+	comment("Cannot schedule inspections when the permit does not currently have a status of 'Issued'");
 }
 
 if (appHasCondition(null, 'Applied', null, 'LOCK')) {

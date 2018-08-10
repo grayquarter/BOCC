@@ -32,7 +32,9 @@
 		ca = getOwnerArray();
 		for (ca1 in ca) {
 			for (ca2 in ca[ca1]) {
-				emailText += ca2 + ' = ' ca[ca1][ca2] + '\n';
+				// TODO: source code for conversion had a syntax error here, fixed.
+				//emailText += ca2 + ' = ' ca[ca1][ca2] + '\n';
+				emailText += ca2 + ' = ' + ca[ca1][ca2] + '\n';				
 			}
 		}
 		ad = aa.address.getAddressByCapId(capId).getOutput();

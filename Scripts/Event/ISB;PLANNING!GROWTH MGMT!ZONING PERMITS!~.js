@@ -4,7 +4,7 @@ showMessage = true;
 if (capStatus != 'Permit Issued' && capStatus != 'Issued' && capStatus != 'Temp C of O Issued') {
 	showMessage = true;
 	cancel = true;
-	comment('Cannot schedule inspections when the permit does not currently have a status of ' Issued '');
+	comment("Cannot schedule inspections when the permit does not currently have a status of 'Issued'");
 }
 
 if ((appMatch('Planning/Growth Mgmt/Zoning Permits/Temporary Advertising') && inspType == 'Zoning Final' && balanceDue > 0)) {

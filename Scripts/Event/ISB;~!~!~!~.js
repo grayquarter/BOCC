@@ -25,7 +25,7 @@ if (!appMatch('Building/Accessories/Residential/Garage') && !appMatch('Building/
 		}
 
 		if ((asi != null && asi != 'No' && asi != 'X' && asi != 'D' && elevCertPassedAll == false)) {
-			comment('An Elevation certificate required for Lintel since is in flood zone ' ' + asi + ' '.  Cancelling inspection...');
+			comment("An Elevation certificate required for Lintel since is in flood zone '" + asi + "'.  Cancelling inspection...");
 			cancel = true;
 		} else {
 			comment('Criteria met... Lintel inspection scheduled.');
