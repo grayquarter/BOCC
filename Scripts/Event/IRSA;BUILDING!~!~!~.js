@@ -97,9 +97,7 @@
 			var city = addrArray[0].getCity();
 			var zip = addrArray[0].getZip();
 			var etext;
-			etext = CapTypeResult + ';
-				' + inspType + ';
-				' + 'Permit #' + capIDString + ' (ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + ')' + '<br>';
+			etext = CapTypeResult + ' ' + inspType + ' ' + 'Permit #' + capIDString + ' (ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + ')' + '<br>';
 			// DISABLED: FPL_temp:30
 			// aa.sendMail('NoReply@CharlotteCountyFL.gov','TinaC.Jones@charlottecountyfl.gov','','FPL Notification from Charlotte County', etext);
 			aa.sendMail('NoReply@CharlotteCountyFL.gov', 'sherry.stover@fpl.com', '', 'FPL Notification from Charlotte County', etext);
