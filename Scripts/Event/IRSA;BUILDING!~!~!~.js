@@ -1,0 +1,203 @@
+//start replaced branch: CC_151_BLD_InspResultAfter
+{
+
+	if (inspResult == 'Fail with Fee') {
+		addFee('REJ-B', 'ADDTL_INSP_FEES', 'ORIGINAL', 1, 'Y');
+		comment('Fail with fee executed.');
+	}
+
+	if (inspResult == 'Fail') {
+		addFee('REJ-B', 'ADDTL_INSP_FEES', 'ORIGINAL', 1, 'Y');
+		comment('Fail with fee executed.');
+	}
+
+	if (inspResult == 'Fail with Fee x 2') {
+		addFee('REJ-B2', 'ADDTL_INSP_FEES', 'ORIGINAL', 1, 'Y');
+	}
+
+	if (inspResult == 'Fail with Fee x 3') {
+		addFee('REJ-B3', 'ADDTL_INSP_FEES', 'ORIGINAL', 1, 'Y');
+	}
+
+	if (matches(inspResult, 'Fail with Fee Z', 'Fail with Fee x 2 Z', 'Fail with Fee x 3 Z')) {
+		addFee('REJ-Z', 'ADDTL_INSP_FEES', 'ORIGINAL', 1, 'Y');
+	}
+
+	if (inspResult == 'Fail ROW') {
+		addFee('10-ROWREIN', 'ADDTL_INSP_FEES', 'ORIGINAL', 1, 'Y');
+	}
+
+	if (inspResult == 'Fail Re-inspect') {
+		addFee('M-STWTRREI', 'ADDTL_INSP_FEES', 'ORIGINAL', 1, 'Y');
+	}
+
+	if (inspResult == 'Partial') {
+		addFee('REJ-B', 'ADDTL_INSP_FEES', 'ORIGINAL', 1, 'Y');
+	}
+
+	if (matches(inspResult, 'Pass', 'Approved as Noted', 'Not Required') && balanceDue == 0) {
+		pendingInspectionExists = checkForPendingInspections();
+		if (!pendingInspectionExists)
+			branchTask('Finaled', getFinaledWorkflowStatus());
+	}
+
+	if ((inspResult.indexOf('Fail') > -1 || inspResult.indexOf('Partial') > -1 || inspResult.indexOf('Cancelled') > -1)) {
+		createPendingInspection(inspGroup, inspType);
+	}
+
+	if (matches(inspResult, 'Pass', 'Approved as Noted', 'Partial without Fee', 'Approved per Affidavit Program') && inspType != 'Plans Change Submitted') {
+		editAppSpecific('Expiration Date', dateAdd(null, 180));
+	}
+
+	if ((appMatch('Building/Construction/Residential/*') || appMatch('Building/Accessories/Residential/*')) && (inspType == 'Plans Change Submitted' || inspType == 'On-Line Resubmittal') && (inspResult == 'Pass' || inspResult == 'Approved as Noted')) {
+		addFee('PLN CHNG', 'ADD_REVIEW', 'ORIGINAL', 1, 'Y');
+	}
+
+	if ((appMatch('Building/Construction/Commercial/*') || appMatch('Building/Accessories/Commercial/*')) && (inspType == 'Plans Change Submitted' || inspType == 'On-Line Resubmittal') && (inspResult == 'Pass' || inspResult == 'Approved as Noted')) {
+		addFee('PLN CHNG_COM', 'ADD_REVIEW', 'ORIGINAL', 1, 'Y');
+	}
+
+	if (appMatch('Building/Accessories/Residential/Temporary Erosion Control') && inspType == 'Compliance Inspection' && inspResult == 'Pass') {
+		editAppSpecific('Expiration Date', dateAdd(null, 60));
+	}
+
+	if ((inspType == 'Electric Final' && inspResult == 'Electric - Power')) { {
+			//START REPLACED BRANCH FPL_FINAL
+			var cap = aa.cap.getCap(capId).getOutput();
+			var CapTypeResult = cap.getCapType();
+			addrResult = aa.address.getAddressByCapId(capId);
+			var addrArray = new Array();
+			var addrArray = addrResult.getOutput();
+			var streetName = addrArray[0].getStreetName();
+			var hseNum = addrArray[0].getHouseNumberStart();
+			var streetSuffix = addrArray[0].getStreetSuffix();
+			var city = addrArray[0].getCity();
+			var zip = addrArray[0].getZip();
+			var etext;
+			etext = CapTypeResult + ';
+				' + inspType + ';
+				' + 'Permit #' + capIDString + ' (ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + ')' + '<br>';
+			// DISABLED: FPL_final:30
+			// aa.sendMail('NoReply@CharlotteCountyFL.gov','TinaC.Jones@charlottecountyfl.gov','','FPL Notification from Charlotte County', etext);
+			aa.sendMail('NoReply@CharlotteCountyFL.gov', 'sherry.stover@fpl.com', '', 'FPL Notification from Charlotte County', etext);
+			aa.sendMail('NoReply@CharlotteCountyFL.gov', 'stacey.scott@fpl.com', '', 'FPL Notification from Charlotte County', etext);
+			// END REPLACED BRANCH FPL_FINAL
+		}
+		comment('Electric Final--Electric - Power');
+	}
+
+	if ((inspType == 'Electric Temporary Service' && inspResult == 'Electric - Power')) { {
+			// START REPLACED BRANCH FPL_TEMP
+			var cap = aa.cap.getCap(capId).getOutput();
+			var CapTypeResult = cap.getCapType();
+			addrResult = aa.address.getAddressByCapId(capId);
+			var addrArray = new Array();
+			var addrArray = addrResult.getOutput();
+			var streetName = addrArray[0].getStreetName();
+			var hseNum = addrArray[0].getHouseNumberStart();
+			var streetSuffix = addrArray[0].getStreetSuffix();
+			var city = addrArray[0].getCity();
+			var zip = addrArray[0].getZip();
+			var etext;
+			etext = CapTypeResult + ';
+				' + inspType + ';
+				' + 'Permit #' + capIDString + ' (ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + ')' + '<br>';
+			// DISABLED: FPL_temp:30
+			// aa.sendMail('NoReply@CharlotteCountyFL.gov','TinaC.Jones@charlottecountyfl.gov','','FPL Notification from Charlotte County', etext);
+			aa.sendMail('NoReply@CharlotteCountyFL.gov', 'sherry.stover@fpl.com', '', 'FPL Notification from Charlotte County', etext);
+			aa.sendMail('NoReply@CharlotteCountyFL.gov', 'stacey.scott@fpl.com', '', 'FPL Notification from Charlotte County', etext);
+			// END REPLACED BRANCH FPL_TEMP
+		}
+		comment('Electric Temporary Service--Electric - Power');
+	}
+
+	if (matches(inspResult, 'Cancelled by County', 'Cancelled by Applicant')) { {
+			// START REPLACED BRANCH CANCELEMAIL2
+			var currentDt = new Date(inspSchedDate);
+			var dd = currentDt.getDate();
+			var mm = currentDt.getMonth() + 1;
+			var yyyy = currentDt.getFullYear();
+			var myDateStr = mm + '/' + dd + '/' + yyyy;
+			comment('myDateStr = ' + myDateStr);
+			var StrCapID = String(capIDString);
+			var StrInspType = String(inspType);
+			var insEmail = lastInspEmail(StrCapID, StrInspType);
+			var sysDate = new Date();
+			var sdd = sysDate.getDate();
+			var smm = sysDate.getMonth() + 1;
+			var syyyy = sysDate.getFullYear();
+			comment('FORMATED sys DATE: ' + smm + '/' + sdd + '/' + syyyy);
+			var text2 = 'Permit # ' + capId.getCustomID() + '<br>Type: ' + inspType + ' scheduled on ' + inspSchedDate;
+			var addrResult = aa.address.getAddressByCapId(capId);
+			var addrArray = new Array();
+			addrArray = addrResult.getOutput();
+			var hseNum = addrArray[0].getHouseNumberStart();
+			var streetName = addrArray[0].getStreetName();
+			var zip = addrArray[0].getZip();
+			var city = addrArray[0].getCity();
+			var etext = 'at Address: ' + hseNum + ' ' + streetName + ', ' + city + ' ' + zip + '\n' + 'has been ';
+			comment('A cancellation email would be sent TO:  ' + insEmail + ' with the following details:');
+			comment(text2 + '\n' + etext + '\n' + inspResult + '.');
+			if (((mm <= smm) && (dd <= sdd) && (yyyy <= syyyy))) {
+				comment('date validated --> to email / INSPECTION: ' + inspType);
+				comment('date validated? --> to email / INSPECTION: ' + inspType);
+				email(insEmail, 'NoReply_Accela@CharlotteCountyFL.gov', inspType + ' CANCEL - Permit ' + capIDString, text2 + '<br>' + etext + '<br>' + inspResult + ' on ' + smm + '/' + sdd + '/' + syyyy);
+			}
+			// end REPLACED BRANCH CANCELEMAIL2
+		}
+
+	}
+
+	comment('CC_151_BLD_InspResultAfter executed successfully');
+	//start replaced branch contractor_inspection'
+	{
+		currentUserID == 'LAPHAMK';
+		var myInsp = String(inspType);
+		var myCapId = String(capIDString);
+		var myLastN = getMyLastInsp(myInsp, myCapId);
+		var myLast = lastInspEmail(myCapId, myInsp);
+		var emlInsp = myLast + '<br>' + myLastN;
+		addrResult = aa.address.getAddressByCapId(capId);
+		var addrArray = new Array();
+		var addrArray = addrResult.getOutput();
+		var streetName = addrArray[0].getStreetName();
+		var hseNum = addrArray[0].getHouseNumberStart();
+		var streetSuffix = addrArray[0].getStreetSuffix();
+		var city = addrArray[0].getCity();
+		var zip = addrArray[0].getZip();
+		var profArr = new Array();
+		var myComment = inspComment;
+		if (myComment == null)
+			myComment = 'n/a';
+		profArr = getLicenseProfessional(capId);
+		var emailAddress;
+		var inspUser = getInspector(inspType);
+		if (profArr.length > 0) {
+			for (x in profArr)
+				if (profArr[x].getPrintFlag() == 'Y')
+					emailAddress = profArr[x].getEmail();
+		}
+
+		if (emailAddress == 'na' || emailAddress == null || emailAddress == 'NONE' || emailAddress == 'NA' || emailAddress == 'none') {
+			emailAddress = 'TinaC.Jones@charlottecountyfl.gov';
+		}
+
+		var inspF = myLastN.getFirstName();
+		var inspL = myLastN.getLastName();
+		var cap = aa.cap.getCap(capId).getOutput();
+		var CapTypeResult = cap.getCapType();
+		inspUserObj = aa.person.getUser(inspF, '', inspL).getOutput();
+		var myUser = inspUserObj.getUserID();
+		var inspPhone = inspUserObj.getPhoneNumber();
+		var etext;
+		etext = inspType + ' inspection: ' + inspResult + '<br>Permit #' + capIDString + ' (' + CapTypeResult + ')<br>Address: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + '<br>Comment: ' + myComment + '<br>Inspector: ' + inspF + ' ' + inspL + '<br>Insp. phone: ' + inspPhone;
+		var emlInsp = '<br>The last insp email is: ' + myLast;
+		//+ '<br>The last insp: ' + myLastN;
+		aa.sendMail('NoReply@CharlotteCountyFL.gov', emailAddress, '', inspType + ' Inspection Notification from Charlotte County -- ' + inspResult, etext);
+		// DISABLED: contractor_inspection:49
+		// aa.sendMail('NoReply-Auto_Sender@Accela.com','Kevin.Lapham@CharlotteCountyFL.gov','',inspType + ' Inspection Notification from Charlotte County -- ' + inspResult, etext);
+		//end replaced branch contractor_inspection'
+	}
+
+}
+//end replaced branch: CC_151_BLD_InspResultAfter;
