@@ -1,4 +1,21 @@
+// code extracted from modified "ISA New" scripts
 
+//update comments
+var inComm = inspObj.getInspectionComments();
+if (inComm == null) {
+	inComm = "";
+}
+var mySearch = /Permit/i;
+var result = mySearch.test(inComm);
+// TODO:  code should be reviewed.
+if (result == true) {
+	result = false;
+} else {
+	var inComm2 = inspObj.setInspectionComments(capIDString + " (Permit); " + inComm);
+	aa.inspection.editInspection(inspObj)
+}
+	
+// end update to master script
 
 var capIDString = capId.getCustomID();
 comment(capIDString);

@@ -1,4 +1,16 @@
 
+// extracted from customized master script
+var licenseList = aa.env.getValue("LicenseList").toArray();
+var licenseTypetoAdd = "";
+logDebug("licenseList = " + licenseList.getClass());
+for (var i in licenseList) {
+	logDebug("licenseList[" + i + "] = " + licenseList[i].getStateLicense());
+	var licenseTypetoAdd = licenseList[i].getLicenseType();
+}
+// end extracted from customized master script
+
+
+
 // TODO, setting showmessage to true could result in popups without meaningful messages
 showMessage = true;
 bAllowAdd = false;
