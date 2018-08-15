@@ -1,3 +1,4 @@
+// test jhs
 var cap = aa.cap.getCap(capId).getOutput();
 var CapTypeResult = cap.getCapType();
 var frACA = cap.isCreatedByACA();
