@@ -1,5 +1,9 @@
 // code extracted from modified "ISA New" scripts
 
+var capIDString = capId.getCustomID();
+var inspObj = aa.inspection.getInspection(capId, inspId).getOutput();  // current inspection object
+var inspGroup = inspObj.getInspection().getInspectionGroup();
+
 //update comments
 var inComm = inspObj.getInspectionComments();
 if (inComm == null) {
