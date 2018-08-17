@@ -10,7 +10,8 @@ if (!appMatch('Building/Trade Permits/Residential/Irrigation System') && !appMat
 	}
 	comment(GetLicInfo(lpn)[1]);
 	if (GetLicInfo(lpn)[0] == true) {
-		// TODO: cancel by itself will not send a message to the user
+		showMessage = true;
+		comment(GetLicInfo(lpn)[1]);
 		cancel = true;
 	}
 }
