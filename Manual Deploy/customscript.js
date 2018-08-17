@@ -1243,6 +1243,8 @@ function GetLicInsInfo(thisLp, myLicNo) {
 	var WCexFlag = 0
 		var licType = thisLp.getLicenseType();
 	if (licType == "OWNER BUILDER" || licType == "UNLICENSED CONTRACTOR" || licType == "COUNTY EMPLOYEE") {
+		logDebug("Unable to process OWNER BUILDER, UNLICENSED CONTRACTOR, COUNTY EMPLOYEE.");
+		aa.print("Unable to process OWNER BUILDER, UNLICENSED CONTRACTOR, COUNTY EMPLOYEE.");
 		aa.abortScript();
 	}
 	var bizName = thisLp.getBusinessName();
@@ -1314,11 +1316,10 @@ function GetLicInsInfo(thisLp, myLicNo) {
 				myInfo3 = " WC insurance expired."; //insurance and/or license expired.
 			}
 			var myInfo = [true, myLicNo + myInfo1 + myInfo2 + myInfo3];
-			aa.print(myInfo[1]);
-			logDebug(myInfo[1]);
+			logDebug(myInfo);
 			return myInfo;
 		} else {
-			aa.abortScript();
+			return false
 		}
 	}
 }
