@@ -1,3 +1,4 @@
+// comment
 
 if (proximity('AGIS_CHARCO', 'Community Planning Areas', 1)) {
 	addStdCondition('CC PERMIT', 'Community Planning Area');
