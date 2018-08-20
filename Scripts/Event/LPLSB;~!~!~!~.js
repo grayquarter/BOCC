@@ -27,7 +27,7 @@ if (lookupResult != undefined) {
 		}
 	}
 	if (!bAllowAdd) {
-		comment('<b>** This Contractor is not valid to be the primary contractor on this CAP. If you are adding a sub GÇô please continue. If you are trying to change the primary contractor, please see your supervisor. **</b>');
+		comment('<b>** This Contractor is not valid to be the primary contractor on this CAP. If you are adding a sub please continue. If you are trying to change the primary contractor, please see your supervisor. **</b>');
 		cancel = true;
 	}
 }
