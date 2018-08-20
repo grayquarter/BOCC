@@ -118,9 +118,10 @@ if (PaymentMethod.equals('Cash')) {
 		cancel = true;
 }
 
-var mCap = aa.cap.getCap(capId).getOutput();
-var frACA = mCap.isCreatedByACA();
-if ((frACA == true) && (addConditionToCapsWithMatchingParcelACA() == true)) {
-	comment('Open permit at same address.  Please contact Community Development.');
-	cancel = true;
-}
+//DISABLE ACA open at same address per Tina
+//var mCap = aa.cap.getCap(capId).getOutput();
+//var frACA = mCap.isCreatedByACA();
+//if ((frACA == true) && (addConditionToCapsWithMatchingParcelACA() == true)) {
+//	comment('Open permit at same address.  Please contact Community Development.');
+//	cancel = true;
+//}
