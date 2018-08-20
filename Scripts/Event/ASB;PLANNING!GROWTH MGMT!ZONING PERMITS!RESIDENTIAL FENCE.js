@@ -7,8 +7,10 @@ if ((LicProfList.length > 0)) {
 	}
 	comment(GetLicInfo(lpn)[1]);
 	if (GetLicInfo(lpn)[0] == true) {
-		// TODO: cancel by itself will not send a message to the user
+		showMessage = true;
+		comment(GetLicInfo(lpn)[1]);
 		cancel = true;
+
 	}
 }
 
