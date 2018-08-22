@@ -41,6 +41,11 @@
 				fullInsps();
 	}
 
+	
+	if ((inspResult.indexOf('Fail') > -1 || inspResult.indexOf('Partial') > -1 || inspResult.indexOf('Cancelled') > -1)) {
+		createPendingInspection(inspGroup, inspType);
+	}
+
 	if (appMatch('Planning/Growth Mgmt/Zoning Permits/Residential Fence') && matches(inspResult, 'Pass', 'Approved as Noted', 'Not Required') && balanceDue == 0) {
 		pendingInspectionExists = checkForPendingInspections();
 		if (!pendingInspectionExists)
