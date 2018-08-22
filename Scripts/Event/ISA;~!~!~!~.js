@@ -21,7 +21,6 @@ if (result == true) {
 	
 // end update to master script
 
-var capIDString = capId.getCustomID();
 comment(capIDString);
 oInspList = aa.inspection.getInspections(capId);
 inspArray = oInspList.getOutput();
