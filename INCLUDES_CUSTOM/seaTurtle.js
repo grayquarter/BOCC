@@ -11,13 +11,12 @@ function seaTurtle() {
 		var streetSuffix = addrArray[0].getStreetSuffix();
 		var city = addrArray[0].getCity();
 		var zip = addrArray[0].getZip();
-		(streetSuffix == null);
-	} else {
-		streetSuffix = '';
+		if (streetSuffix == null) {
+			streetSuffix = '';
+		}
 		var etext;
 		etext = 'Permit # ' + capIDString + '<BR>Permit type: ' + CapTypeResult + '<BR>ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip;
 		email('info@coastalwildlifeclub.org', 'NoReply@CharlotteCountyFL.gov', 'Sea Turtle Monitoring Notification for Permit ' + capIDString, 'The following permit is in a Sea Turtle Monitoring Zone:<br>' + etext);
 		email('Kevin.Lapham@charlottecountyfl.gov', 'coastalWildlife.CondAUDIT@CharlotteCountyFL.gov', 'Sea Turtle Monitoring Notification for Permit ' + capIDString, 'The following permit is in a Sea Turtle Monitoring Zone:<br>' + etext);
 	}
-
 }
