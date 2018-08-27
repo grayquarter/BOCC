@@ -1,5 +1,4 @@
 //start replaced branch: CC_151_BLD_InspResultAfter
-{
 
 	if (inspResult == 'Fail with Fee') {
 		addFee('REJ-B', 'ADDTL_INSP_FEES', 'ORIGINAL', 1, 'Y');
@@ -195,5 +194,4 @@
 		//end replaced branch contractor_inspection'
 	}
 
-}
 //end replaced branch: CC_151_BLD_InspResultAfter;
