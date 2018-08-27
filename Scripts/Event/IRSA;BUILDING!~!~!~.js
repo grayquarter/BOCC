@@ -1,6 +1,9 @@
-	//start replaced branch: CC_151_BLD_InspResultAfter
+//start replaced branch: CC_151_BLD_InspResultAfter
 
-		if(inspResult == 'Fail with Fee') {
+var myInsp = String(inspType);
+var myCapId = String(capIDString);
+
+	if (inspResult == 'Fail with Fee') {
 			addFee('REJ-B', 'ADDTL_INSP_FEES', 'ORIGINAL', 1, 'Y');
 			comment('Fail with fee executed.');
 		}
@@ -120,6 +123,12 @@ if (matches(inspResult, 'Cancelled by County', 'Cancelled by Applicant')) {
 		var StrCapID = String(capIDString);
 		var StrInspType = String(inspType);
 		var insEmail = lastInspEmail(StrCapID, StrInspType);
+		if (lastInspEmail(myCapId, myInsp) != null) {
+			var myLast = lastInspEmail(myCapId, myInsp);
+		} else {
+			var myLast = "TinaC.Jones@charlottecountyfl.gov"
+		}
+
 		var sysDate = new Date();
 		var sdd = sysDate.getDate();
 		var smm = sysDate.getMonth() + 1;
@@ -148,9 +157,6 @@ if (matches(inspResult, 'Cancelled by County', 'Cancelled by Applicant')) {
 comment('CC_151_BLD_InspResultAfter executed successfully');
 //start replaced branch contractor_inspection'
 {
-	currentUserID == 'LAPHAMK';
-	var myInsp = String(inspType);
-	var myCapId = String(capIDString);
 	var myLastN = getMyLastInsp(myInsp, myCapId);
 	if (lastInspEmail(myCapId, myInsp) != null) {
 		var myLast = lastInspEmail(myCapId, myInsp);
@@ -204,3 +210,4 @@ comment('CC_151_BLD_InspResultAfter executed successfully');
 	//end replaced branch contractor_inspection'
 }
 }
+//end replaced branch: CC_151_BLD_InspResultAfter;
