@@ -23,10 +23,7 @@ function lastInspEmail(myCapID, insp2Cinspheck) {
 				if (inspType == insp2Cinspheck && inspStatus != "Pending") {
 					if (inspStatus.length) {
 						var lastInsp = inSpector;
-						if (lastInsp == null) {
-							lastInsp = "TinaC.Jones@charlottecountyfl.gov"
-						}
-
+						if (lastInsp == null) { lastInsp = "TinaC.Jones@charlottecountyfl.gov" }
 					}
 				}
 			}
@@ -39,8 +36,12 @@ function lastInspEmail(myCapID, insp2Cinspheck) {
 		var firstname = nameArray2[0];
 		var lastname = nameArray2[1];
 		var lastInspObj = aa.person.getUser(firstname, "", lastname).getOutput();
-		var lastInspU = lastInspObj.getUserID();
-		var userEml = lastInspObj.getEmail();
+		//var lastInspU = lastInspObj.getUserID();
+		if (lastInspObj.getEmail() == null) {
+			var userEml = "TinaC.Jones@charlottecountyfl.gov"
+		} else {
+			var userEml = lastInspObj.getEmail();
+		}
 		return (userEml);
 	}
 }
