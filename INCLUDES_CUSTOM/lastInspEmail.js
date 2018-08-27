@@ -23,6 +23,10 @@ function lastInspEmail(myCapID, insp2Cinspheck) {
 				if (inspType == insp2Cinspheck && inspStatus != "Pending") {
 					if (inspStatus.length) {
 						var lastInsp = inSpector;
+						if (lastInsp == null) {
+							lastInsp = "TinaC.Jones@charlottecountyfl.gov"
+						}
+
 					}
 				}
 			}
