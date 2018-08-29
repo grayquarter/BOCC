@@ -51,12 +51,20 @@ if (matches(inspResult, 'Pass', 'Approved as Noted', 'Partial without Fee', 'App
 	editAppSpecific('Expiration Date', dateAdd(null, 180));
 }
 
-if (appMatch('Building/Construction/Residential/*') || appMatch('Building/Accessories/Residential/*') && (inspType == 'Plans Change Submitted' || inspType == 'On-Line Resubmittal') && (inspResult == 'Pass' || inspResult == 'Approved as Noted')) {
-	addFee('PLN CHNG', 'ADD_REVIEW', 'ORIGINAL', 1, 'Y');
+if(appMatch('Building/Construction/Residential/*') || appMatch('Building/Accessories/Residential/*')) {
+	if(inspType == 'Plans Change Submitted' || inspType == 'On-Line Resubmittal') {
+		if (inspResult == 'Pass' || inspResult == 'Approved as Noted') {
+			addFee('PLN CHNG', 'ADD_REVIEW', 'ORIGINAL', 1, 'Y');
+		}
+	}
 }
 
-if ((appMatch('Building/Construction/Commercial/*') || appMatch('Building/Accessories/Commercial/*')) && (inspType == 'Plans Change Submitted' || inspType == 'On-Line Resubmittal') && (inspResult == 'Pass' || inspResult == 'Approved as Noted')) {
-	addFee('PLN CHNG_COM', 'ADD_REVIEW', 'ORIGINAL', 1, 'Y');
+if (appMatch('Building/Construction/Commercial/*') || appMatch('Building/Accessories/Commercial/*')) {
+	if (inspType == 'Plans Change Submitted' || inspType == 'On-Line Resubmittal') {
+		if (inspResult == 'Pass' || inspResult == 'Approved as Noted') {
+			addFee('PLN CHNG_COM', 'ADD_REVIEW', 'ORIGINAL', 1, 'Y');
+		}
+	}
 }
 
 if (appMatch('Building/Accessories/Residential/Temporary Erosion Control') && inspType == 'Compliance Inspection' && inspResult == 'Pass') {
