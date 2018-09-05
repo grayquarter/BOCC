@@ -1,8 +1,8 @@
 function GetLicInsInfo(thisLp, myLicNo) {
 	var WCexFlag = 0
 	var licType = thisLp.getLicenseType();
-	if (licType == "OWNER BUILDER" || licType == "UNLICENSED CONTRACTOR" || licType == "COUNTY EMPLOYEE") {
-		logDebug("OWNER BUILDER, UNLICENSED CONTRACTOR, COUNTY EMPLOYEE... bypassing LP check.");
+	if (licType == "OWNER BUILDER" || licType == "UNLICENSED CONTRACTOR" || licType == "COUNTY EMPLOYEE" || licType == "LP PENDING") {
+		logDebug("OWNER BUILDER, UNLICENSED CONTRACTOR, LP PENDING, COUNTY EMPLOYEE... bypassing LP check.");
 		return false
 	} else {
 	var bizName = thisLp.getBusinessName();
