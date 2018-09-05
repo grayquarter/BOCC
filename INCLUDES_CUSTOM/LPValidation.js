@@ -7,6 +7,11 @@ function LPValidation() {
 			for (var thisLic in LicProfList) {
 				licProfScriptModel = LicProfList[thisLic];
 				licNum = licProfScriptModel.getLicenseNbr();
+				var licType = licProfScriptModel.getLicenseType();
+				if (licType == "OWNER BUILDER" || licType == "UNLICENSED CONTRACTOR" || licType == "COUNTY EMPLOYEE" || licType == "LP PENDING") {
+					logDebug("OWNER BUILDER, UNLICENSED CONTRACTOR, LP PENDING, COUNTY EMPLOYEE... bypassing LP check.");
+					return false;
+				}
 				logDebug("Lic Num (ASB): " + licNum);
 				isExp = doLogic(licNum, null);
 				if (isExp == true)
