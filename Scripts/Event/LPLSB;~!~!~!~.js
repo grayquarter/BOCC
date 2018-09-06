@@ -33,4 +33,5 @@ if (lookupResult != undefined) {
 }
 
 //TODO: there is only one instance of this script, why not embed this code?
-include('LPLUSB:' + appTypeArray[0] + '/*/*/*');
+//include('LPLUSB:' + appTypeArray[0] + '/*/*/*');
+//moved to LPLSB:Building
