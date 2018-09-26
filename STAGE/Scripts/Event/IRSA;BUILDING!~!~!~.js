@@ -1,7 +1,7 @@
 //start replaced branch: CC_151_BLD_InspResultAfter
 
 showMessage = true;
-
+var inspComment  = aa.env.getValue("InspectionResultComment");
 var myInsp = String(inspType);
 var myCapId = String(capIDString);
 
