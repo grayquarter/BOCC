@@ -1,7 +1,7 @@
 //start replaced branch: CC_151_BLD_InspResultAfter
 
 showMessage = true;
-
+var inspComment  = aa.env.getValue("InspectionResultComment");
 var myInsp = String(inspType);
 var myCapId = String(capIDString);
 
@@ -93,7 +93,7 @@ if (inspType == 'Electric Final' && inspResult == 'Electric - Power') {
 		var etext;
 		etext = CapTypeResult + ' ' + inspType + ' ' + 'Permit #' + capIDString + ' (ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + ')' + '<br>';
 		// DISABLED: FPL_final:30
-		// aa.sendMail('NoReply@CharlotteCountyFL.gov','TinaC.Jones@charlottecountyfl.gov','','FPL Notification from Charlotte County', etext);
+		aa.sendMail('NoReplyFPL@CharlotteCountyFL.gov','Kevin.Lapham@charlottecountyfl.gov','','FPL Notification from Charlotte County', etext);
 		aa.sendMail('NoReply@CharlotteCountyFL.gov', 'sherry.stover@fpl.com', '', 'FPL Notification from Charlotte County', etext);
 		aa.sendMail('NoReply@CharlotteCountyFL.gov', 'stacey.scott@fpl.com', '', 'FPL Notification from Charlotte County', etext);
 		// END REPLACED BRANCH FPL_FINAL
@@ -115,7 +115,7 @@ if (inspType == 'Electric Temporary Service' && inspResult == 'Electric - Power'
 		var etext;
 		etext = CapTypeResult + ' ' + inspType + ' ' + 'Permit #' + capIDString + ' (ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + ')' + '<br>';
 		// DISABLED: FPL_temp:30
-		// aa.sendMail('NoReply@CharlotteCountyFL.gov','TinaC.Jones@charlottecountyfl.gov','','FPL Notification from Charlotte County', etext);
+		aa.sendMail('NoReplyFPL@CharlotteCountyFL.gov','Kevin.Lapham@charlottecountyfl.gov','','FPL Notification from Charlotte County', etext);
 		aa.sendMail('NoReply@CharlotteCountyFL.gov', 'sherry.stover@fpl.com', '', 'FPL Notification from Charlotte County', etext);
 		aa.sendMail('NoReply@CharlotteCountyFL.gov', 'stacey.scott@fpl.com', '', 'FPL Notification from Charlotte County', etext);
 		// END REPLACED BRANCH FPL_TEMP
