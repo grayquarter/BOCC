@@ -2,6 +2,7 @@
 
 showMessage = true;
 var inspComment  = aa.env.getValue("InspectionResultComment");
+var inspType = aa.env.getValue("InspectionType");
 var myInsp = String(inspType);
 var myCapId = String(capIDString);
 
