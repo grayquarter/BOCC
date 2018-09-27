@@ -1,10 +1,11 @@
 // code extracted from modified "ISA New" scripts
-
+showMessage = true;
+//update commentsfu
 var capIDString = capId.getCustomID();
 var inspObj = aa.inspection.getInspection(capId, inspId).getOutput();  // current inspection object
 var inspGroup = inspObj.getInspection().getInspectionGroup();
 
-//update comments
+
 var inComm = inspObj.getInspectionComments();
 if (inComm == null) {
 	inComm = "";
@@ -21,6 +22,7 @@ if (result == true) {
 	
 // end update to master script
 
+var capIDString = capId.getCustomID();
 comment(capIDString);
 oInspList = aa.inspection.getInspections(capId);
 inspArray = oInspList.getOutput();
@@ -57,3 +59,4 @@ if (((coastLightR == true || coastLightF == true) && (inspType == 'COASTAL LIGHT
 	aa.sendMail('Accela@CharlotteCountyFL.gov', 'environmentalinspectors@CCBCC.onmicrosoft.com', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
 	aa.sendMail('AccelaCoastal@CharlotteCountyFL.gov', 'kevin.lapham@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
 }
+
