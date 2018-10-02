@@ -1,11 +1,9 @@
 // code extracted from modified "ISA New" scripts
 showMessage = true;
-//update commentsfu
 var capIDString = capId.getCustomID();
-var inspObj = aa.inspection.getInspection(capId, inspId).getOutput();  // current inspection object
+var inspObj = aa.inspection.getInspection(capId, inspId).getOutput(); 
 var inspGroup = inspObj.getInspection().getInspectionGroup();
-
-
+//update comments
 var inComm = inspObj.getInspectionComments();
 if (inComm == null) {
 	inComm = "";
@@ -20,9 +18,6 @@ if (result == true) {
 	aa.inspection.editInspection(inspObj)
 }
 	
-// end update to master script
-
-var capIDString = capId.getCustomID();
 comment(capIDString);
 oInspList = aa.inspection.getInspections(capId);
 inspArray = oInspList.getOutput();
