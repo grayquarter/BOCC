@@ -33,26 +33,46 @@ if (inspType == "" || inspType == " " || inspType == null) {
 		inspComment = commentList[x];
 		aa.print("commentList" + x + ":" + inspComment);
 		var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
+		var inspGroup = inspObj.getInspection().getInspectionGroup();
+		aa.print("inspGroup (arr)== " + inspGroup);
 		var inComm = inspObj.getInspectionComments();
 		if (inComm == null) {
 			inComm = "";
 		}
 		var mySearch = /emailed/i;
 		var result = mySearch.test(inComm);
-		if (result == false) {
-			fullIRSA(capIDString, inspType, inspComment);
+		if (result == false && inspResult != "") {
+			fullIRSA(capIDString, inspType, inspComment, inspGroup);
 			var inComm2 = inspObj.setInspectionComments(inComm + " " + "emailed");
 			aa.inspection.editInspection(inspObj);
 		}
 	}
-	
-} else {
-	fullIRSA(capIDString, inspType, inspComment);
-	aa.print("inspType sent =" + inspType);
+
+	} else {
+		if (inspResult != "") {
+			var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
+			var inspGroup = inspObj.getInspection().getInspectionGroup();
+			aa.print("inspGroup == " + inspGroup);
+			fullIRSA(capIDString, inspType, inspComment, inspGroup);
+			aa.print("inspType sent =" + inspType);
+		}
 }
 
 
-function fullIRSA(capIDString, inspType, inspComment) {
+
+if (inspResult == "") {
+	comment("DELETE PENDINGS:  " + capIDString);
+	oInspList = aa.inspection.getInspections(capId);
+	inspArray = oInspList.getOutput();
+	comment(inspArray);
+	if (inspArray.length > 0) {
+		for (insp in inspArray) {
+			fullInsps();
+		}
+	}
+}
+
+function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
 
 	aa.print("inspType arr = " + inspType);
 
@@ -109,8 +129,6 @@ function fullIRSA(capIDString, inspType, inspComment) {
 		editAppSpecific('Expiration Date', dateAdd(null, 180));
 	}
 
-
-
 	if (appMatch('Building/Construction/Residential/*') || appMatch('Building/Accessories/Residential/*')) {
 		if (inspType == 'Plans Change Submitted' || inspType == 'On-Line Resubmittal') {
 			if (inspResult == 'Pass' || inspResult == 'Approved as Noted') {
@@ -148,7 +166,7 @@ function fullIRSA(capIDString, inspType, inspComment) {
 		var etext;
 		etext = CapTypeResult + ' ' + inspType + ' ' + 'Permit #' + capIDString + ' (ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + ')' + '<br>';
 		// DISABLED: FPL_final:30
-		aa.sendMail('NoReply@CharlotteCountyFL.gov','Kevin.Lapham@charlottecountyfl.gov','','FPL Notification from Charlotte County', etext);
+		aa.sendMail('NoReply@CharlotteCountyFL.gov', 'Kevin.Lapham@charlottecountyfl.gov', '', 'FPL Notification from Charlotte County', etext);
 		aa.sendMail('NoReply@CharlotteCountyFL.gov', 'sherry.stover@fpl.com', '', 'FPL Notification from Charlotte County', etext);
 		aa.sendMail('NoReply@CharlotteCountyFL.gov', 'stacey.scott@fpl.com', '', 'FPL Notification from Charlotte County', etext);
 		// END REPLACED BRANCH FPL_FINAL
@@ -273,20 +291,8 @@ function fullIRSA(capIDString, inspType, inspComment) {
 	//aa.sendMail('NoReply-Auto_SenderINSP@Accela.com', 'Kevin.Lapham@CharlotteCountyFL.gov', '', inspType + ' Inspection Notification from Charlotte County -- ' + inspResult, etext);
 	//end replaced branch contractor_inspection'
 
-	var capIDString = capId.getCustomID();
-	comment(capIDString);
-	oInspList = aa.inspection.getInspections(capId);
-	inspArray = oInspList.getOutput();
-	comment(inspArray);
-	if (inspArray.length > 0) {
-		for (insp in inspArray) {
-			//replaced branch(fullInsps)
-			fullInsps();
-		}
-	}
-
-
 	comment('CC_151_BLD_InspResultAfter executed successfully');
 
 	//end replaced branch: CC_151_BLD_InspResultAfter;
 }
+
