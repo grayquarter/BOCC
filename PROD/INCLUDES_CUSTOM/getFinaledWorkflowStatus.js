@@ -12,7 +12,7 @@ function getFinaledWorkflowStatus() {
 			return "C of O Issued";
 		}
 
-		if (appTypeArray[2] == "Residential" && matches(appTypeArray[3], "Addition", "DCA Home", "Duplex", "Mobile Home", "Modular", "Single Family", "Townhouse")) {
+		if (appTypeArray[2] == "Residential" && matches(appTypeArray[3], "Addition", "DCA Home", "Duplex", "Mobile Home", "Modular", "Single Family", "Single Family-Babcock", "Townhouse")) {
 			logDebug("Return status of C of O Issued");
 			return "C of O Issued";
 		}
