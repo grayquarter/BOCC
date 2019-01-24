@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\STAGE\\INCLUDES_CUSTOM",
-    "\\STAGE\\Scripts"
+    "\\PROD\\Scripts",
+    "\\PROD\\Scripts\\BOCC",
+    "\\PROD\\Scripts\\Event"
   ],
-  "SelectedNode": "\\Manual Deploy",
+  "SelectedNode": "\\PROD",
   "PreviewInSolutionExplorer": false
 }
