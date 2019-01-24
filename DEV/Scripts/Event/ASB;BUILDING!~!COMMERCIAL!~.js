@@ -1,3 +1,4 @@
+//ASB:BUILDING/ /COMMERCIAL/
 if (!appMatch('Building/Construction/Commercial/Shell') || !appMatch('Building/Trade Permits/Commercial/Irrigation System')) {
 
 	var LicProfList = aa.env.getValue('LicProfList').toArray();
