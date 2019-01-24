@@ -1,4 +1,4 @@
-//DUA
+//DUA 
 //var myMatch = capIDString.indexOf('TMP') !== -1;
 var myMatch = capIDString.indexOf('TMP') != -1;
 
