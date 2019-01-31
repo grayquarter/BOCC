@@ -128,3 +128,13 @@ if ((frACA == false) && proximity('AGIS_CHARCO', 'DRI', 1)) {
 		addStdCondition('CC PERMIT', 'DRI Notice');
 	}
 }
+
+var existingDocs = aa.document.getCapDocumentList(capId, "ADMIN").getOutput();
+if (existingDocs != null) {
+    for (var index in existingDocs) {
+        if (existingDocs[index].getDocCategory() == 'Affidavit for No Zoning Inspection') {
+            scheduleInspection("Zoning Final", 1);
+            resultInspection("Zoning Final", "Not Required", sysDate, "Automated by Affidavit for No Zoning Inspection document.");
+        }
+    }
+}
