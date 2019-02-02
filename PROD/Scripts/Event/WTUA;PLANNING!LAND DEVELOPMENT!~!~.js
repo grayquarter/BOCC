@@ -24,7 +24,7 @@
 		editAppSpecific('Expiration Date', dateAdd(null, 730));
 	}
 
-/*
+/*  This is old Accela code that is broken:
 	if (appMatch('Planning/Land Development/ROW/Utility') && wfTask == 'Sufficiency Review' && wfStatus == 'Sufficient') {       
         sendToAddress = null;
 		sendToAddress = 'fbenitez@accela.com';
