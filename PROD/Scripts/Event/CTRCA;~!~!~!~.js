@@ -1,4 +1,8 @@
 
+if (appMatch('CodeEnforcement/*/*/*')) {
+    editAppSpecific('Zoning Code', AInfo['ParcelAttribute.ZONING_CODE']);
+}
+
 if (appMatch('Building/*/*/*')) {
 	arrInspRecord = new Array();
 	oInspList = aa.inspection.getInspectionListForSchedule(capId.getID1(), capId.getID2(), capId.getID3());
