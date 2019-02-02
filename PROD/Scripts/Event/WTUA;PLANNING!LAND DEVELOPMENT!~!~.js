@@ -1,7 +1,7 @@
-
+//WTUA;PLANNING!LAND DEVELOPMENT!~!~
 
 //start replaced branch: CC_351_LD_WFUpdateAfter
-{
+
 	if (appMatch('Planning/Land Development/Grade & Fill/*') && wfTask == 'Issuance' && wfStatus == 'Issued') {
 		scheduleInspection('ROW Inspection', 0, '');
 		scheduleInspection('Preliminary Inspection', 60, '');
@@ -24,8 +24,9 @@
 		editAppSpecific('Expiration Date', dateAdd(null, 730));
 	}
 
-	if (appMatch('Planning/Land Development/ROW/Utility') && wfTask == 'Sufficiency Review' && wfStatus == 'Sufficient') {
-		sendToAddress = null;
+/*
+	if (appMatch('Planning/Land Development/ROW/Utility') && wfTask == 'Sufficiency Review' && wfStatus == 'Sufficient') {       
+        sendToAddress = null;
 		sendToAddress = 'fbenitez@accela.com';
 		emailSubject = 'Release of power to structure notification';
 		emailText = 'Permit Number : ' + capIDString + '\n';
@@ -45,9 +46,8 @@
 		emailText += ' ' + '\n';
 		emailText += 'Sincerely' + '\n';
 		emailText += 'Charlotte County Building Construction Services';
-		aa.sendMail('accela@accela.com', sendToAddress, '', emailSubject, emailText);
-	}
-
-}
+		aa.sendMail('accela@accela.com', sendToAddress, '', emailSubject, emailText);  
+	} 
+*/
 //end replaced branch: CC_351_LD_WFUpdateAfter;
-/* The code in this branch needs to be re-written */
+// The code in this branch needs to be re-written 
