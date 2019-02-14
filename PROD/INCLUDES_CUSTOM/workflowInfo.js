@@ -70,5 +70,22 @@ function workflowInfo() {
         aa.sendMail('NoReply@CharlotteCountyFL.gov', emailAddress, '', Subj, EmlBod + '<br>' + endText);
         aa.sendMail('NoReply@CharlotteCountyFL.gov', 'TinaC.Jones@charlottecountyfl.gov', '', Subj, 'To: ' + emailAddress + '<br>' + EmlBod + '<br>' + endText);
         aa.sendMail('wf-NoReply@CharlotteCountyFL.gov', 'Kevin.Lapham@charlottecountyfl.gov', '', Subj, 'To: ' + emailAddress + '<br>' + EmlBod + '<br>' + endText);
+
+
+        var capCons = aa.people.getCapContactByCapID(capId).getOutput();
+        if (capCons.length != 0) {
+            for (i in capCons) {
+                var thisPeop = capCons[i];
+                var allPeopData = thisPeop.getPeople();
+                var firstName1 = allPeopData.getFirstName();
+                var ccUID = "";
+                var pEml = allPeopData.getEmail();
+                var bizName = allPeopData.getBusinessName();
+                var relationship = allPeopData.getRelation();
+                if (pEml != null && pEml != "" && relationship == "Supervisor") {
+                    aa.sendMail('NoReply@CharlotteCountyFL.gov', pEml, '', Subj, EmlBod + '<br>' + endText);
+                }
+            }
+        }
     }
 }
