@@ -308,5 +308,20 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
     comment('CC_151_BLD_InspResultAfter executed successfully');
 
     //end replaced branch: CC_151_BLD_InspResultAfter;
-}
 
+
+    //begin SUPERVISOR email 20190210 KL
+    var capCons = aa.people.getCapContactByCapID(capId).getOutput();
+    if (capCons.length != 0) {
+        for (i in capCons) {
+            var thisPeop = capCons[i];
+            var allPeopData = thisPeop.getPeople();
+            var firstName1 = allPeopData.getFirstName();
+            var pEml = allPeopData.getEmail();
+            var relationship = allPeopData.getRelation();
+            if (pEml != null && pEml != "" && relationship == "Supervisor") {
+                aa.sendMail('NoReply@CharlotteCountyFL.gov', pEml, '', inspType + ' Inspection Notification from Charlotte County -- ' + inspResult, etext);
+            }
+        }
+    }
+}
