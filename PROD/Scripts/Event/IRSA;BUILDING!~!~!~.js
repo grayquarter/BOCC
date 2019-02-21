@@ -259,7 +259,7 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
     if (myLastN == null || myLastN == "n/a") {
         myLastN = "n/a";
         inspF = "n/a";
-        inspL = "n/a";
+        inspL = "";
     } else {
         inspF = myLastN.getFirstName();
         inspL = myLastN.getLastName();
