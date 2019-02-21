@@ -50,8 +50,8 @@ if (inspType == "" || inspType == " " || inspType == null) {
 
 } else {
     if (inspResult != "") {
-        var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
-        var inspGroup = inspObj.getInspection().getInspectionGroup();
+        inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
+        inspGroup = inspObj.getInspection().getInspectionGroup();
         aa.print("inspGroup == " + inspGroup);
         fullIRSA(capIDString, inspType, inspComment, inspGroup);
         aa.print("inspType sent =" + inspType);
@@ -60,7 +60,7 @@ if (inspType == "" || inspType == " " || inspType == null) {
 
 
 if (matches(inspResult, 'Pass', 'Approved as Noted', 'Not Required')) {
-    var capIDString = capId.getCustomID();
+    capIDString = capId.getCustomID();
     comment(capIDString);
     oInspList = aa.inspection.getInspections(capId);
     inspArray = oInspList.getOutput();
@@ -169,7 +169,7 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
         var CapTypeResult = cap.getCapType();
         addrResult = aa.address.getAddressByCapId(capId);
         var addrArray = new Array();
-        var addrArray = addrResult.getOutput();
+        addrArray = addrResult.getOutput();
         var streetName = addrArray[0].getStreetName();
         var hseNum = addrArray[0].getHouseNumberStart();
         var streetSuffix = addrArray[0].getStreetSuffix();
@@ -188,17 +188,16 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
 
     if (inspType == 'Electric Temporary Service' && inspResult == 'Electric - Power') {
         // START REPLACED BRANCH FPL_TEMP
-        var cap = aa.cap.getCap(capId).getOutput();
-        var CapTypeResult = cap.getCapType();
+        cap = aa.cap.getCap(capId).getOutput();
+        CapTypeResult = cap.getCapType();
         addrResult = aa.address.getAddressByCapId(capId);
-        var addrArray = new Array();
-        var addrArray = addrResult.getOutput();
-        var streetName = addrArray[0].getStreetName();
-        var hseNum = addrArray[0].getHouseNumberStart();
-        var streetSuffix = addrArray[0].getStreetSuffix();
-        var city = addrArray[0].getCity();
-        var zip = addrArray[0].getZip();
-        var etext;
+        addrArray = new Array();
+        addrArray = addrResult.getOutput();
+        streetName = addrArray[0].getStreetName();
+        hseNum = addrArray[0].getHouseNumberStart();
+        streetSuffix = addrArray[0].getStreetSuffix();
+        city = addrArray[0].getCity();
+        zip = addrArray[0].getZip();
         etext = CapTypeResult + ' ' + inspType + ' ' + 'Permit #' + capIDString + ' (ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + ')' + '<br>';
         // DISABLED: FPL_temp:30
         aa.sendMail('NoReplyFPL@CharlotteCountyFL.gov', 'Kevin.Lapham@charlottecountyfl.gov', '', 'FPL Notification from Charlotte County', etext);
@@ -217,13 +216,14 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
         var yyyy = currentDt.getFullYear();
         var myDateStr = mm + '/' + dd + '/' + yyyy;
         comment('myDateStr = ' + myDateStr);
-        var StrCapID = String(capIDString);
-        var StrInspType = String(inspType);
+        //var StrCapID = String(capIDString);
+        //var StrInspType = String(inspType);
         //var insEmail = lastInspEmail(StrCapID, StrInspType);
+        var myLast = "";
         if (lastInspEmail(myCapId, myInsp) != null) {
-            var myLast = lastInspEmail(myCapId, myInsp);
+            myLast = lastInspEmail(myCapId, myInsp);
         } else {
-            var myLast = "TinaC.Jones@charlottecountyfl.gov";
+            myLast = "TinaC.Jones@charlottecountyfl.gov";
         }
 
         var sysDate = new Date();
@@ -233,13 +233,13 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
         comment('FORMATED sys DATE: ' + smm + '/' + sdd + '/' + syyyy);
         var text2 = 'Permit # ' + capId.getCustomID() + '<br>Type: ' + inspType + ' scheduled on ' + inspSchedDate;
         var addrResult = aa.address.getAddressByCapId(capId);
-        var addrArray = new Array();
+        addrArray = new Array();
         addrArray = addrResult.getOutput();
-        var hseNum = addrArray[0].getHouseNumberStart();
-        var streetName = addrArray[0].getStreetName();
-        var zip = addrArray[0].getZip();
-        var city = addrArray[0].getCity();
-        var etext = 'at Address: ' + hseNum + ' ' + streetName + ', ' + city + ' ' + zip + '\n' + 'has been ';
+        hseNum = addrArray[0].getHouseNumberStart();
+        streetName = addrArray[0].getStreetName();
+        zip = addrArray[0].getZip();
+        city = addrArray[0].getCity();
+        etext = 'at Address: ' + hseNum + ' ' + streetName + ', ' + city + ' ' + zip + '\n' + 'has been ';
         comment('A cancellation email would be sent TO:  ' + myLast + ' with the following details:');
         comment(text2 + '\n' + etext + '\n' + inspResult + '.');
         if (mm <= smm && dd <= sdd && yyyy <= syyyy) {
@@ -254,10 +254,23 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
     //start replaced branch contractor_inspection'
     var myLastN = getMyLastInsp(myInsp, myCapId);
     aa.print("LastN = " + myLastN);
-    if (lastInspEmail(myCapId, myInsp) != null) {
-        var myLast = lastInspEmail(myCapId, myInsp);
+    var inspF = "";
+    var inspL = "";
+    if (myLastN == null || myLastN == "n/a") {
+        myLastN = "n/a";
+        inspF = "n/a";
+        inspL = "n/a";
     } else {
-        var myLast = "TinaC.Jones@charlottecountyfl.gov";
+        inspF = myLastN.getFirstName();
+        inspL = myLastN.getLastName();
+    }
+    aa.print("LastN = " + myLastN);
+    aa.print("inspF/inspL = " + inspF + " " + inspL);
+    myLast = "";
+    if (lastInspEmail(myCapId, myInsp) != null) {
+        myLast = lastInspEmail(myCapId, myInsp);
+    } else {
+        myLast = "TinaC.Jones@charlottecountyfl.gov";
     }
     //var emlInsp = myLast + '<br>' + myLastN;
     addrResult = aa.address.getAddressByCapId(capId);
@@ -274,7 +287,7 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
         myComment = 'n/a';
     profArr = getLicenseProfessional(capId);
     var emailAddress;
-    var inspUser = getInspector(inspType);
+    //var inspUser = getInspector(inspType);
     if (profArr.length > 0) {
         for (x in profArr)
             if (profArr[x].getPrintFlag() == 'Y')
@@ -285,13 +298,11 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
         emailAddress = 'TinaC.Jones@charlottecountyfl.gov';
     }
 
-    var inspF = myLastN.getFirstName();
-    var inspL = myLastN.getLastName();
     cap = aa.cap.getCap(capId).getOutput();
     CapTypeResult = cap.getCapType();
     inspUserObj = aa.person.getUser(inspF, '', inspL).getOutput();
-    if (inspUserObj.getUserID() != null) {
-        var myUser = inspUserObj.getUserID();
+    if (inspUserObj != null) {  //inspUserObj.getUserID() 
+        //var myUser = inspUserObj.getUserID();
         var inspPhone = inspUserObj.getPhoneNumber();
     } else {
         inspPhone = "941-743-1201";
