@@ -219,7 +219,7 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
         comment('myDateStr = ' + myDateStr);
         var StrCapID = String(capIDString);
         var StrInspType = String(inspType);
-        var insEmail = lastInspEmail(StrCapID, StrInspType);
+        //var insEmail = lastInspEmail(StrCapID, StrInspType);
         if (lastInspEmail(myCapId, myInsp) != null) {
             var myLast = lastInspEmail(myCapId, myInsp);
         } else {
@@ -240,12 +240,12 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
         var zip = addrArray[0].getZip();
         var city = addrArray[0].getCity();
         var etext = 'at Address: ' + hseNum + ' ' + streetName + ', ' + city + ' ' + zip + '\n' + 'has been ';
-        comment('A cancellation email would be sent TO:  ' + insEmail + ' with the following details:');
+        comment('A cancellation email would be sent TO:  ' + myLast + ' with the following details:');
         comment(text2 + '\n' + etext + '\n' + inspResult + '.');
         if (mm <= smm && dd <= sdd && yyyy <= syyyy) {
             comment('date validated --> to email / INSPECTION: ' + inspType);
             comment('date validated? --> to email / INSPECTION: ' + inspType);
-            email(insEmail, 'NoReply_Accela@CharlotteCountyFL.gov', inspType + ' CANCEL - Permit ' + capIDString, text2 + '<br>' + etext + '<br>' + inspResult + ' on ' + smm + '/' + sdd + '/' + syyyy);
+            email(myLast, 'NoReply_Accela@CharlotteCountyFL.gov', inspType + ' CANCEL - Permit ' + capIDString, text2 + '<br>' + etext + '<br>' + inspResult + ' on ' + smm + '/' + sdd + '/' + syyyy);
         }
         // end REPLACED BRANCH CANCELEMAIL2
     }
@@ -259,15 +259,15 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
     } else {
         var myLast = "TinaC.Jones@charlottecountyfl.gov";
     }
-    var emlInsp = myLast + '<br>' + myLastN;
+    //var emlInsp = myLast + '<br>' + myLastN;
     addrResult = aa.address.getAddressByCapId(capId);
-    var addrArray = new Array();
-    var addrArray = addrResult.getOutput();
-    var streetName = addrArray[0].getStreetName();
-    var hseNum = addrArray[0].getHouseNumberStart();
-    var streetSuffix = addrArray[0].getStreetSuffix();
-    var city = addrArray[0].getCity();
-    var zip = addrArray[0].getZip();
+    addrArray = new Array();
+    addrArray = addrResult.getOutput();
+    streetName = addrArray[0].getStreetName();
+    hseNum = addrArray[0].getHouseNumberStart();
+    streetSuffix = addrArray[0].getStreetSuffix();
+    city = addrArray[0].getCity();
+    zip = addrArray[0].getZip();
     var profArr = new Array();
     var myComment = inspComment;
     if (myComment == null)
@@ -287,18 +287,18 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
 
     var inspF = myLastN.getFirstName();
     var inspL = myLastN.getLastName();
-    var cap = aa.cap.getCap(capId).getOutput();
-    var CapTypeResult = cap.getCapType();
+    cap = aa.cap.getCap(capId).getOutput();
+    CapTypeResult = cap.getCapType();
     inspUserObj = aa.person.getUser(inspF, '', inspL).getOutput();
     if (inspUserObj.getUserID() != null) {
         var myUser = inspUserObj.getUserID();
         var inspPhone = inspUserObj.getPhoneNumber();
     } else {
-        var inspPhone = "941-743-1201";
+        inspPhone = "941-743-1201";
     }
-    var etext;
+    etext =  "";
     etext = inspType + ' inspection: ' + inspResult + '<br>Permit #' + capIDString + ' (' + CapTypeResult + ')<br>Address: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + '<br>Comment: ' + myComment + '<br>Inspector: ' + inspF + ' ' + inspL + '<br>Insp. phone: ' + inspPhone;
-    var emlInsp = '<br>The last insp email is: ' + myLast;
+    //var emlInsp = '<br>The last insp email is: ' + myLast;
     //+ '<br>The last insp: ' + myLastN;
     aa.sendMail('NoReply@CharlotteCountyFL.gov', emailAddress, '', inspType + ' Inspection Notification from Charlotte County -- ' + inspResult, etext);
     // DISABLED: contractor_inspection:49
