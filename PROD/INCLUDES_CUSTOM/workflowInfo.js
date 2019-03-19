@@ -69,7 +69,7 @@ function workflowInfo() {
     if (wfComment != null) {
         aa.sendMail('NoReply@CharlotteCountyFL.gov', emailAddress, '', Subj, EmlBod + '<br>' + endText);
         aa.sendMail('NoReply@CharlotteCountyFL.gov', 'TinaC.Jones@charlottecountyfl.gov', '', Subj, 'To: ' + emailAddress + '<br>' + EmlBod + '<br>' + endText);
-        aa.sendMail('wf-NoReply@CharlotteCountyFL.gov', 'Kevin.Lapham@charlottecountyfl.gov', '', Subj, 'To: ' + emailAddress + '<br>' + EmlBod + '<br>' + endText);
+        //aa.sendMail('wf-NoReply@CharlotteCountyFL.gov', 'Kevin.Lapham@charlottecountyfl.gov', '', Subj, 'To: ' + emailAddress + '<br>' + EmlBod + '<br>' + endText);
 
 
         var capCons = aa.people.getCapContactByCapID(capId).getOutput();
