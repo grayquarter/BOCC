@@ -34,6 +34,11 @@ if (((BabFin == true) && (inspType == 'Babcock Final'))) {
     assignInspection(inspId, 'AMY.WICKS@KIMLEY-HORN.COM', capId);
 }
 
+var HealthInsp = checkInspectionResult('Health Approval', 'Scheduled');
+if (HealthInsp == true && inspType == 'Health Approval') {
+    assignInspection(inspId, 'LBEAUCHAMP', capId);
+}
+
 var coastLightR = false;
 var coastLightF = false;
 var cap = aa.cap.getCap(capId).getOutput();
