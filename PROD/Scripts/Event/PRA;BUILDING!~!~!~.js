@@ -77,7 +77,8 @@ if (appMatch('Building/Trade Permits/Residential/Solar Water Heater') && (capSta
 if (appMatch('Building/Trade Permits/Residential/Plumbing') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
 	email('TinaC.Jones@charlottecountyfl.gov', 'ACA@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
 	email(emailAddress, 'NoReply@charlottecountyfl.gov', 'Automated Issuance of Permit # ' + capIDString, 'An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
-	activateTask('Permit Issuance');
+    email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_autoP@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
+    activateTask('Permit Issuance');
 	updateTask('Permit Issuance', 'Issued', 'Automated Issuance');
 	createPendingInspFromReqd(capId);
 }
