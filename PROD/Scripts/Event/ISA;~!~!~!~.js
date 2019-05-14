@@ -39,13 +39,11 @@ if (HealthInsp == true && inspType == 'Health Approval') {
     assignInspection(inspId, 'LBEAUCHAMP', capId);
 }
 
-var coastLightR = false;
-var coastLightF = false;
 var cap = aa.cap.getCap(capId).getOutput();
 var CapTypeResult = cap.getCapType();
 coastLightR = checkInspectionResult('COASTAL LIGHTING ROUGH', 'Scheduled');
 coastLightF = checkInspectionResult('COASTAL LIGHTING FINAL', 'Scheduled');
-if (((coastLightR == true || coastLightF == true) && (inspType == 'COASTAL LIGHTING ROUGH' || inspType == 'COASTAL LIGHTING FINAL'))) {
+if (coastLightR == true && inspType == 'COASTAL LIGHTING ROUGH') {
     addrResult = aa.address.getAddressByCapId(capId);
     var addrArray = new Array();
     addrArray = addrResult.getOutput();
@@ -62,3 +60,22 @@ if (((coastLightR == true || coastLightF == true) && (inspType == 'COASTAL LIGHT
     aa.sendMail('AccelaCoastal@CharlotteCountyFL.gov', 'kevin.lapham@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
     assignInspection(inspId, 'DERHEIMERS', capId);
 }
+
+if (coastLightF == true && inspType == 'COASTAL LIGHTING FINAL') {
+    addrResult = aa.address.getAddressByCapId(capId);
+    var addrArray = new Array();
+    addrArray = addrResult.getOutput();
+    var streetName = addrArray[0].getStreetName();
+    var hseNum = addrArray[0].getHouseNumberStart();
+    var streetSuffix = addrArray[0].getStreetSuffix();
+    var city = addrArray[0].getCity();
+    var zip = addrArray[0].getZip();
+    var etext;
+    etext = CapTypeResult + ' -- Permit #' + capIDString + '<br> Inspection: ' + inspType + ' scheduled for: ' + inspSchedDate + '<br>ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + '' + '<br>';
+    aa.sendMail('Accela@CharlotteCountyFL.gov', 'Suzanne.Derheimer@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
+    //aa.sendMail('Accela@CharlotteCountyFL.gov', 'Rebekah.Augustinowicz@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
+    aa.sendMail('Accela@CharlotteCountyFL.gov', 'Susan.Foley-Pieri@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
+    aa.sendMail('AccelaCoastal@CharlotteCountyFL.gov', 'kevin.lapham@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
+    assignInspection(inspId, 'DERHEIMERS', capId);
+}
+
