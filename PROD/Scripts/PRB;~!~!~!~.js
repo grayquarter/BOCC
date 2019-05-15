@@ -119,6 +119,7 @@ if (PaymentMethod.equals('Cash')) {
 }
 
 //DISABLE ACA open at same address per Tina
+//
 //var mCap = aa.cap.getCap(capId).getOutput();
 //var frACA = mCap.isCreatedByACA();
 //if ((frACA == true) && (addConditionToCapsWithMatchingParcelACA() == true)) {
