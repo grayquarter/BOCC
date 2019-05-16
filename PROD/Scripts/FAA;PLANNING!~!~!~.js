@@ -1,3 +1,5 @@
+//FAA:PLANNING
+
 if (feeExists('M-EXTEND', 'NEW')) {
     editAppSpecific('Expiration Date', dateAdd(AInfo['Expiration Date'], 90));
     updateAppStatus('Issued', '');
