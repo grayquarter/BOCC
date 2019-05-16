@@ -1,3 +1,5 @@
+//ICA:///
+
 var inspectionList = aa.env.getValue("InspectionList");
 var Product = aa.env.getValue("Product");
 var InspArr = inspectionList.toArray();
@@ -35,7 +37,11 @@ if (inspectionList != null) {
 		nameArray2 = String(inspTor2).split(" ");
 		var firstname = nameArray2[0]; var lastname = nameArray2[1];
 		var lastInspObj = aa.person.getUser(firstname, "", lastname).getOutput();
-		var userEml = lastInspObj.getEmail();
+		if (lastInspObj.getEmail() != null) {
+			var userEml = lastInspObj.getEmail();
+		} else {
+			userEml = "TinaC.Jones@charlottecountyfl.gov"
+		}
 		var addrResult = aa.address.getAddressByCapId(capId);
 		var addrArray = new Array();
 		addrArray = addrResult.getOutput();
@@ -83,3 +89,4 @@ if (inspectionList != null) {
 		}
 	}
 }
+
