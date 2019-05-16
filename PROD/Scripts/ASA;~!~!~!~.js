@@ -1,16 +1,16 @@
-//ASA: / / / 
+//ASA:/// 
 copyParcelGisObjects();
 
 var mCap = aa.cap.getCap(capId).getOutput();
 var frACA = mCap.isCreatedByACA();
 if (!appMatch('Licenses/*/*/*')) {
-    capOwnerResult = aa.owner.getOwnerByCapId(capId);
-    if (capOwnerResult.getSuccess()) {
-        Owner = capOwnerResult.getOutput();
-        for (yy in Owner) {
-            copyOwnerToContact('Owner');
-        }
-    }
+	capOwnerResult = aa.owner.getOwnerByCapId(capId);
+	if (capOwnerResult.getSuccess()) {
+		Owner = capOwnerResult.getOutput();
+		for (yy in Owner) {
+			copyOwnerToContact('Owner');
+		}
+	}
 }
 // DISABLED: ApplicationSubmitAfter:10
 // if (proximity('AGIS_CHARCO', 'ScrubJay for Accela', 1)) {
@@ -18,17 +18,17 @@ if (!appMatch('Licenses/*/*/*')) {
 // 	}
 
 if (proximity('AGIS_CHARCO', 'ScrubJay for Accela', 1)) {
-    addStdCondition('CC PERMIT', 'Scrub Jay Boundary Hold');
+	addStdCondition('CC PERMIT', 'Scrub Jay Boundary Hold');
 }
 
 editAppSpecific('Flood Zone', GISFloodPlain('AGIS_CHARCO', 'FEMA Flood Zones (Effective 5/5/2003)', 0, 'FZONE'));
 
 if (getGISInfo('AGIS_CHARCO', 'FEMA Flood Zones (Effective 5/5/2003)', 'SFHA') == 'IN') {
-    editAppSpecific('In SFHA', 'Y');
+	editAppSpecific('In SFHA', 'Y');
 }
 
 if (!appMatch('Licenses/*/*/*')) {
-    addConditionToCapsWithMatchingParcel();
+	addConditionToCapsWithMatchingParcel();
 }
 
 /* DISABLED: ApplicationSubmitAfter TICKET 18974 
@@ -37,28 +37,28 @@ if (proximity('AGIS_CHARCO', 'PG City Boundary', 0)) {
 }  */
 
 if (proximity('AGIS_CHARCO', 'LOMC', 1)) {
-    addStdCondition('CC PERMIT', 'LOMR-LOMA Notice');
+	addStdCondition('CC PERMIT', 'LOMR-LOMA Notice');
 }
 
 if (proximity('AGIS_CHARCO', 'Sea Turtle Lighting Zones', 1) && (frACA == false)) {
-    addStdCondition('CC PERMIT', 'Sea Turtle Monitoring');
-    //replaced branch(SeaTurtleMonitor)
-    seaTurtleMonitor();
+	addStdCondition('CC PERMIT', 'Sea Turtle Monitoring');
+	//replaced branch(SeaTurtleMonitor)
+	seaTurtleMonitor();
 }
 
 if (appMatch('Building/*/*/*') && proximity('AGIS_CHARCO', 'Sea Turtle Lighting Zones', 1)) {
-    addStdCondition('CC PERMIT', 'Sea Turtle Lighting Hold');
-    //start replaced branch: AdHocLight
-    var mCap = aa.cap.getCap(capId).getOutput();
-    var frACA = mCap.isCreatedByACA();
-    if (frACA == false) {
-        addAdHocTaskcLight(capIDString);
-    }
-    //end replaced branch: AdHocLight;
+	addStdCondition('CC PERMIT', 'Sea Turtle Lighting Hold');
+	//start replaced branch: AdHocLight
+	var mCap = aa.cap.getCap(capId).getOutput();
+	var frACA = mCap.isCreatedByACA();
+	if (frACA == false) {
+		addAdHocTaskcLight(capIDString);
+	}
+	//end replaced branch: AdHocLight;
 }
 
 if (proximity('AGIS_CHARCO', 'Babcock_Lots', 1)) {
-    addStdCondition('CC PERMIT', 'Babcock Ranch');
+	addStdCondition('CC PERMIT', 'Babcock Ranch');
 }
 
 
