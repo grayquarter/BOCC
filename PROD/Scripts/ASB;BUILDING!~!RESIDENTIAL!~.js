@@ -1,4 +1,5 @@
 //ASB:BUILDING/ /RESIDENTIAL/
+
 if (!appMatch('Building/Trade Permits/Residential/Irrigation System') & !appMatch('Building/Trade Permits/Residential/Electrical')) {
 
     var LicProfList = aa.env.getValue('LicProfList').toArray();
@@ -15,7 +16,6 @@ if (!appMatch('Building/Trade Permits/Residential/Irrigation System') & !appMatc
             comment(GetLicInfo(lpn)[1]);
             cancel = true;
         }
-
     }
 
     if (LPValidation()) {
