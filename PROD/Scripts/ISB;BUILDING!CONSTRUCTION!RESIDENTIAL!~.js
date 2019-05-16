@@ -1,4 +1,4 @@
-// ISB:BUILDING/CONSTRUCTION/RESIDENTIAL/
+// ISB:BUILDING/CONSTRUCTION/RESIDENTIAL//
 // TODO, setting showmessage to true could result in popups without meaningful messages
 
 showMessage = true;
