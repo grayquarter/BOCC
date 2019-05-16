@@ -1,3 +1,4 @@
+//WTUA:BUILDING///
 
 if (isTaskActive('Reviews') && matches(wfStatus, 'Approved', 'Not Required')) {
 	closeSubWorkflow(wfProcessID, 'Approved');
