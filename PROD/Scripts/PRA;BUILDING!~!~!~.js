@@ -1,4 +1,4 @@
-//PRA:BUILDING///
+//PRA:BUILDING/// 
 var cap = aa.cap.getCap(capId).getOutput();
 var capIDString = capId.getCustomID();
 var CapTypeResult = cap.getCapType();
