@@ -1,4 +1,4 @@
-// ASA:BUILDING////
+// ASA:BUILDING///
 var cap = aa.cap.getCap(capId).getOutput();
 var CapTypeResult = cap.getCapType();
 var frACA = cap.isCreatedByACA();
