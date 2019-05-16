@@ -4,12 +4,8 @@ if (appMatch('Planning/Land Development/Grade & Fill/*') && wfTask == 'Issuance'
     scheduleInspection('ROW Inspection', 0, '');
     scheduleInspection('Preliminary Inspection', 60, '');
     scheduleInspection('Final Inspection', 120, '');
-    workflowInfo();
 }
 
-if (appMatch('Planning/Land Development/ROW/Utility') && wfTask == 'Sufficiency Review' && wfStatus == 'Sufficient') {
-    workflowInfo();
-}
 
 if (appMatch('Planning/Land Development/Excavations/II') && wfTask == 'Permit Issuance' && wfStatus == 'Issued') {
     editAppSpecific('Reclamation Date', dateAdd(null, 3650));
