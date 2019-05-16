@@ -1,3 +1,4 @@
+//ASA:PLANNING/GROWTH MGMT/ZONING PERMITS/RESIDENTIAL FENCE
 
 if (cap.isCompleteCap()) {
 	arrInspRecord = new Array();
@@ -30,7 +31,9 @@ if (proximity('AGIS_CHARCO', 'Sea Turtle Lighting Zones', 1)) {
 	}
 }
 
+
 editAppSpecific('Expiration Date', dateAdd(null, 180));
+
 
 var existingDocs = aa.document.getCapDocumentList(capId, "ADMIN").getOutput();
 if (existingDocs != null) {
