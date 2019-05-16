@@ -1,4 +1,5 @@
-// DUPA - document update after   
+// DUPA - document update after  
+
 var capId = aa.env.getValue("CapID");
 var documentModelArray = aa.env.getValue("DocumentModel");
 
