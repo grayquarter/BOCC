@@ -1,4 +1,7 @@
+//ISB:BUILDING/TRADE PERMITS/COMMERCIAL/
+
 showMessage = true;
+
 if ((appMatch('Building/Trade Permits/Commercial/Demolitions') && inspType == 'Building Final' && balanceDue > 0)) {
 	comment('Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
 	cancel = true;
