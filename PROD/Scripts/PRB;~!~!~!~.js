@@ -1,5 +1,5 @@
+//PRB
 //start replaced branch: CC_240_PaymentBefore
-{
 	comment('CC_240_PaymentBefore started');
 	// TODO: showMessage should default to false at start of script
 	showMessage = false;
@@ -24,7 +24,6 @@
 	// 	cancel = true;
 	// 	}
 
-}
 //end replaced branch: CC_240_PaymentBefore;
 showMessage = true;
 if (PaymentMethod.equals('Cash')) {
