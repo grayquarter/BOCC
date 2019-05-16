@@ -1,3 +1,4 @@
+//WTUA:BUILDING/CONSTRUCTION/RESIDENTIAL/
 
 if (appTypeArray[3] == 'Duplex' && wfTask == 'Permit Issuance' && wfStatus == 'Issued' && !balanceDue == 0) {
 	feeSch = 'BLD_CON_RES_DU';
