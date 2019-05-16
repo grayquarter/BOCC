@@ -1,5 +1,6 @@
-// LPLSB
+// LPLSB///
 // extracted from customized master script
+
 showMessage = false;
 var licenseList = aa.env.getValue("LicenseList").toArray();
 var cap = aa.env.getValue("CapIdModel");
