@@ -1,3 +1,4 @@
+//WTUB:BUILDING///
 
 if (wfTask == 'Finaled' && matches(wfStatus, 'Finaled', 'C of O Issued', 'C of Completion Issued') && balanceDue > 0) {
 	showMessage = true;
