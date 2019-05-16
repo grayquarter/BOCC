@@ -1,4 +1,4 @@
-//DUA
+//DUA ///
 
 showMessage = true; showDebug = false;
 
@@ -79,19 +79,19 @@ if (documentUploadedFrom == 'ACA' && myMatch == false) {
 
 if (myMatch == false) {
     //start replaced branch: AffNoZon
-    var documentModels = documentModelArray.toArray();
-    //comment('documentModels.length=' + documentModels.length);
-    //comment('documentModels[0]=' + documentModels[0].getDocCategory());
-    var myDoc = documentModels[0].getDocCategory();
-    var myName = documentModels[0].getDocName();
-    //comment('myDoc=' + myDoc);
-    if (myDoc == 'Affidavit for No Zoning Inspection' && myMatch == false) {
-        AffNoZon3();
-    }
+        var documentModels = documentModelArray.toArray();
+        //comment('documentModels.length=' + documentModels.length);
+        //comment('documentModels[0]=' + documentModels[0].getDocCategory());
+        var myDoc = documentModels[0].getDocCategory();
+        var myName = documentModels[0].getDocName();
+        //comment('myDoc=' + myDoc);
+        if (myDoc == 'Affidavit for No Zoning Inspection' && myMatch == false) {
+            AffNoZon3();
+        }
 
-    if (myName == 'WaiveZoning.pdf' || myName == 'waivezoning.pdf' && myMatch == false) {
-        AffNoZon3();
-    }
+        if (myName == 'WaiveZoning.pdf' || myName == 'waivezoning.pdf' && myMatch == false) {
+            AffNoZon3();
+        }
     //end replaced branch: AffNoZon;
 }
 
