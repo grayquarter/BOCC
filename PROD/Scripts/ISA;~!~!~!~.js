@@ -11,7 +11,6 @@ if (inComm == null) {
 }
 var mySearch = /Permit/i;
 var result = mySearch.test(inComm);
-// TODO:  code should be reviewed.
 if (result == true) {
 	result = false;
 } else {
