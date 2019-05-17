@@ -58,7 +58,6 @@ if (documentUploadedFrom == 'ACA' && myMatch == false) {
     //end replaced branch: resubmittal;
 }
 
-// TODO not matching braces
 
 if (documentUploadedFrom == 'ACA' && myMatch == false) {
     var documentModels = documentModelArray.toArray();
