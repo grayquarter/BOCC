@@ -16,17 +16,8 @@ if (proximity('AGIS_CHARCO', 'Historical Preservation Buffer', 1) && !appMatch('
 editAppSpecific('Expiration Date', dateAdd(null, 180));
 
 
-// DISABLED: ASA:Building/*/*/*:10
-// if (!appMatch('Building/POS/*/*')) {
-// 	showMessage=true;
-// 	attrArray = new Array;
-// 	loadAddressAttributes(attrArray, capId);
-// 	for(x in attrArray ) if (x == 'AddressAttribute.HISTORICAL' && attrArray[x]== 'Y') addAppCondition('CC PERMIT', 'Applied', 'Historical Address Notice', 'The permit being applied for may be within a Historical area. Further review is needed.', 'Notice');
-// 	}
-
 if (!appMatch('Building/POS/*/*')) {
-    // TODO, setting showmessage to true could result in popups without meaningful messages
-    showMessage = true;
+    showMessage = false;
     attrArray = new Array;
     loadAddressAttributes(attrArray, capId);
     for (x in attrArray) {
@@ -39,12 +30,9 @@ if (!appMatch('Building/POS/*/*')) {
 
 
 if (proximity('AGIS_CHARCO', 'Babcock_Lots', 1) && !appMatch('Building/POS/*/*')) {
-    // TODO showMessage should default to false and only be set to true when needed.
     showMessage = false;
     comment('Updating Babcock ASI.');
-    // DISABLED: ASA:Building/*/*/*:21
     // 	addStdCondition('CC PERMIT', 'Babcock Ranch');
-    // 	// addAppCondition('CC PERMIT', 'Applied', 'Babcock Ranch', 'This parcel is in the Babcock Ranch development.', 'Notice');
     editAppSpecific('Front Setback', getGISInfo('AGIS_CHARCO', 'Babcock_Lots', 'FrntStbk'));
     editAppSpecific('Rear Setback', getGISInfo('AGIS_CHARCO', 'Babcock_Lots', 'RearStbk'));
     editAppSpecific('Left Setback', getGISInfo('AGIS_CHARCO', 'Babcock_Lots', 'LeftStbk'));
