@@ -1,3 +1,4 @@
+//ISB:BUILDING///
 
 if ((inspType != 'Plans Change Submitted' || inspType != 'On-Line Resubmittal') && capStatus != 'Permit Issued' && capStatus != 'Issued' && capStatus != 'Temp C of O Issued') {
 	showMessage = true;

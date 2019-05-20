@@ -1,3 +1,4 @@
+//ASA:PLANNING/GROWTH MGMT/ZONING PERMITS/RESIDENTIAL FENCE
 
 if (cap.isCompleteCap()) {
 	arrInspRecord = new Array();
@@ -30,4 +31,16 @@ if (proximity('AGIS_CHARCO', 'Sea Turtle Lighting Zones', 1)) {
 	}
 }
 
+
 editAppSpecific('Expiration Date', dateAdd(null, 180));
+
+
+var existingDocs = aa.document.getCapDocumentList(capId, "ADMIN").getOutput();
+if (existingDocs != null) {
+    for (var index in existingDocs) {
+        if (existingDocs[index].getDocCategory() == 'Affidavit for No Zoning Inspection') {
+            scheduleInspection("Zoning Final", 1);
+            resultInspection("Zoning Final", "Not Required", sysDate, "Automated by Affidavit for No Zoning Inspection document.");
+        }
+    }
+}

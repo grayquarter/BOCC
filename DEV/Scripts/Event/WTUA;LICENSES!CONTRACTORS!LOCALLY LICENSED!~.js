@@ -1,6 +1,6 @@
+//WTUA:LICENSES/CONTRACTORS/LOCALLY LICENSED/
 
 if (wfTask == 'Quality Review' && wfStatus == 'Approved') {
-
 	updateTask('Status', 'Active', 'Issuance');
 	LicType = lookup('CC_LIC_TYPE', AInfo['Certificate of Competency Category']);
 	createReferenceLP(capIDString, LicType, 'COC APPLICANT');

@@ -1,6 +1,11 @@
-//IRSA:  start replaced branch: CC_151_BLD_InspResultAfter
+//IRSA:  
+//start replaced branch: CC_151_BLD_InspResultAfter
 
 showMessage = true;
+
+var vScriptName = aa.env.getValue("ScriptCode");
+var vEventName = aa.env.getValue("EventName");
+aa.print(vScriptName + "/" + vEventName);
 
 var PermitId1 = aa.env.getValue("PermitId1");
 var PermitId2 = aa.env.getValue("PermitId2");
@@ -14,80 +19,102 @@ if (capResult.getSuccess()) {
     aa.print("capIDString : " + capIDString);
 }
 
+var InspectionResultArray = aa.env.getValue("InspectionResultArray");
 var InspectionIdArray = aa.env.getValue("InspectionIdArray");
 var InspectionId = aa.env.getValue("InspectionId");
-var inspComment = aa.env.getValue("InspectionResultComment");
-var inspType = aa.env.getValue("InspectionType");
-aa.print("inspType=" + inspType);
+//var inspComment = aa.env.getValue("InspectionResultComment");
+//var inspType = aa.env.getValue("InspectionType");
+//aa.print("inspType=" + inspType);
 var inspectionList = aa.env.getValue("InspectionTypeArray");
 aa.print("inspectionList = " + inspectionList);
 aa.print("insp length=" + inspectionList.length);
-var commentList = aa.env.getValue("InspectionResultCommentArray");
-
-if (inspType == "" || inspType == " " || inspType == null) {
-    for (x in inspectionList) {
-        InspectionId = InspectionIdArray[x];
-        aa.print("InspectionIdArray = " + InspectionIdArray);
-        inspType = inspectionList[x];
-        aa.print("inspectionList" + x + ":" + inspType);
-        inspComment = commentList[x];
-        aa.print("commentList" + x + ":" + inspComment);
-        var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
-        var inspGroup = inspObj.getInspection().getInspectionGroup();
-        aa.print("inspGroup (arr)== " + inspGroup);
-        var inComm = inspObj.getInspectionComments();
-        if (inComm == null) {
-            inComm = "";
+if (vScriptName == "V360InspectionResultSubmitAfter") {
+    var commentList = aa.env.getValue("InspectionResultCommentArray");
+    aa.print("Analyze AA result methods...");
+    if (inspType == "" || inspType == " " || inspType == null) {
+        for (x in inspectionList) {
+            InspectionId = InspectionIdArray[x];
+            aa.print("InspectionIdArray l = " + InspectionIdArray);
+            inspResult = InspectionResultArray[x];
+            aa.print("InspectionResultArray  l = " + InspectionResultArray[x]);
+            inspType = inspectionList[x];
+            aa.print("inspectionList l " + x + ":" + inspType);
+            inspComment = commentList[x];
+            aa.print("commentList l " + x + ":" + inspComment);
+            var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
+            var inspGroup = inspObj.getInspection().getInspectionGroup();
+            aa.print("inspGroup l (arr)== " + inspGroup);
+            var inComm = inspObj.getInspectionComments();
+            if (inComm == null) {
+                inComm = "";
+            }
+            var mySearch = /emailed/i;
+            var result = mySearch.test(inComm);
+            if (result == false && inspResult != "") {
+                fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult);
+                var inComm2 = inspObj.setInspectionComments(inComm + " " + "emailed by script");
+                aa.inspection.editInspection(inspObj);
+            }
         }
-        var mySearch = /emailed/i;
-        var result = mySearch.test(inComm);
-        if (result == false && inspResult != "") {
-            fullIRSA(capIDString, inspType, inspComment, inspGroup);
-            var inComm2 = inspObj.setInspectionComments(inComm + " " + "emailed");
-            aa.inspection.editInspection(inspObj);
+    }
+
+    if (matches(inspResult, 'Pass', 'Approved as Noted', 'Not Required')) {
+        comment("DELETE EXTRA PENDINGS:  " + capIDString);
+        capIDString = capId.getCustomID();
+        comment(capIDString);
+        oInspList = aa.inspection.getInspections(capId);
+        inspArray = oInspList.getOutput();
+        comment(inspArray);
+        pendingInspectionExists = checkForPendingInspections();
+        if (pendingInspectionExists) {
+            aa.print("DELETE EXTRA PENDINGS  (in AA):  " + capIDString);
+            for (insp in inspArray)
+                if (inspType == inspArray[insp].getInspectionType() && inspArray[insp].getInspectionStatus() == 'Pending') {
+                    comment('DEL this ID: ' + inspArray[insp].getIdNumber());
+                    var InspM = aa.inspection.getInspection(capId, inspArray[insp].getIdNumber()).getOutput();
+                    InspM.getInspection().getActivity().setAuditStatus('I');
+                    aa.inspection.editInspection(InspM).getOutput();
+                    comment(inspArray[insp].getIdNumber() + ' has been removed for inspType: ' + inspArray[insp].getInspectionType());
+                }
         }
     }
 
 } else {
-    if (inspResult != "") {
-        var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
-        var inspGroup = inspObj.getInspection().getInspectionGroup();
-        aa.print("inspGroup == " + inspGroup);
-        fullIRSA(capIDString, inspType, inspComment, inspGroup);
-        aa.print("inspType sent =" + inspType);
-    }
-}
+    aa.print("Analyze apps and other result methods...");
+    var InspectionId = aa.env.getValue("InspectionId");
+    var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
+    var inspGroup = inspObj.getInspection().getInspectionGroup();
 
+    var inspResult = aa.env.getValue("InspectionResult");
+    var inspComment = aa.env.getValue("InspectionResultComment");
+    var inspType = aa.env.getValue("InspectionType");
 
-if (matches(inspResult, 'Pass', 'Approved as Noted', 'Not Required')) {
-    var capIDString = capId.getCustomID();
-    comment(capIDString);
-    oInspList = aa.inspection.getInspections(capId);
-    inspArray = oInspList.getOutput();
-    comment(inspArray);
-    pendingInspectionExists = checkForPendingInspections();
-    if (pendingInspectionExists)
-        for (insp in inspArray)
-            fullInsps();
-}
+    fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult);
 
-
-if (inspResult == "") {
-    comment("DELETE PENDINGS:  " + capIDString);
-    oInspList = aa.inspection.getInspections(capId);
-    inspArray = oInspList.getOutput();
-    comment(inspArray);
-    if (inspArray.length > 0) {
-        for (insp in inspArray) {
-            fullInsps();
+    if (matches(inspResult, 'Pass', 'Approved as Noted', 'Not Required')) {
+        capIDString = capId.getCustomID();
+        comment(capIDString);
+        oInspList = aa.inspection.getInspections(capId);
+        inspArray = oInspList.getOutput();
+        comment(inspArray);
+        pendingInspectionExists = checkForPendingInspections();
+        if (pendingInspectionExists) {
+            aa.print("DELETE EXTRA PENDINGS (in apps):  " + capIDString);
+            for (insp in inspArray)
+                if (inspType == inspArray[insp].getInspectionType() && inspArray[insp].getInspectionStatus() == 'Pending') {
+                    comment('DEL this ID: ' + inspArray[insp].getIdNumber());
+                    var InspM = aa.inspection.getInspection(capId, inspArray[insp].getIdNumber()).getOutput();
+                    InspM.getInspection().getActivity().setAuditStatus('I');
+                    aa.inspection.editInspection(InspM).getOutput();
+                    comment(inspArray[insp].getIdNumber() + ' has been removed for inspType: ' + inspArray[insp].getInspectionType());
+                }
         }
     }
+
 }
 
-function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
-
+function fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult) {
     aa.print("inspType arr = " + inspType);
-
     var myInsp = String(inspType);
     var myCapId = String(capIDString);
     aa.print("Insp + CapId:" + myInsp + " / " + myCapId);
@@ -137,7 +164,7 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
         createPendingInspection(inspGroup, inspType);
     }
 
-    if (matches(inspResult, 'Pass', 'Approved as Noted', 'Partial without Fee', 'Approved per Affidavit Program') && inspType != 'Plans Change Submitted') {
+    if (matches(inspResult, 'Pass', 'Approved as Noted', 'Approved per Affidavit Program') && inspType != 'Plans Change Submitted') {
         editAppSpecific('Expiration Date', dateAdd(null, 180));
     }
 
@@ -169,7 +196,7 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
         var CapTypeResult = cap.getCapType();
         addrResult = aa.address.getAddressByCapId(capId);
         var addrArray = new Array();
-        var addrArray = addrResult.getOutput();
+        addrArray = addrResult.getOutput();
         var streetName = addrArray[0].getStreetName();
         var hseNum = addrArray[0].getHouseNumberStart();
         var streetSuffix = addrArray[0].getStreetSuffix();
@@ -188,17 +215,16 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
 
     if (inspType == 'Electric Temporary Service' && inspResult == 'Electric - Power') {
         // START REPLACED BRANCH FPL_TEMP
-        var cap = aa.cap.getCap(capId).getOutput();
-        var CapTypeResult = cap.getCapType();
+        cap = aa.cap.getCap(capId).getOutput();
+        CapTypeResult = cap.getCapType();
         addrResult = aa.address.getAddressByCapId(capId);
-        var addrArray = new Array();
-        var addrArray = addrResult.getOutput();
-        var streetName = addrArray[0].getStreetName();
-        var hseNum = addrArray[0].getHouseNumberStart();
-        var streetSuffix = addrArray[0].getStreetSuffix();
-        var city = addrArray[0].getCity();
-        var zip = addrArray[0].getZip();
-        var etext;
+        addrArray = new Array();
+        addrArray = addrResult.getOutput();
+        streetName = addrArray[0].getStreetName();
+        hseNum = addrArray[0].getHouseNumberStart();
+        streetSuffix = addrArray[0].getStreetSuffix();
+        city = addrArray[0].getCity();
+        zip = addrArray[0].getZip();
         etext = CapTypeResult + ' ' + inspType + ' ' + 'Permit #' + capIDString + ' (ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + ')' + '<br>';
         // DISABLED: FPL_temp:30
         aa.sendMail('NoReplyFPL@CharlotteCountyFL.gov', 'Kevin.Lapham@charlottecountyfl.gov', '', 'FPL Notification from Charlotte County', etext);
@@ -217,13 +243,14 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
         var yyyy = currentDt.getFullYear();
         var myDateStr = mm + '/' + dd + '/' + yyyy;
         comment('myDateStr = ' + myDateStr);
-        var StrCapID = String(capIDString);
-        var StrInspType = String(inspType);
-        var insEmail = lastInspEmail(StrCapID, StrInspType);
+        //var StrCapID = String(capIDString);
+        //var StrInspType = String(inspType);
+        //var insEmail = lastInspEmail(StrCapID, StrInspType);
+        var myLast = "";
         if (lastInspEmail(myCapId, myInsp) != null) {
-            var myLast = lastInspEmail(myCapId, myInsp);
+            myLast = lastInspEmail(myCapId, myInsp);
         } else {
-            var myLast = "TinaC.Jones@charlottecountyfl.gov";
+            myLast = "TinaC.Jones@charlottecountyfl.gov";
         }
 
         var sysDate = new Date();
@@ -233,19 +260,19 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
         comment('FORMATED sys DATE: ' + smm + '/' + sdd + '/' + syyyy);
         var text2 = 'Permit # ' + capId.getCustomID() + '<br>Type: ' + inspType + ' scheduled on ' + inspSchedDate;
         var addrResult = aa.address.getAddressByCapId(capId);
-        var addrArray = new Array();
+        addrArray = new Array();
         addrArray = addrResult.getOutput();
-        var hseNum = addrArray[0].getHouseNumberStart();
-        var streetName = addrArray[0].getStreetName();
-        var zip = addrArray[0].getZip();
-        var city = addrArray[0].getCity();
-        var etext = 'at Address: ' + hseNum + ' ' + streetName + ', ' + city + ' ' + zip + '\n' + 'has been ';
-        comment('A cancellation email would be sent TO:  ' + insEmail + ' with the following details:');
+        hseNum = addrArray[0].getHouseNumberStart();
+        streetName = addrArray[0].getStreetName();
+        zip = addrArray[0].getZip();
+        city = addrArray[0].getCity();
+        etext = 'at Address: ' + hseNum + ' ' + streetName + ', ' + city + ' ' + zip + '\n' + 'has been ';
+        comment('A cancellation email would be sent TO:  ' + myLast + ' with the following details:');
         comment(text2 + '\n' + etext + '\n' + inspResult + '.');
         if (mm <= smm && dd <= sdd && yyyy <= syyyy) {
             comment('date validated --> to email / INSPECTION: ' + inspType);
             comment('date validated? --> to email / INSPECTION: ' + inspType);
-            email(insEmail, 'NoReply_Accela@CharlotteCountyFL.gov', inspType + ' CANCEL - Permit ' + capIDString, text2 + '<br>' + etext + '<br>' + inspResult + ' on ' + smm + '/' + sdd + '/' + syyyy);
+            email(myLast, 'NoReply_Accela@CharlotteCountyFL.gov', inspType + ' CANCEL - Permit ' + capIDString, text2 + '<br>' + etext + '<br>' + inspResult + ' on ' + smm + '/' + sdd + '/' + syyyy);
         }
         // end REPLACED BRANCH CANCELEMAIL2
     }
@@ -254,27 +281,40 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
     //start replaced branch contractor_inspection'
     var myLastN = getMyLastInsp(myInsp, myCapId);
     aa.print("LastN = " + myLastN);
-    if (lastInspEmail(myCapId, myInsp) != null) {
-        var myLast = lastInspEmail(myCapId, myInsp);
+    var inspF = "";
+    var inspL = "";
+    if (myLastN == null || myLastN == "n/a") {
+        myLastN = "n/a";
+        inspF = "n/a";
+        inspL = "";
     } else {
-        var myLast = "TinaC.Jones@charlottecountyfl.gov";
+        inspF = myLastN.getFirstName();
+        inspL = myLastN.getLastName();
     }
-    var emlInsp = myLast + '<br>' + myLastN;
+    aa.print("LastN = " + myLastN);
+    aa.print("inspF/inspL = " + inspF + " " + inspL);
+    myLast = "";
+    if (lastInspEmail(myCapId, myInsp) != null) {
+        myLast = lastInspEmail(myCapId, myInsp);
+    } else {
+        myLast = "TinaC.Jones@charlottecountyfl.gov";
+    }
+    //var emlInsp = myLast + '<br>' + myLastN;
     addrResult = aa.address.getAddressByCapId(capId);
-    var addrArray = new Array();
-    var addrArray = addrResult.getOutput();
-    var streetName = addrArray[0].getStreetName();
-    var hseNum = addrArray[0].getHouseNumberStart();
-    var streetSuffix = addrArray[0].getStreetSuffix();
-    var city = addrArray[0].getCity();
-    var zip = addrArray[0].getZip();
+    addrArray = new Array();
+    addrArray = addrResult.getOutput();
+    streetName = addrArray[0].getStreetName();
+    hseNum = addrArray[0].getHouseNumberStart();
+    streetSuffix = addrArray[0].getStreetSuffix();
+    city = addrArray[0].getCity();
+    zip = addrArray[0].getZip();
     var profArr = new Array();
     var myComment = inspComment;
     if (myComment == null)
         myComment = 'n/a';
     profArr = getLicenseProfessional(capId);
     var emailAddress;
-    var inspUser = getInspector(inspType);
+    //var inspUser = getInspector(inspType);
     if (profArr.length > 0) {
         for (x in profArr)
             if (profArr[x].getPrintFlag() == 'Y')
@@ -285,20 +325,18 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
         emailAddress = 'TinaC.Jones@charlottecountyfl.gov';
     }
 
-    var inspF = myLastN.getFirstName();
-    var inspL = myLastN.getLastName();
-    var cap = aa.cap.getCap(capId).getOutput();
-    var CapTypeResult = cap.getCapType();
+    cap = aa.cap.getCap(capId).getOutput();
+    CapTypeResult = cap.getCapType();
     inspUserObj = aa.person.getUser(inspF, '', inspL).getOutput();
-    if (inspUserObj.getUserID() != null) {
-        var myUser = inspUserObj.getUserID();
+    if (inspUserObj != null) {  //inspUserObj.getUserID() 
+        //var myUser = inspUserObj.getUserID();
         var inspPhone = inspUserObj.getPhoneNumber();
     } else {
-        var inspPhone = "941-743-1201";
+        inspPhone = "941-743-1201";
     }
-    var etext;
+    etext = "";
     etext = inspType + ' inspection: ' + inspResult + '<br>Permit #' + capIDString + ' (' + CapTypeResult + ')<br>Address: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + '<br>Comment: ' + myComment + '<br>Inspector: ' + inspF + ' ' + inspL + '<br>Insp. phone: ' + inspPhone;
-    var emlInsp = '<br>The last insp email is: ' + myLast;
+    //var emlInsp = '<br>The last insp email is: ' + myLast;
     //+ '<br>The last insp: ' + myLastN;
     aa.sendMail('NoReply@CharlotteCountyFL.gov', emailAddress, '', inspType + ' Inspection Notification from Charlotte County -- ' + inspResult, etext);
     // DISABLED: contractor_inspection:49
@@ -308,5 +346,21 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
     comment('CC_151_BLD_InspResultAfter executed successfully');
 
     //end replaced branch: CC_151_BLD_InspResultAfter;
+
+
+    //begin SUPERVISOR email 20190210 KL
+    var capCons = aa.people.getCapContactByCapID(capId).getOutput();
+    if (capCons.length != 0) {
+        for (i in capCons) {
+            var thisPeop = capCons[i];
+            var allPeopData = thisPeop.getPeople();
+            var firstName1 = allPeopData.getFirstName();
+            var pEml = allPeopData.getEmail();
+            var relationship = allPeopData.getRelation();
+            if (pEml != null && pEml != "" && relationship == "Supervisor") {
+                aa.sendMail('NoReply@CharlotteCountyFL.gov', pEml, '', inspType + ' Inspection Notification from Charlotte County -- ' + inspResult, etext);
+            }
+        }
+    }
 }
 

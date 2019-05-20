@@ -1,3 +1,4 @@
+//FAA:BUILDING///
 
 if (feeExists('M-EXTEND', 'NEW')) {
 	editAppSpecific('Expiration Date', dateAdd(AInfo['Expiration Date'], 90));

@@ -1,6 +1,12 @@
-//IRSA:PLANNING/GROWTH MGMT/ZONING PERMITS/:  	start refactored branch: CC_151_GM_ZN_InspResultAfter
+//IRSA:PLANNING/GROWTH MGMT/ZONING PERMITS/
+
+//IRSA:  //start refactored branch: CC_151_GM_ZN_InspResultAfter
 
 showMessage = true;
+
+var vScriptName = aa.env.getValue("ScriptCode");
+var vEventName = aa.env.getValue("EventName");
+aa.print(vScriptName + "/" + vEventName);
 
 var PermitId1 = aa.env.getValue("PermitId1");
 var PermitId2 = aa.env.getValue("PermitId2");
@@ -14,68 +20,102 @@ if (capResult.getSuccess()) {
     aa.print("capIDString : " + capIDString);
 }
 
+var InspectionResultArray = aa.env.getValue("InspectionResultArray");
 var InspectionIdArray = aa.env.getValue("InspectionIdArray");
 var InspectionId = aa.env.getValue("InspectionId");
-var inspComment = aa.env.getValue("InspectionResultComment");
-var inspType = aa.env.getValue("InspectionType");
-aa.print("inspType=" + inspType);
 var inspectionList = aa.env.getValue("InspectionTypeArray");
 aa.print("inspectionList = " + inspectionList);
 aa.print("insp length=" + inspectionList.length);
-var commentList = aa.env.getValue("InspectionResultCommentArray");
-
-if (inspType == "" || inspType == " " || inspType == null) {
-    for (x in inspectionList) {
-        InspectionId = InspectionIdArray[x];
-        aa.print("InspectionIdArray = " + InspectionIdArray);
-        inspType = inspectionList[x];
-        aa.print("inspectionList" + x + ":" + inspType);
-        inspComment = commentList[x];
-        aa.print("commentList" + x + ":" + inspComment);
-        var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
-        var inspGroup = inspObj.getInspection().getInspectionGroup();
-        aa.print("inspGroup (arr)== " + inspGroup);
-        var inComm = inspObj.getInspectionComments();
-        if (inComm == null) {
-            inComm = "";
+if (vScriptName == "V360InspectionResultSubmitAfter") {
+    var commentList = aa.env.getValue("InspectionResultCommentArray");
+    aa.print("Analyze AA result methods...");
+    if (inspType == "" || inspType == " " || inspType == null) {
+        for (x in inspectionList) {
+            InspectionId = InspectionIdArray[x];
+            aa.print("InspectionIdArray l = " + InspectionIdArray);
+            inspResult = InspectionResultArray[x];
+            aa.print("InspectionResultArray  l = " + InspectionResultArray[x]);
+            inspType = inspectionList[x];
+            aa.print("inspectionList l " + x + ":" + inspType);
+            inspComment = commentList[x];
+            aa.print("commentList l " + x + ":" + inspComment);
+            var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
+            var inspGroup = inspObj.getInspection().getInspectionGroup();
+            aa.print("inspGroup l (arr)== " + inspGroup);
+            var inComm = inspObj.getInspectionComments();
+            if (inComm == null) {
+                inComm = "";
+            }
+            var mySearch = /emailed/i;
+            var result = mySearch.test(inComm);
+            if (result == false && inspResult != "") {
+                fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult);
+                var inComm2 = inspObj.setInspectionComments(inComm + " " + "emailed by script");
+                aa.inspection.editInspection(inspObj);
+            }
         }
-        var mySearch = /emailed/i;
-        var result = mySearch.test(inComm);
-        if (result == false && inspResult != "") {
-            fullIRSA(capIDString, inspType, inspComment, inspGroup);
-            var inComm2 = inspObj.setInspectionComments(inComm + " " + "emailed");
-            aa.inspection.editInspection(inspObj);
+    }
+
+    if (matches(inspResult, 'Pass', 'Approved as Noted', 'Not Required')) {
+        comment("DELETE EXTRA PENDINGS:  " + capIDString);
+        capIDString = capId.getCustomID();
+        comment(capIDString);
+        oInspList = aa.inspection.getInspections(capId);
+        inspArray = oInspList.getOutput();
+        comment(inspArray);
+        pendingInspectionExists = checkForPendingInspections();
+        if (pendingInspectionExists) {
+            aa.print("DELETE EXTRA PENDINGS  (in AA):  " + capIDString);
+            for (insp in inspArray)
+                if (inspType == inspArray[insp].getInspectionType() && inspArray[insp].getInspectionStatus() == 'Pending') {
+                    comment('DEL this ID: ' + inspArray[insp].getIdNumber());
+                    var InspM = aa.inspection.getInspection(capId, inspArray[insp].getIdNumber()).getOutput();
+                    InspM.getInspection().getActivity().setAuditStatus('I');
+                    aa.inspection.editInspection(InspM).getOutput();
+                    comment(inspArray[insp].getIdNumber() + ' has been removed for inspType: ' + inspArray[insp].getInspectionType());
+                }
         }
     }
 
 } else {
-    if (inspResult != "") {
-        var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
-        var inspGroup = inspObj.getInspection().getInspectionGroup();
-        aa.print("inspGroup == " + inspGroup);
-        fullIRSA(capIDString, inspType, inspComment, inspGroup);
-        aa.print("inspType sent =" + inspType);
-    }
-}
+    aa.print("Analyze apps and other result methods...");
+    var InspectionId = aa.env.getValue("InspectionId");
+    var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
+    var inspGroup = inspObj.getInspection().getInspectionGroup();
 
+    var inspResult = aa.env.getValue("InspectionResult");
+    var inspComment = aa.env.getValue("InspectionResultComment");
+    var inspType = aa.env.getValue("InspectionType");
 
+    fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult);
 
-if (inspResult == "") {
-    comment("DELETE PENDINGS:  " + capIDString);
-    oInspList = aa.inspection.getInspections(capId);
-    inspArray = oInspList.getOutput();
-    comment(inspArray);
-    if (inspArray.length > 0) {
-        for (insp in inspArray) {
-            fullInsps();
+    if (matches(inspResult, 'Pass', 'Approved as Noted', 'Not Required')) {
+        capIDString = capId.getCustomID();
+        comment(capIDString);
+        oInspList = aa.inspection.getInspections(capId);
+        inspArray = oInspList.getOutput();
+        comment(inspArray);
+        pendingInspectionExists = checkForPendingInspections();
+        if (pendingInspectionExists) {
+            aa.print("DELETE EXTRA PENDINGS (in apps):  " + capIDString);
+            for (insp in inspArray)
+                if (inspType == inspArray[insp].getInspectionType() && inspArray[insp].getInspectionStatus() == 'Pending') {
+                    comment('DEL this ID: ' + inspArray[insp].getIdNumber());
+                    var InspM = aa.inspection.getInspection(capId, inspArray[insp].getIdNumber()).getOutput();
+                    InspM.getInspection().getActivity().setAuditStatus('I');
+                    aa.inspection.editInspection(InspM).getOutput();
+                    comment(inspArray[insp].getIdNumber() + ' has been removed for inspType: ' + inspArray[insp].getInspectionType());
+                }
         }
     }
+
 }
 
-function fullIRSA(capIDString, inspType, inspComment, inspGroup) {
+
+
+function fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult) {
 
     aa.print("inspType arr = " + inspType);
-
     var myInsp = String(inspType);
     var myCapId = String(capIDString);
     aa.print("Insp + CapId:" + myInsp + " / " + myCapId);

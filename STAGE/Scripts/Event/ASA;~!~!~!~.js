@@ -1,4 +1,4 @@
-//ASA: / / / 
+//ASA:///
 copyParcelGisObjects();
 
 var mCap = aa.cap.getCap(capId).getOutput();
@@ -31,9 +31,10 @@ if (!appMatch('Licenses/*/*/*')) {
 	addConditionToCapsWithMatchingParcel();
 }
 
+/* DISABLED: ApplicationSubmitAfter TICKET 18974 
 if (proximity('AGIS_CHARCO', 'PG City Boundary', 0)) {
 	addStdCondition('CC_ADDR', 'PG City Limits');
-}
+}  */
 
 if (proximity('AGIS_CHARCO', 'LOMC', 1)) {
 	addStdCondition('CC PERMIT', 'LOMR-LOMA Notice');
@@ -58,6 +59,15 @@ if (appMatch('Building/*/*/*') && proximity('AGIS_CHARCO', 'Sea Turtle Lighting 
 
 if (proximity('AGIS_CHARCO', 'Babcock_Lots', 1)) {
 	addStdCondition('CC PERMIT', 'Babcock Ranch');
+}
+
+
+if (frACA == false) {
+    if (getGISInfo('AGIS_CHARCO', 'DRI', 'NAME') == 'Sandhill') {
+        var ahUser = "ShaoJ";
+        var adHocTaskName = "Sandhill DRI Review";
+        customAddAdHocTask(capIDString, ahUser, adHocTaskName);
+    }
 }
 
 

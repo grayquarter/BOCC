@@ -1,3 +1,4 @@
+//ASIUA:BUILDING///
 
 bContinue = true;
 arrCAPS = capIdsGetByParcel();
