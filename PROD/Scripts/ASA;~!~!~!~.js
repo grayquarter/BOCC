@@ -62,15 +62,6 @@ if (proximity('AGIS_CHARCO', 'Babcock_Lots', 1)) {
 }
 
 
-if (frACA == false) {
-    if (getGISInfo('AGIS_CHARCO', 'DRI', 'NAME') == 'Sandhill') {
-        var ahUser = "ShaoJ";
-        var adHocTaskName = "Sandhill DRI Review";
-        customAddAdHocTask(capIDString, ahUser, adHocTaskName);
-    }
-}
-
-
 // DISABLED: ApplicationSubmitAfter:40
 // if (proximity('AGIS_CHARCO', 'DRI', 1)) {
 // 	email('Kevin.Lapham@charlottecountyfl.gov', 'DRI@AGIS-accela.com', 'Application in DRI for ' + capId + ' / ' + capIDString, 'Application in DRI for ' + capId + ' / ' + capIDString);
