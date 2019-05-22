@@ -23,14 +23,22 @@ if (proximity('AGIS_CHARCO', 'Sea Turtle Lighting Zones', 1)) {
     seaTurtleMonitor();
 }
 
-if (appMatch('Building/Construction/*/*')) {
-    //replaced branch(SeaTurtle)
-    seaTurtle();
-}
-
 var cap = aa.cap.getCap(capId).getOutput();
 var CapTypeResult = cap.getCapType();
 var frACA = cap.isCreatedByACA();
+
+if (appMatch('Building/Construction/*/*')) {
+    //replaced branch(SeaTurtle)
+    seaTurtle();
+    if (frACA == true) {
+        if (getGISInfo('AGIS_CHARCO', 'DRI', 'NAME') == 'Sandhill') {
+            var ahUser = "ShaoJ";
+            var adHocTaskName = "Sandhill DRI Review";
+            customAddAdHocTask(capIDString, ahUser, adHocTaskName);
+        }
+    }
+}
+
 var profArr = new Array();
 profArr = getLicenseProfessional(capId);
 var pLicNo;
@@ -107,13 +115,6 @@ if (proximity('AGIS_CHARCO', 'DRI', 1) && !appMatch('Building/POS/*/*')) {
     editAppSpecific('Project Name', getGISInfo('AGIS_CHARCO', 'DRI', 'NAME'));
 }
 
-
-
-if (getGISInfo('AGIS_CHARCO', 'DRI', 'NAME') == 'Sandhill') {
-    var ahUser = "ShaoJ";
-    var adHocTaskName = "Sandhill DRI Review";
-    customAddAdHocTask(capIDString, ahUser, adHocTaskName);
-}
 
 
 // DISABLED: ConvertToRealCapAfter:40
