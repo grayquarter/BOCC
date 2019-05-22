@@ -12,7 +12,7 @@ for (x in allTsks)
         comment(x + ' status = ' + taskStatus(x, 'PR-DRC1'));
     }
 /*
-    if (appMatch('Building/Accessories/Commercial/Boatlift') && (isTaskActive(x, 'PR-COMMBOAT') || (allTsks[x].process == 'PR-COMMBOAT' && !matches(taskStatus(x, 'PR-COMMBOAT'), 'Approved', 'Not Required', null)))) {
+    if (appMatch('Building/Accessories/Commercial/Boatlift',capId) && (isTaskActive(x, 'PR-COMMBOAT') || (allTsks[x].process == 'PR-COMMBOAT' && !matches(taskStatus(x, 'PR-COMMBOAT'), 'Approved', 'Not Required', null)))) {
         clsPrntTsk = false;
     }
 
