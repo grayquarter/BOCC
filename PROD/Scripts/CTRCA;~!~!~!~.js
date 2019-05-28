@@ -102,8 +102,13 @@ if (appMatch('Building/Trade Permits/Residential/Pool Solar System') && (pLicNo.
 // 	}
 
 if (appMatch('Building/Construction/Residential/Single Family-Babcock') && frACA == true) {
-    createPendingInspection('RESSINGLE - B', 'Babcock Final');
-    scheduleInspection('Babcock Final', 100, 'AMY.WICKS@KIMLEY-HORN.COM', null, 'scheduled via script');
+    createPendingInspection('RESSINGLE-B', 'Babcock-Landscape');
+    scheduleInspection('Babcock-Landscape', 100, 'AMY.WICKS@KIMLEY-HORN.COM', null, 'scheduled via script');
+}
+
+if (appMatch('Building/Construction/Residential/Single Family-Babcock') && frACA == true) {
+    createPendingInspection('RESSINGLE-B', 'Babcock-Landscape');
+    scheduleInspection('Babcock-Landscape', 100, 'AMY.WICKS@KIMLEY-HORN.COM', null, 'scheduled via script');
 }
 
 
