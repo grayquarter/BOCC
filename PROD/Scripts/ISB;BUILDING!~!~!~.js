@@ -8,6 +8,26 @@ if ((currentUserID != 'JONESTC' && currentUserID != 'LAPHAMK') && inspType == 'A
 }
 
 
+//if (appMatch('Building/Construction/*/*') && inspType == 'Building Final') {
+/*    var assessGar = false;
+    var assessGar1 = false;
+    var assessGar2 = false;
+    assessGar1 = checkInspectionResult('Assess Garbage', 'Pass');
+    assessGar2 = checkInspectionResult('Assess Garbage', 'Not Required');
+    if (assessGar1 == true || assessGar2 == true) {
+        assessGar = true;
+    }
+    if (assessGar == false) {
+        showMessage = true;
+        aa.print("Cannot schedule inspection as Garbage Fees are due.  After Electric Final pay garbage fee.");
+        comment("Cannot schedule inspection as Garbage Fees are due.  After Electric Final pay garbage fee.");
+
+        cancel = true;
+    }
+}
+*/
+
+
 if ((inspType != 'Plans Change Submitted' || inspType != 'On-Line Resubmittal') && capStatus != 'Permit Issued' && capStatus != 'Issued' && capStatus != 'Temp C of O Issued') {
 	showMessage = true;
 	cancel = true;
