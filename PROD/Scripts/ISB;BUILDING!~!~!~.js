@@ -1,10 +1,12 @@
 //ISB:BUILDING///
 
+
 if ((currentUserID != 'JONESTC' && currentUserID != 'LAPHAMK') && inspType == 'Assess Garbage') {
     aa.print("This inspection type cannot be manually scheduled.");
     comment("This inspection type cannot be manually scheduled.");
     cancel = true;
 }
+
 
 if ((inspType != 'Plans Change Submitted' || inspType != 'On-Line Resubmittal') && capStatus != 'Permit Issued' && capStatus != 'Issued' && capStatus != 'Temp C of O Issued') {
 	showMessage = true;
