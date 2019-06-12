@@ -8,8 +8,8 @@ if (inspType != 'On-Line Resubmittal' && inspType != 'Plans Change Submitted' &&
 }
 
 
-if ((currentUserID != 'JONESTC' && currentUserID != 'LAPHAMK') && inspType == 'Assess Garbage' && inspResult == "Pass") {
-    aa.print("This inspection type cannot be manually resulted.");
+if ((currentUserID != 'JONESTC' && currentUserID != 'LAPHAMK' && currentUserID != 'ADMIN') && inspType == 'Assess Garbage' && inspResult == "Pass") {
+    aa.print("This inspection type cannot be manually resulted by userID: " + currentUserID);
     comment("This inspection type cannot be manually resulted.");
     cancel = true;
 }
