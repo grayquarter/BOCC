@@ -189,6 +189,39 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult) {
         editAppSpecific('Expiration Date', dateAdd(null, 60));
     }
 
+
+/*
+    //GARB-CC fees:
+    if (inspType == 'Electric Final' && inspResult == 'Pass') {
+        scheduleInspection('Assess Garbage', 1, 'ADMIN', null, 'scheduled via script');
+        var getGarbage = takeOutGarbage(capId);
+        if (getGarbage == true) {
+            resultInspection("Assess Garbage", "Pass", sysDate, "Automated invoicing of Garbage Fee.");
+            var inspType = 'Assess Garbage';
+            comment("DELETE Garbage PENDINGS:  " + capIDString);
+            oInspList = aa.inspection.getInspections(capId);
+            inspArray = oInspList.getOutput();
+            comment(inspArray);
+            pendingInspectionExists = checkForPendingInspections();
+            if (pendingInspectionExists) {
+                aa.print("DELETE EXTRA Garbage PENDINGS  (in AA):  " + capIDString);
+                for (insp in inspArray)
+                    if (inspType == inspArray[insp].getInspectionType() && inspArray[insp].getInspectionStatus() == 'Pending') {
+                        var InspM = aa.inspection.getInspection(capId, inspArray[insp].getIdNumber()).getOutput();
+                        InspM.getInspection().getActivity().setAuditStatus('I');
+                        aa.inspection.editInspection(InspM).getOutput();
+                        comment(inspArray[insp].getIdNumber() + ' has been removed for inspType: ' + inspArray[insp].getInspectionType());
+                        aa.print(inspArray[insp].getIdNumber() + ' has been removed for inspType: ' + inspArray[insp].getInspectionType());
+                    }
+            }
+        } else {
+            resultInspection("Assess Garbage", "Fail without Fee", sysDate, "Garbage Fee calculation error.");
+        }
+
+    }
+*/
+
+
     if (inspType == 'Electric Final' && inspResult == 'Electric - Power') {
 
         //START REPLACED BRANCH FPL_FINAL
@@ -364,3 +397,146 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult) {
     }
 }
 
+function takeOutGarbage(capId) {
+
+    var feeA = feesPaid(capId);
+
+    for (x in feeA) {
+        thisFee = feeA[x];
+        if (thisFee.code == "GARB-CC") {
+            if (thisFee.status == "NEW") {
+                invoiceFee("GARB-CC", "ORIGINAL");
+                aa.print("There are garbage collection fees due... processing invoice.");
+                comment("There are garbage collection fees due... processing invoice.");
+                return true;
+            } else {
+                aa.print("There is a problem calculating the garbage collection fees. Please review the Assess Garbage inspection.");
+                comment("There is a problem calculating the garbage collection fees. Please review the Assess Garbage inspection.");
+                return false;
+            }
+        }
+
+        if (thisFee.code == "GARB-BG") {
+            if (thisFee.status == "NEW") {
+                invoiceFee("GARB-BG", "ORIGINAL");
+                aa.print("There are garbage collection fees due... processing invoice.");
+                comment("There are garbage collection fees due... processing invoice.");
+                return true;
+            } else {
+                aa.print("There is a problem calculating the garbage collection fees. Please review the Assess Garbage inspection.");
+                comment("There is a problem calculating the garbage collection fees. Please review the Assess Garbage inspection.");
+                return false;
+            }
+        }
+
+        if (thisFee.code == "GARB-DP") {
+            if (thisFee.status == "NEW") {
+                invoiceFee("GARB-DP", "ORIGINAL");
+                aa.print("There are garbage collection fees due... processing invoice.");
+                comment("There are garbage collection fees due... processing invoice.");
+                return true;
+            } else {
+                aa.print("There is a problem calculating the garbage collection fees. Please review the Assess Garbage inspection.");
+                comment("There is a problem calculating the garbage collection fees. Please review the Assess Garbage inspection.");
+                return false;
+            }
+        }
+    }
+
+    function feesPaid() {
+        var itemCap = capId;
+        if (arguments.length > 0) {
+            ltcapidstr = arguments[0];
+            if (typeof (ltcapidstr) == "string") {
+                var ltresult = aa.cap.getCapID(ltcapidstr);
+                if (ltresult.getSuccess())
+                    itemCap = ltresult.getOutput();
+                else { logMessage("**ERROR: Failed to get cap ID: " + ltcapidstr + " error: " + ltresult.getErrorMessage()); return false; }
+            }
+            else
+                itemCap = ltcapidstr;
+        }
+        var feeArr = new Array();
+        var feeResult = aa.fee.getFeeItems(itemCap);
+        if (feeResult.getSuccess()) { var feeObjArr = feeResult.getOutput(); }
+        else { aa.print("**ERROR: getting fee items: " + feeResult.getErrorMessage()); return false; }
+        for (ff in feeObjArr) {
+            fFee = feeObjArr[ff];
+            var myFee = new FeeObj();
+            var amtPaid = 0;
+
+            var pfResult = aa.finance.getPaymentFeeItems(itemCap, null);
+            if (pfResult.getSuccess()) {
+                var pfObj = pfResult.getOutput();
+                for (ij in pfObj)
+                    if (fFee.getFeeSeqNbr() == pfObj[ij].getFeeSeqNbr())
+                        amtPaid += pfObj[ij].getFeeAllocation();
+            }
+
+            myFee.sequence = fFee.getFeeSeqNbr();
+            myFee.code = fFee.getFeeCod();
+            myFee.sched = fFee.getF4FeeItemModel().getFeeSchudle();
+            myFee.description = fFee.getFeeDescription();
+            myFee.unit = fFee.getFeeUnit();
+            myFee.amount = fFee.getFee();
+            myFee.amountPaid = amtPaid;
+            if (fFee.getApplyDate()) myFee.applyDate = convertDate(fFee.getApplyDate());
+            if (fFee.getApplyDate()) myFee.applyDateF = dateFormatted(fFee.getApplyDate().getMonth(), fFee.getApplyDate().getDayOfMonth(), fFee.getApplyDate().getYear(), "MM-DD-YYYY");
+            if (fFee.getEffectDate()) myFee.effectDate = convertDate(fFee.getEffectDate());
+            if (fFee.getExpireDate()) myFee.expireDate = convertDate(fFee.getExpireDate());
+            myFee.status = fFee.getFeeitemStatus();
+            myFee.period = fFee.getPaymentPeriod();
+            myFee.display = fFee.getDisplay();
+            myFee.accCodeL1 = fFee.getAccCodeL1();
+            myFee.accCodeL2 = fFee.getAccCodeL2();
+            myFee.accCodeL3 = fFee.getAccCodeL3();
+            myFee.formula = fFee.getFormula();
+            myFee.udes = fFee.getUdes();
+            myFee.UDF1 = fFee.getUdf1();
+            myFee.UDF2 = fFee.getUdf2();
+            myFee.UDF3 = fFee.getUdf3();
+            myFee.UDF4 = fFee.getUdf4();
+            myFee.subGroup = fFee.getSubGroup();
+            myFee.calcFlag = fFee.getCalcFlag();
+            myFee.calcProc = fFee.getFeeCalcProc();
+            myFee.version = fFee.getF4FeeItemModel().getVersion();
+
+            feeArr.push(myFee);
+        }
+
+        return feeArr;
+    }
+
+    function FeeObj() {
+        var thisFee = new Array;
+        thisFee.sequence = null;
+        thisFee.code = null;
+        thisFee.description = null;
+        thisFee.unit = null;
+        thisFee.amount = null;
+        thisFee.amountPaid = null;
+        thisFee.applyDate = null;
+        thisFee.effectDate = null;
+        thisFee.expireDate = null;
+        thisFee.status = null;
+        thisFee.recDate = null;
+        thisFee.period = null;
+        thisFee.display = null;
+        thisFee.accCodeL1 = null;
+        thisFee.accCodeL2 = null;
+        thisFee.accCodeL3 = null;
+        thisFee.formula = null;
+        thisFee.udes = null;
+        thisFee.UDF1 = null;
+        thisFee.UDF2 = null;
+        thisFee.UDF3 = null;
+        thisFee.UDF4 = null;
+        thisFee.subGroup = null;
+        thisFee.calcFlag = null;
+        thisFee.calcProc = null;
+        thisFee.auditDate = null;
+        thisFee.auditID = null;
+        thisFee.auditStatus = null;
+        thisFee.version = null;
+    }
+}
