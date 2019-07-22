@@ -1,4 +1,5 @@
 //PRA:BUILDING/// 
+var autoAppr = false;
 var cap = aa.cap.getCap(capId).getOutput();
 var capIDString = capId.getCustomID();
 var CapTypeResult = cap.getCapType();
@@ -36,6 +37,7 @@ if (appMatch('Building/Trade Permits/Commercial/Water Heater') && (capStatus == 
     activateTask('Permit Issuance');
     updateTask('Permit Issuance', 'Issued', 'Automated Issuance');
     createPendingInspFromReqd(capId);
+    autoAppr = true;
 }
 
 if (appMatch('Building/Trade Permits/Residential/Water Heater') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
@@ -45,6 +47,7 @@ if (appMatch('Building/Trade Permits/Residential/Water Heater') && (capStatus ==
     activateTask('Permit Issuance');
     updateTask('Permit Issuance', 'Issued', 'Automated Issuance');
     createPendingInspFromReqd(capId);
+    autoAppr = true;
 }
 
 if (appMatch('Building/Trade Permits/Commercial/Irrigation System') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
@@ -54,6 +57,7 @@ if (appMatch('Building/Trade Permits/Commercial/Irrigation System') && (capStatu
     activateTask('Permit Issuance');
     updateTask('Permit Issuance', 'Issued', 'Automated Issuance');
     createPendingInspFromReqd(capId);
+    autoAppr = true;
 }
 
 if (appMatch('Building/Trade Permits/Residential/Irrigation System') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
@@ -63,6 +67,7 @@ if (appMatch('Building/Trade Permits/Residential/Irrigation System') && (capStat
     activateTask('Permit Issuance');
     updateTask('Permit Issuance', 'Issued', 'Automated Issuance');
     createPendingInspFromReqd(capId);
+    autoAppr = true;
 }
 
 if (appMatch('Building/Trade Permits/Residential/Solar Water Heater') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
@@ -72,6 +77,7 @@ if (appMatch('Building/Trade Permits/Residential/Solar Water Heater') && (capSta
     activateTask('Permit Issuance');
     updateTask('Permit Issuance', 'Issued', 'Automated Issuance');
     createPendingInspFromReqd(capId);
+    autoAppr = true;
 }
 
 if (appMatch('Building/Trade Permits/Residential/Plumbing') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
@@ -81,6 +87,7 @@ if (appMatch('Building/Trade Permits/Residential/Plumbing') && (capStatus == nul
     activateTask('Permit Issuance');
     updateTask('Permit Issuance', 'Issued', 'Automated Issuance');
     createPendingInspFromReqd(capId);
+    autoAppr = true;
 }
 
 if (appMatch('Building/Trade Permits/Residential/Electrical') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
@@ -90,6 +97,7 @@ if (appMatch('Building/Trade Permits/Residential/Electrical') && (capStatus == n
     activateTask('Permit Issuance');
     updateTask('Permit Issuance', 'Issued', 'Automated Issuance');
     createPendingInspFromReqd(capId);
+    autoAppr = true;
 }
 
 if (appMatch('Building/Trade Permits/Residential/Pool Heat Pump') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
@@ -99,6 +107,7 @@ if (appMatch('Building/Trade Permits/Residential/Pool Heat Pump') && (capStatus 
     activateTask('Permit Issuance');
     updateTask('Permit Issuance', 'Issued', 'Automated Issuance');
     createPendingInspFromReqd(capId);
+    autoAppr = true;
 }
 
 if (appMatch('Building/Trade Permits/Residential/Roofing') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
@@ -108,6 +117,7 @@ if (appMatch('Building/Trade Permits/Residential/Roofing') && (capStatus == null
     activateTask('Permit Issuance');
     updateTask('Permit Issuance', 'Issued', 'Automated Issuance');
     createPendingInspFromReqd(capId);
+    autoAppr = true;
 }
 
 if (appMatch('Building/Trade Permits/Residential/Mechanical') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
@@ -117,6 +127,7 @@ if (appMatch('Building/Trade Permits/Residential/Mechanical') && (capStatus == n
     activateTask('Permit Issuance');
     updateTask('Permit Issuance', 'Issued', 'Automated Issuance');
     createPendingInspFromReqd(capId);
+    autoAppr = true;
 }
 
 if (appMatch('Building/Trade Permits/Residential/Sewer Connection') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
@@ -126,6 +137,7 @@ if (appMatch('Building/Trade Permits/Residential/Sewer Connection') && (capStatu
     activateTask('Permit Issuance');
     updateTask('Permit Issuance', 'Issued', 'Automated Issuance');
     createPendingInspFromReqd(capId);
+    autoAppr = true;
 }
 
 //var capIDString = capId.getCustomID();
@@ -151,3 +163,7 @@ var mEXT2 = FeeItemsPaidList.indexOf('100') != -1;
 // if (frACA == false) {
 // 	email('Kevin.Lapham@charlottecountyfl.gov', 'PRA.Payments@accela.com', 'PRA Payment made for ' + capId, 'PRA Payment made in the amount of ' + FeeItemsPaidList +  'for ' + capId + ' / ' + capIDString);
 // 	}
+
+if (capStatus == null && frACA == true && balanceDue <= 0 && autoAppr == false) {
+    email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_Payment.TEST@accela.com', 'ACA Payment from Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An payment has been made in ACA for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
+}
