@@ -1,4 +1,3 @@
-
 //PRA:BUILDING///
 var autoAppr = false;
 var cap = aa.cap.getCap(capId).getOutput();
@@ -165,10 +164,12 @@ var mEXT2 = FeeItemsPaidList.indexOf('100') != -1;
 // 	email('Kevin.Lapham@charlottecountyfl.gov', 'PRA.Payments@accela.com', 'PRA Payment made for ' + capId, 'PRA Payment made in the amount of ' + FeeItemsPaidList +  'for ' + capId + ' / ' + capIDString);
 // 	}
 
+
+
 if ((capStatus == null || capStatus == "On-Line Ready for Pickup") && frACA == true && balanceDue <= 0 && autoAppr == false) {
-    email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_Payment@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
+    email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_Payment@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + ' with status: ' + capStatus + ' . <br>' + CapTypeResult + eAddr);
 }
 
 if (capStatus == "Ready for Pickup" && balanceDue <= 0 && autoAppr == false) {
-    email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_Payment.2@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
+    email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_Payment.2@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + ' with status: ' + capStatus+ ' . <br>' + CapTypeResult + eAddr);
 }
