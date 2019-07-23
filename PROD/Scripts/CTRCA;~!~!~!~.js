@@ -40,15 +40,22 @@ if (appMatch('Building/Construction/*/*')) {
 }
 
 var profArr = new Array();
-profArr = getLicenseProfessional(capId);
-var pLicNo;
+profArr = aa.licenseScript.getLicenseProf(capId);
+profArr = profArr.getOutput();
+
+aa.print("arr len=" + profArr.length);
+var pLicNo = "";
 if ((profArr != null && profArr.length > 0)) {
     for (x in profArr) {
         if (profArr[x].getPrintFlag() == 'Y') {
             pLicNo = profArr[x].getLicenseNbr();
+        } else {
+            aa.print(profArr[x].getLicenseNbr() + " is not set as a primary LP.")
         }
     }
 }
+aa.print("pLicNo:" + pLicNo);
+
 
 if (appMatch('Building/Trade Permits/*/Mechanical') && (pLicNo.substr(0, 3) == 'CGC')) {
     addStdCondition('CC PERMIT', 'Subcontractor Worksheet');
