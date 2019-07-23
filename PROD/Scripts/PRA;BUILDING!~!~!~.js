@@ -1,4 +1,5 @@
-//PRA:BUILDING/// 
+
+//PRA:BUILDING///
 var autoAppr = false;
 var cap = aa.cap.getCap(capId).getOutput();
 var capIDString = capId.getCustomID();
@@ -30,7 +31,7 @@ if (emailAddress == 'na' || emailAddress == null || emailAddress == 'NONE' || em
     emailAddress = 'TinaC.Jones@charlottecountyfl.gov';
 }
 
-if (appMatch('Building/Trade Permits/Commercial/Water Heater') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
+if (appMatch('Building/Trade Permits/Commercial/Water Heater') && (capStatus == null) && (frACA == true) && (balanceDue <= 0)) {
     email('TinaC.Jones@charlottecountyfl.gov', 'ACA@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_autoP@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email(emailAddress, 'NoReply@charlottecountyfl.gov', 'Automated Issuance of Permit # ' + capIDString, 'An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
@@ -40,7 +41,7 @@ if (appMatch('Building/Trade Permits/Commercial/Water Heater') && (capStatus == 
     autoAppr = true;
 }
 
-if (appMatch('Building/Trade Permits/Residential/Water Heater') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
+if (appMatch('Building/Trade Permits/Residential/Water Heater') && (capStatus == null) && (frACA == true) && (balanceDue <= 0)) {
     email('TinaC.Jones@charlottecountyfl.gov', 'ACA@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_autoP@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email(emailAddress, 'NoReply@charlottecountyfl.gov', 'Automated Issuance of Permit # ' + capIDString, 'An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
@@ -50,7 +51,7 @@ if (appMatch('Building/Trade Permits/Residential/Water Heater') && (capStatus ==
     autoAppr = true;
 }
 
-if (appMatch('Building/Trade Permits/Commercial/Irrigation System') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
+if (appMatch('Building/Trade Permits/Commercial/Irrigation System') && (capStatus == null) && (frACA == true) && (balanceDue <= 0)) {
     email('TinaC.Jones@charlottecountyfl.gov', 'ACA@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_autoP@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email(emailAddress, 'NoReply@charlottecountyfl.gov', 'Automated Issuance of Permit # ' + capIDString, 'An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
@@ -60,7 +61,7 @@ if (appMatch('Building/Trade Permits/Commercial/Irrigation System') && (capStatu
     autoAppr = true;
 }
 
-if (appMatch('Building/Trade Permits/Residential/Irrigation System') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
+if (appMatch('Building/Trade Permits/Residential/Irrigation System') && (capStatus == null) && (frACA == true) && (balanceDue <= 0)) {
     email('TinaC.Jone@charlottecountyfl.gov', 'ACA@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_autoP@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email(emailAddress, 'NoReply@charlottecountyfl.gov', 'Automated Issuance of Permit # ' + capIDString, 'An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
@@ -70,7 +71,7 @@ if (appMatch('Building/Trade Permits/Residential/Irrigation System') && (capStat
     autoAppr = true;
 }
 
-if (appMatch('Building/Trade Permits/Residential/Solar Water Heater') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
+if (appMatch('Building/Trade Permits/Residential/Solar Water Heater') && (capStatus == null) && (frACA == true) && (balanceDue <= 0)) {
     email('TinaC.Jones@charlottecountyfl.gov', 'ACA@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_autoP@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email(emailAddress, 'NoReply@charlottecountyfl.gov', 'Automated Issuance of Permit # ' + capIDString, 'An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
@@ -80,7 +81,7 @@ if (appMatch('Building/Trade Permits/Residential/Solar Water Heater') && (capSta
     autoAppr = true;
 }
 
-if (appMatch('Building/Trade Permits/Residential/Plumbing') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
+if (appMatch('Building/Trade Permits/Residential/Plumbing') && (capStatus == null) && (frACA == true) && (balanceDue <= 0)) {
     email('TinaC.Jones@charlottecountyfl.gov', 'ACA@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email(emailAddress, 'NoReply@charlottecountyfl.gov', 'Automated Issuance of Permit # ' + capIDString, 'An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_autoP@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
@@ -90,7 +91,7 @@ if (appMatch('Building/Trade Permits/Residential/Plumbing') && (capStatus == nul
     autoAppr = true;
 }
 
-if (appMatch('Building/Trade Permits/Residential/Electrical') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
+if (appMatch('Building/Trade Permits/Residential/Electrical') && (capStatus == null) && (frACA == true) && (balanceDue <= 0)) {
     email('TinaC.Jones@charlottecountyfl.gov', 'ACA@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_autoP@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email(emailAddress, 'NoReply@charlottecountyfl.gov', 'Automated Issuance of Permit # ' + capIDString, 'An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
@@ -100,7 +101,7 @@ if (appMatch('Building/Trade Permits/Residential/Electrical') && (capStatus == n
     autoAppr = true;
 }
 
-if (appMatch('Building/Trade Permits/Residential/Pool Heat Pump') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
+if (appMatch('Building/Trade Permits/Residential/Pool Heat Pump') && (capStatus == null) && (frACA == true) && (balanceDue <= 0)) {
     email('TinaC.Jones@charlottecountyfl.gov', 'ACA@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_autoP@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email(emailAddress, 'NoReply@charlottecountyfl.gov', 'Automated Issuance of Permit # ' + capIDString, 'An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
@@ -110,7 +111,7 @@ if (appMatch('Building/Trade Permits/Residential/Pool Heat Pump') && (capStatus 
     autoAppr = true;
 }
 
-if (appMatch('Building/Trade Permits/Residential/Roofing') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
+if (appMatch('Building/Trade Permits/Residential/Roofing') && (capStatus == null) && (frACA == true) && (balanceDue <= 0)) {
     email('TinaC.Jones@charlottecountyfl.gov', 'ACA@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_autoP@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email(emailAddress, 'NoReply@charlottecountyfl.gov', 'Automated Issuance of Permit # ' + capIDString, 'An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
@@ -120,7 +121,7 @@ if (appMatch('Building/Trade Permits/Residential/Roofing') && (capStatus == null
     autoAppr = true;
 }
 
-if (appMatch('Building/Trade Permits/Residential/Mechanical') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
+if (appMatch('Building/Trade Permits/Residential/Mechanical') && (capStatus == null) && (frACA == true) && (balanceDue <= 0)) {
     email('TinaC.Jones@charlottecountyfl.gov', 'ACA@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_autoP@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email(emailAddress, 'NoReply@charlottecountyfl.gov', 'Automated Issuance of Permit # ' + capIDString, 'An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
@@ -130,7 +131,7 @@ if (appMatch('Building/Trade Permits/Residential/Mechanical') && (capStatus == n
     autoAppr = true;
 }
 
-if (appMatch('Building/Trade Permits/Residential/Sewer Connection') && (capStatus == null) && (frACA == true) && (balanceDue >= 0)) {
+if (appMatch('Building/Trade Permits/Residential/Sewer Connection') && (capStatus == null) && (frACA == true) && (balanceDue <= 0)) {
     email('TinaC.Jones@charlottecountyfl.gov', 'ACA@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_autoP@accela.com', 'Automated Issuance of Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
     email(emailAddress, 'NoReply@charlottecountyfl.gov', 'Automated Issuance of Permit # ' + capIDString, 'An automated permit has been issued for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
@@ -164,6 +165,10 @@ var mEXT2 = FeeItemsPaidList.indexOf('100') != -1;
 // 	email('Kevin.Lapham@charlottecountyfl.gov', 'PRA.Payments@accela.com', 'PRA Payment made for ' + capId, 'PRA Payment made in the amount of ' + FeeItemsPaidList +  'for ' + capId + ' / ' + capIDString);
 // 	}
 
-if (capStatus == null && frACA == true && balanceDue <= 0 && autoAppr == false) {
-    email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_Payment.TEST@accela.com', 'ACA Payment from Permit # ' + capIDString, 'To email: ' + emailAddress + '<br> An payment has been made in ACA for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
+if ((capStatus == null || capStatus == "On-Line Ready for Pickup") && frACA == true && balanceDue <= 0 && autoAppr == false) {
+    email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_Payment@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
+}
+
+if (capStatus == "Ready for Pickup" && balanceDue <= 0 && autoAppr == false) {
+    email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_Payment.2@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + '. <br>' + CapTypeResult + eAddr);
 }
