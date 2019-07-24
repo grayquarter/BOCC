@@ -1,7 +1,13 @@
 //IRSA:  
 //start replaced branch: CC_151_BLD_InspResultAfter
 
-showMessage = true;
+if (currentUserID == "LAPHAMK") {
+    showMessage = true;
+    showDebug = true;
+} else {
+    showMessage = true;
+    showDebug = false;
+}
 
 var vScriptName = aa.env.getValue("ScriptCode");
 var vEventName = aa.env.getValue("EventName");
