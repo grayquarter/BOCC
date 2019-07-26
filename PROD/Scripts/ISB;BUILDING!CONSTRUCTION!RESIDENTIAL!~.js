@@ -23,6 +23,7 @@ if (vScriptName == "InspectionMultipleScheduleBefore") {
 
     for (x in InspectionIdArray) {
         InspectionId = InspectionIdArray[x];
+        aa.print(InspectionId);
         capResult = aa.cap.getCapID(PermitID1Array[x], PermitID2Array[x], PermitID3Array[x]);
         if (capResult.getSuccess()) {
             var capId = capResult.getOutput();
@@ -37,7 +38,7 @@ if (vScriptName == "InspectionMultipleScheduleBefore") {
             var inspType = inspObj.getInspection().getInspectionType();
             aa.print(" inspGroup(arr)== " + inspGroup);
             aa.print(" inspType(arr)== " + inspType);
-
+            aa.print("---");
             doISBprocess(capId, capIDString, inspType);
 
         }
@@ -67,60 +68,59 @@ if (vScriptName == "InspectionScheduleBefore") {
 }
 
 
-
 function doISBprocess(capId, capIDString, inspType) {
 
     if ((appMatch('Building/Construction/Residential/Single Family') && inspType == 'Building Final' && balanceDue > 0)) {
         showMessage = true;
-        comment('Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
+        comment(capIDString + ' ' + inspType + ' Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
         cancel = true;
     }
 
     if ((appMatch('Building/Construction/Residential/Addition') && inspType == 'Building Final' && balanceDue > 0)) {
         showMessage = true;
-        comment('Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
+        comment(capIDString + ' ' + inspType + ' Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
         cancel = true;
     }
 
     if ((appMatch('Building/Construction/Residential/DCA Home') && inspType == 'Building Final' && balanceDue > 0)) {
         showMessage = true;
-        comment('Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
+        comment(capIDString + ' ' + inspType + ' Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
         cancel = true;
     }
 
     if ((appMatch('Building/Construction/Residential/Miscellaneous') && inspType == 'Building Final' && balanceDue > 0)) {
         showMessage = true;
-        comment('Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
+        comment(capIDString + ' ' + inspType + ' Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
         cancel = true;
     }
 
     if ((appMatch('Building/Construction/Residential/Mobile Home') && inspType == 'Mobile Home Final' && balanceDue > 0)) {
         showMessage = true;
-        comment('Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
+        comment(capIDString + ' ' + inspType + ' Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
         cancel = true;
     }
 
     if ((appMatch('Building/Construction/Residential/Modular') && inspType == 'Mobile Home Final' && balanceDue > 0)) {
         showMessage = true;
-        comment('Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
+        comment(capIDString + ' ' + inspType + ' Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
         cancel = true;
     }
 
     if ((appMatch('Building/Construction/Residential/Remodel') && inspType == 'Building Final' && balanceDue > 0)) {
         showMessage = true;
-        comment('Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
+        comment(capIDString + ' ' + inspType + ' Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
         cancel = true;
     }
 
     if ((appMatch('Building/Construction/Residential/SUBDRY') && inspType == 'Building Final' && balanceDue > 0)) {
         showMessage = true;
-        comment('Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
+        comment(capIDString + ' ' + inspType + ' Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
         cancel = true;
     }
 
     if ((appMatch('Building/Construction/Residential/Single Family-Babcock') && inspType == 'Building Final' && balanceDue > 0)) {
         showMessage = true;
-        comment('Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
+        comment(capIDString + ' ' + inspType + ' Inspection cannot be scheduled because there is a balance of $' + balanceDue + ' due on the record.');
         cancel = true;
     }
 
