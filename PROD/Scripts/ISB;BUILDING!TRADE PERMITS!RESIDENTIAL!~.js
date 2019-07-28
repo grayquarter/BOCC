@@ -60,8 +60,9 @@ if (vScriptName == "InspectionScheduleBefore") {
         aa.print("capId: " + capId);
         var capIDString = capId.getCustomID();
         aa.print("capIDString : " + capIDString);
-
-        doISBprocess(capId, capIDString, inspType);
+        aa.print("Balance=" + balanceDue);
+        aa.print("InspectionType=" + InspectionType );
+        doISBprocess(capId, capIDString, InspectionType);
 
     }
 
