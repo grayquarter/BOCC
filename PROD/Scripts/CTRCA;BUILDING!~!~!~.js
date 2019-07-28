@@ -1,5 +1,26 @@
 // CTRCA:BUILDING///
 
+var cap = aa.cap.getCap(capId).getOutput();
+var CapTypeResult = cap.getCapType();
+var frACA = cap.isCreatedByACA();
+var resArr = CapTypeResult.toString().split("/");
+
+for (x in resArr) {
+    aa.print(resArr[x]);
+    if (x == 2) {
+        //var type3 = resArr[x];
+        var type3 = resArr[x].substr(0, 1);
+    }
+    if (x == 3) {
+        var type4 = resArr[x];
+        //var type4 = resArr[x].substr(0, 5);
+    }
+}
+var capResult = aa.cap.getCap(capId).getOutput().getCapModel();
+capResult.setSpecialText(type3 + " " + type4 + " On-line Permit");
+aa.cap.editCapByPK(capResult);
+editAppSpecific("On-Line Permit?", "Yes");
+
 arrInspRecord = new Array();
 oInspList = aa.inspection.getInspectionListForSchedule(capId.getID1(), capId.getID2(), capId.getID3());
 if (oInspList.getSuccess()) {
@@ -23,10 +44,6 @@ if (appMatch('Building/Construction/*/*')) {
     }
 }
 
-
-var cap = aa.cap.getCap(capId).getOutput();
-var CapTypeResult = cap.getCapType();
-var frACA = cap.isCreatedByACA();
 
 if (!appMatch('Building/Land Development/*/*')) {
 
@@ -92,12 +109,6 @@ if (!appMatch('Building/Land Development/*/*')) {
         addStdCondition('CC PERMIT', 'Subcontractor Worksheet');
     }
 }
-// DISABLED: ConvertToRealCapAfter:30
-// if (appMatch('Building/*/*/*')) {
-// 	var capResult = aa.cap.getCap(capId).getOutput().getCapModel();
-// 	capResult.setSpecialText('On-Line Permit');
-// 	aa.cap.editCapByPK(capResult);
-// 	}
 
 if (appMatch('Building/Construction/Residential/Single Family-Babcock') && frACA == true) {
     scheduleInspection('Babcock-Landscape', 100, 'AMY.WICKS@KIMLEY-HORN.COM', null, 'scheduled via script');
@@ -116,6 +127,8 @@ if (proximity('AGIS_CHARCO', 'DRI', 1) && !appMatch('Building/POS/*/*')) {
     editAppSpecific('Project Name', getGISInfo('AGIS_CHARCO', 'DRI', 'NAME'));
 }
 
+
+//editAppSpecific('Expiration Date', dateAdd(null, 180));
 
 
 // DISABLED: ConvertToRealCapAfter:40
