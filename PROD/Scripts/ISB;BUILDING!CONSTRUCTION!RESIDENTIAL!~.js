@@ -1,4 +1,4 @@
-//ISB:BUILDING/CONSTRUCTION/RESIDENTIAL//
+// ISB:BUILDING/CONSTRUCTION/RESIDENTIAL//
 
 if (currentUserID == "LAPHAMK") {
     showMessage = true;
@@ -52,7 +52,7 @@ if (vScriptName == "InspectionScheduleBefore") {
     var PermitId3 = aa.env.getValue("PermitId3");
     var inspType = aa.env.getValue("InspectionType");
     aa.print(PermitId1 + PermitId2 + PermitId3);
-    aa.print("inspType=" + inspType);
+    aa.print("InspectionType=" + InspectionType);
 
     capResult = aa.cap.getCapID(PermitId1, PermitId2, PermitId3);
     if (capResult.getSuccess()) {
@@ -60,8 +60,9 @@ if (vScriptName == "InspectionScheduleBefore") {
         aa.print("capId: " + capId);
         var capIDString = capId.getCustomID();
         aa.print("capIDString : " + capIDString);
-
-        doISBprocess(capId, capIDString, inspType);
+        aa.print("Balance=" + balanceDue);
+        aa.print("InspectionType=" + InspectionType );
+        doISBprocess(capId, capIDString, InspectionType);
 
     }
 
