@@ -12,6 +12,7 @@ var vScriptName = aa.env.getValue("ScriptCode");
 var vEventName = aa.env.getValue("EventName");
 aa.print(vScriptName + "/" + vEventName);
 
+
 if (vScriptName == "InspectionMultipleScheduleBefore") {
     aa.print("Processing InspectionMultipleScheduleBefore...");
     var PermitID1Array = aa.env.getValue("PermitID1Array");
@@ -66,7 +67,6 @@ if (vScriptName == "InspectionScheduleBefore") {
     }
 
 }
-
 
 
 function doISBprocess(capId, capIDString, inspType) {
