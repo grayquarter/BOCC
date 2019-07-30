@@ -170,6 +170,8 @@ if ((capStatus == null || capStatus == "On-Line Ready for Pickup") && frACA == t
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_Payment@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + ' with status: ' + capStatus + ' . <br>' + CapTypeResult + eAddr);
 }
 
+/*
 if (capStatus == "Ready for Pickup" && balanceDue <= 0 && autoAppr == false) {
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_Payment.2@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + ' with status: ' + capStatus+ ' . <br>' + CapTypeResult + eAddr);
-}
+} 
+*/
