@@ -4,10 +4,9 @@ var cap = aa.cap.getCap(capId).getOutput();
 var capIDString = capId.getCustomID();
 var CapTypeResult = cap.getCapType();
 var frACA = cap.isCreatedByACA();
-var capIDString = capId.getCustomID();
 addrResult = aa.address.getAddressByCapId(capId);
 var addrArray = new Array();
-var addrArray = addrResult.getOutput();
+addrArray = addrResult.getOutput();
 var streetName = addrArray[0].getStreetName();
 var hseNum = addrArray[0].getHouseNumberStart();
 var streetSuffix = addrArray[0].getStreetSuffix();
@@ -165,12 +164,12 @@ var mEXT2 = FeeItemsPaidList.indexOf('100') != -1;
 // 	}
 
 
-
+/*
 if ((capStatus == null || capStatus == "On-Line Ready for Pickup") && frACA == true && balanceDue <= 0 && autoAppr == false) {
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_Payment@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + ' with status: ' + capStatus + ' . <br>' + CapTypeResult + eAddr);
 }
 
-/*
+
 if (capStatus == "Ready for Pickup" && balanceDue <= 0 && autoAppr == false) {
     email('Kevin.Lapham@charlottecountyfl.gov', 'ACA_Payment.2@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + ' with status: ' + capStatus+ ' . <br>' + CapTypeResult + eAddr);
 } 
@@ -211,9 +210,10 @@ if ((capStatus == "Ready for Pickup" || capStatus == "On-Line Ready for Pickup")
 
         if (setQRflag == true && setIflag == true) {
             email('Kevin.Lapham@charlottecountyfl.gov', 'ACA-WF_Payment@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + ' with status: ' + capStatus + ' . <br>' + CapTypeResult + eAddr);
-            email('Chris.Perin@charlottecountyfl.gov', 'ACA_Payment@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + ' with status: ' + capStatus+ ' . <br>' + CapTypeResult + eAddr);
-
+            email('Chris.Perin@charlottecountyfl.gov', 'ACA_Payment@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + ' with status: ' + capStatus + ' . <br>' + CapTypeResult + eAddr);
+            email('catherine.irish@charlottecountyfl.gov', 'ACA_Payment@accela.com', 'ACA Payment from Permit # ' + capIDString, 'From email: ' + emailAddress + '<br> A payment has been made in ACA for Permit # ' + capIDString + ' with status: ' + capStatus + ' . <br>' + CapTypeResult + eAddr);
         }
     }
 
 }
+
