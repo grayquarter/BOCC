@@ -48,18 +48,23 @@ if (vScriptName == "V360InspectionResultSubmitAfter") {
             inspComment = commentList[x];
             aa.print("commentList l " + x + ":" + inspComment);
             var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
-            var inspGroup = inspObj.getInspection().getInspectionGroup();
-            aa.print("inspGroup l (arr)== " + inspGroup);
-            var inComm = inspObj.getInspectionComments();
-            if (inComm == null) {
-                inComm = "";
-            }
-            var mySearch = /emailed/i;
-            var result = mySearch.test(inComm);
-            if (result == false && inspResult != "") {
-                fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult);
-                var inComm2 = inspObj.setInspectionComments(inComm + " " + "emailed by script");
-                aa.inspection.editInspection(inspObj);
+            if (inspObj.getInspection().getInspectionGroup() != null) {
+                var inspGroup = inspObj.getInspection().getInspectionGroup();
+                aa.print("inspGroup l (arr)== " + inspGroup);
+                var inComm = inspObj.getInspectionComments();
+                if (inComm == null) {
+                    inComm = "";
+                }
+                var mySearch = /emailed/i;
+                var result = mySearch.test(inComm);
+                if (result == false && inspResult != "") {
+                    fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult);
+                    var inComm2 = inspObj.setInspectionComments(inComm + " " + "emailed by script");
+                    aa.inspection.editInspection(inspObj);
+                    aa.print("IRSA complete for " + capIDString);
+                }
+            } else {
+                aa.print("Unsuccessful inspGroup load... bypassing " + x + " in inspection list.");
             }
         }
     }
