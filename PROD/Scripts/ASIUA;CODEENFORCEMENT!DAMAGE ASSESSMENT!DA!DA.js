@@ -69,15 +69,15 @@ if (typeof (BUILDINGDETAIL) != 'undefined') {
             BUILDINGDETAIL[rec]['Foundation'] = 0;
         }
  
-        sumT = parseFloat(BUILDINGDETAIL[rec]['Doors Windows']) + parseFloat(BUILDINGDETAIL[rec]['Interior Finish']) + parseFloat(BUILDINGDETAIL[rec]['Exterior Finish']) + parseFloat(BUILDINGDETAIL[rec]['Roofing']) + parseFloat(BUILDINGDETAIL[rec]['Superstructure']) + parseFloat(BUILDINGDETAIL[rec]['Foundation']);
+        sumT = parseFloat(BUILDINGDETAIL[rec]['Doors Windows'] * 0.05) + parseFloat(BUILDINGDETAIL[rec]['Interior Finish'] * 0.46) + parseFloat(BUILDINGDETAIL[rec]['Exterior Finish'] * 0.07) + parseFloat(BUILDINGDETAIL[rec]['Roofing'] * 0.08) + parseFloat(BUILDINGDETAIL[rec]['Superstructure'] * 0.25) + parseFloat(BUILDINGDETAIL[rec]['Foundation'] * .09);
         sumT = round(sumT, 2);
 
         aa.print("SumT = " + sumT);
-
+/*
         if (sumT != 100) {
             aa.print("The total must equal 100 (representing 100%).  Recheck your percentages and save again.")
         }
-
+*/
         arrNewTableRec['Total Percent'] = sumT.toString();
         addToASITable('BUILDING DETAIL', arrNewTableRec);
 
