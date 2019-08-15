@@ -16,7 +16,6 @@ if (inspectionList != null) {
         var myID = InspModel.getIdNumber();
         createPendingInspection(inspGroup, inspType, capId);
         if ((inspTor == null) || inspTor == "") {
-            //inspTor = "CHARCO/IS/APPSUP/NA/NA/NA/Kevin Lapham";
             inspTor = "NA/NA/NA/NA/NA/NA/";
         }
         var schedDate = InspModel.getScheduledDate();
