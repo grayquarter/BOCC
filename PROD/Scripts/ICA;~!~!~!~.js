@@ -40,7 +40,7 @@ if (inspectionList != null) {
         if (lastInspObj.getEmail() != null) {
             var userEml = lastInspObj.getEmail();
         } else {
-            userEml = "TinaC.Jones@charlottecountyfl.gov"
+            userEml = "TinaC.Jones@charlottecountyfl.gov";
         }
         var addrResult = aa.address.getAddressByCapId(capId);
         var addrArray = new Array();
@@ -86,7 +86,9 @@ if (inspectionList != null) {
                         var newCapId = capIDString.replace("=", "");
                     }
                     //aa.sendMail("DoNotReply@charlottecountyFL.gov", "kevin.lapham@charlottecountyFL.gov", "", inspType + " Inspection Cancellation ID# " + myID, "MSG SENT TO Inspector email: " + userEml + "<BR>" + "INSPECTION: " + inspType + " scheduled on " + schedDate + "<BR>" + "for Permit " + newCapId + "<BR>" + etext);
-                    aa.sendMail("DoNotReply@charlottecountyFL.gov", userEml, "", inspType + " Cancellation for " + newCapId, "INSPECTION: " + inspType + " scheduled on " + schedDate + "<BR>" + "for Permit # " + newCapId + "<BR>" + etext);
+                    if (userEml != 'NoReply@CharlotteCountyFL.gov') {
+                        aa.sendMail("DoNotReply@charlottecountyFL.gov", userEml, "", inspType + " Cancellation for " + newCapId, "INSPECTION: " + inspType + " scheduled on " + schedDate + "<BR>" + "for Permit # " + newCapId + "<BR>" + etext);
+                    }
                 }
                 aa.print("--------------------------");
             }
