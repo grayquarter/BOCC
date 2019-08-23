@@ -75,8 +75,8 @@ if (wfTask == 'Permit Issuance') {
 	}
 }
 
-if (wfTask == 'Finaled' && checkForInsp(capId) == true) {
-	showMessage = true;
-	comment('Cannot FINAL record with open inspections.');
-	cancel = true;
+if (wfTask == 'Finaled' && wfStatus != 'Temp C of O Issued' && checkForInsp(capId) == true) {
+    showMessage = true;
+    comment('Cannot FINAL record with open inspections.');
+    cancel = true;
 }
