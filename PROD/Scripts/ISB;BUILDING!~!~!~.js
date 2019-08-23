@@ -61,7 +61,7 @@ if (vScriptName == "InspectionScheduleBefore") {
         var capIDString = capId.getCustomID();
         aa.print("capIDString : " + capIDString);
         aa.print("Balance=" + balanceDue);
-        aa.print("InspectionType=" + InspectionType );
+        aa.print("InspectionType=" + InspectionType);
         doISBprocess(capId, capIDString, InspectionType);
 
 
@@ -80,27 +80,6 @@ function doISBprocess(capId, capIDString, inspType) {
         comment("This inspection type cannot be manually scheduled.");
         cancel = true;
     }
-
-
-    //if (appMatch('Building/Construction/*/*') && inspType == 'Building Final') {
-    /*    var assessGar = false;
-        var assessGar1 = false;
-        var assessGar2 = false;
-        assessGar1 = checkInspectionResult('Assess Garbage', 'Pass');
-        assessGar2 = checkInspectionResult('Assess Garbage', 'Not Required');
-        if (assessGar1 == true || assessGar2 == true) {
-            assessGar = true;
-        }
-        if (assessGar == false) {
-            showMessage = true;
-            aa.print("Cannot schedule inspection as Garbage Fees are due.  After Electric Final pay garbage fee.");
-            comment("Cannot schedule inspection as Garbage Fees are due.  After Electric Final pay garbage fee.");
-    
-            cancel = true;
-        }
-    }
-    */
-
 
     if ((inspType != 'Plans Change Submitted' || inspType != 'On-Line Resubmittal') && capStatus != 'Permit Issued' && capStatus != 'Issued' && capStatus != 'Temp C of O Issued') {
         showMessage = true;
@@ -182,7 +161,4 @@ function doISBprocess(capId, capIDString, inspType) {
             comment('Criteria met... Lintel inspection scheduled.');
         }
     }
-
-
-
 }  
