@@ -30,7 +30,6 @@ if (typeof (STRUCTURE) != 'undefined') {
 }
 
 
-
 if (typeof (BUILDINGDETAIL) != 'undefined') {
     sumT = 0;
     removeASITable('BUILDING DETAIL');
@@ -38,47 +37,47 @@ if (typeof (BUILDINGDETAIL) != 'undefined') {
         arrNewTableRec = [];
         valuation = 0;
         arrNewTableRec['Building Unit'] = BUILDINGDETAIL[rec]['Building Unit'];
-        arrNewTableRec['Foundation'] = BUILDINGDETAIL[rec]['Foundation'];
-        arrNewTableRec['Superstructure'] = BUILDINGDETAIL[rec]['Superstructure'];
-        arrNewTableRec['Roofing'] = BUILDINGDETAIL[rec]['Roofing'];
-        arrNewTableRec['Exterior Finish'] = BUILDINGDETAIL[rec]['Exterior Finish'];
-        arrNewTableRec['Interior Finish'] = BUILDINGDETAIL[rec]['Interior Finish'];
-        arrNewTableRec['Doors Windows'] = BUILDINGDETAIL[rec]['Doors Windows'];
-        
-        if (BUILDINGDETAIL[rec]['Doors Windows'] == ""){
-            BUILDINGDETAIL[rec]['Doors Windows'] = 0;
+        arrNewTableRec['Foundation %'] = BUILDINGDETAIL[rec]['Foundation %'];
+        arrNewTableRec['Superstructure %'] = BUILDINGDETAIL[rec]['Superstructure %'];
+        arrNewTableRec['Roofing %'] = BUILDINGDETAIL[rec]['Roofing %'];
+        arrNewTableRec['Exterior Finish %'] = BUILDINGDETAIL[rec]['Exterior Finish %'];
+        arrNewTableRec['Interior Finish %'] = BUILDINGDETAIL[rec]['Interior Finish %'];
+        arrNewTableRec['Doors Windows %'] = BUILDINGDETAIL[rec]['Doors Windows %'];
+
+        if (BUILDINGDETAIL[rec]['Doors Windows %'] == "") {
+            BUILDINGDETAIL[rec]['Doors Windows %'] = 0;
         }
 
-        if (BUILDINGDETAIL[rec]['Interior Finish'] == ""){
-            BUILDINGDETAIL[rec]['Interior Finish'] = 0;
+        if (BUILDINGDETAIL[rec]['Interior Finish %'] == "") {
+            BUILDINGDETAIL[rec]['Interior Finish %'] = 0;
         }
 
-        if (BUILDINGDETAIL[rec]['Exterior Finish'] == ""){
-            BUILDINGDETAIL[rec]['Exterior Finish'] = 0;
+        if (BUILDINGDETAIL[rec]['Exterior Finish %'] == "") {
+            BUILDINGDETAIL[rec]['Exterior Finish %'] = 0;
         }
 
-        if (BUILDINGDETAIL[rec]['Roofing'] == "") {
-            BUILDINGDETAIL[rec]['Roofing'] = 0;
+        if (BUILDINGDETAIL[rec]['Roofing %'] == "") {
+            BUILDINGDETAIL[rec]['Roofing %'] = 0;
         }
 
-        if (BUILDINGDETAIL[rec]['Superstructure'] == "") {
-            BUILDINGDETAIL[rec]['Superstructure'] = 0;
+        if (BUILDINGDETAIL[rec]['Superstructure %'] == "") {
+            BUILDINGDETAIL[rec]['Superstructure %'] = 0;
         }
 
-        if (BUILDINGDETAIL[rec]['Foundation'] == "") {
-            BUILDINGDETAIL[rec]['Foundation'] = 0;
+        if (BUILDINGDETAIL[rec]['Foundation %'] == "") {
+            BUILDINGDETAIL[rec]['Foundation %'] = 0;
         }
- 
-        sumT = parseFloat(BUILDINGDETAIL[rec]['Doors Windows'] * 0.05) + parseFloat(BUILDINGDETAIL[rec]['Interior Finish'] * 0.46) + parseFloat(BUILDINGDETAIL[rec]['Exterior Finish'] * 0.07) + parseFloat(BUILDINGDETAIL[rec]['Roofing'] * 0.08) + parseFloat(BUILDINGDETAIL[rec]['Superstructure'] * 0.25) + parseFloat(BUILDINGDETAIL[rec]['Foundation'] * .09);
+
+        sumT = parseFloat(BUILDINGDETAIL[rec]['Doors Windows %'] * 0.05) + parseFloat(BUILDINGDETAIL[rec]['Interior Finish %'] * 0.46) + parseFloat(BUILDINGDETAIL[rec]['Exterior Finish %'] * 0.07) + parseFloat(BUILDINGDETAIL[rec]['Roofing %'] * 0.08) + parseFloat(BUILDINGDETAIL[rec]['Superstructure %'] * 0.25) + parseFloat(BUILDINGDETAIL[rec]['Foundation %'] * .09);
         sumT = round(sumT, 2);
 
         aa.print("SumT = " + sumT);
-/*
-        if (sumT != 100) {
-            aa.print("The total must equal 100 (representing 100%).  Recheck your percentages and save again.")
-        }
-*/
-        arrNewTableRec['Total Percent'] = sumT.toString();
+        /*
+                if (sumT != 100) {
+                    aa.print("The total must equal 100 (representing 100%).  Recheck your percentages and save again.")
+                }
+        */
+        arrNewTableRec['Total %'] = sumT.toString();
         addToASITable('BUILDING DETAIL', arrNewTableRec);
 
     }
