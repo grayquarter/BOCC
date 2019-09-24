@@ -180,7 +180,7 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult) {
     }
 
     if (appMatch('Building/Construction/Residential/*') || appMatch('Building/Accessories/Residential/*')) {
-        if (inspType == 'Plans Change Submitted' || inspType == 'On-Line Resubmittal') {
+        if (inspType == 'Plans Change Submitted') {
             if (inspResult == 'Pass' || inspResult == 'Approved as Noted') {
                 addFee('PLN CHNG', 'ADD_REVIEW', 'ORIGINAL', 1, 'Y');
             }
@@ -188,7 +188,7 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult) {
     }
 
     if (appMatch('Building/Construction/Commercial/*') || appMatch('Building/Accessories/Commercial/*')) {
-        if (inspType == 'Plans Change Submitted' || inspType == 'On-Line Resubmittal') {
+        if (inspType == 'Plans Change Submitted') {
             if (inspResult == 'Pass' || inspResult == 'Approved as Noted') {
                 addFee('PLN CHNG_COM', 'ADD_REVIEW', 'ORIGINAL', 1, 'Y');
             }
