@@ -66,7 +66,6 @@ if (documentUploadedFrom == 'ACA' && myMatch == false) {
     }
 
     if (myDocD == 'resubmittal.pdf' && myMatch == false) {
-        scheduleInspection('On-Line Resubmittal', 0, 'PERINC', null, 'scheduled via script');
         email('permitresubmittal@charlottecountyfl.gov', 'NoReplyResub@accela.com', 'ACA Plan Change Document Uploaded for ' + capIDString + '.', 'A Plan Change document has been uploaded through ACA for ' + capIDString);
 
         if (myDocD == 'resubmittal.pdf') {
