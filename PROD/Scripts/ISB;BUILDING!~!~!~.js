@@ -81,7 +81,7 @@ function doISBprocess(capId, capIDString, inspType) {
         cancel = true;
     }
 
-    if ((inspType != 'Plans Change Submitted' || inspType != 'On-Line Resubmittal') && capStatus != 'Permit Issued' && capStatus != 'Issued' && capStatus != 'Temp C of O Issued') {
+    if (inspType != 'Plans Change Submitted' && capStatus != 'Permit Issued' && capStatus != 'Issued' && capStatus != 'Temp C of O Issued') {
         showMessage = true;
         cancel = true;
         comment("Cannot schedule inspections when the permit does not currently have a status of 'Issued'");
