@@ -49,10 +49,10 @@ if (documentUploadedFrom == 'ACA' && myMatch == false) {
     }
 
     if (wfInfo != '' && nCt < 2) {
-        email('TinaC.Jones@charlottecountyfl.gov', 'NoReply@accela.com', 'ACA Document Uploaded for ' + capIDString + '.', 'A document has been uploaded through ACA for ' + capIDString + '<br> Status: ' + wfInfo);
-        email('Catherine.Irish@charlottecountyfl.gov', 'NoReply@accela.com', 'ACA Document Uploaded for ' + capIDString + '.', 'A document has been uploaded through ACA for ' + capIDString + '<br> Status: ' + wfInfo);
-        email('Chris.Perin@charlottecountyfl.gov', 'NoReply@accela.com', 'ACA Document Uploaded for ' + capIDString + '.', 'A document has been uploaded through ACA for ' + capIDString + '<br> Status: ' + wfInfo);
-        email('Kevin.Lapham@charlottecountyfl.gov', 'NoReplyResub@accela.com', 'ACA Document Uploaded for ' + capIDString + '.', 'A document has been uploaded through ACA for ' + capIDString + '<br> Status: ' + wfInfo);
+        email('TinaC.Jones@charlottecountyfl.gov', 'NoReply@charlottefl.com', 'ACA Document Uploaded for ' + capIDString + '.', 'A document has been uploaded through ACA for ' + capIDString + '<br> Status: ' + wfInfo);
+        email('Catherine.Irish@charlottecountyfl.gov', 'NoReply@charlottefl.com', 'ACA Document Uploaded for ' + capIDString + '.', 'A document has been uploaded through ACA for ' + capIDString + '<br> Status: ' + wfInfo);
+        email('Chris.Perin@charlottecountyfl.gov', 'NoReply@charlottefl.com', 'ACA Document Uploaded for ' + capIDString + '.', 'A document has been uploaded through ACA for ' + capIDString + '<br> Status: ' + wfInfo);
+        email('Kevin.Lapham@charlottecountyfl.gov', 'NoReplyResub@charlottefl.com', 'ACA Document Uploaded for ' + capIDString + '.', 'A document has been uploaded through ACA for ' + capIDString + '<br> Status: ' + wfInfo);
 
     }
     //end replaced branch: resubmittal;
@@ -66,10 +66,10 @@ if (documentUploadedFrom == 'ACA' && myMatch == false) {
     }
 
     if (myDocD == 'resubmittal.pdf' && myMatch == false) {
-        email('permitresubmittal@charlottecountyfl.gov', 'NoReplyResub@accela.com', 'ACA Plan Change Document Uploaded for ' + capIDString + '.', 'A Plan Change document has been uploaded through ACA for ' + capIDString);
+        email('permitresubmittal@charlottecountyfl.gov', 'NoReplyResub@charlottefl.com', 'ACA Plan Change Document Uploaded for ' + capIDString + '.', 'A Plan Change document has been uploaded through ACA for ' + capIDString);
 
         if (myDocD == 'resubmittal.pdf') {
-            email('Kevin.Lapham@charlottecountyfl.gov', 'NoReplyResub2@accela.com', 'ACA Resubmittal Document Uploaded for ' + capIDString + '.', 'A resubmittal document has been uploaded through ACA for ' + capIDString + '<br> documentModels.length=' + documentModels.length + '  getDocCategory=' + documentModels[0].getDocCategory() + ' myName  = ' + documentModels[0].getDocName() + ' getDocDescription= ' + documentModels[0].getDocDescription() + '  MATCH? ' + myMatch);
+            email('Kevin.Lapham@charlottecountyfl.gov', 'NoReplyResub2@charlottefl.com', 'ACA Resubmittal Document Uploaded for ' + capIDString + '.', 'A resubmittal document has been uploaded through ACA for ' + capIDString + '<br> documentModels.length=' + documentModels.length + '  getDocCategory=' + documentModels[0].getDocCategory() + ' myName  = ' + documentModels[0].getDocName() + ' getDocDescription= ' + documentModels[0].getDocDescription() + '  MATCH? ' + myMatch);
         }
     }
     //end replaced branch: resubmittal2;
@@ -77,19 +77,19 @@ if (documentUploadedFrom == 'ACA' && myMatch == false) {
 
 if (myMatch == false) {
     //start replaced branch: AffNoZon
-        var documentModels = documentModelArray.toArray();
-        //comment('documentModels.length=' + documentModels.length);
-        //comment('documentModels[0]=' + documentModels[0].getDocCategory());
-        var myDoc = documentModels[0].getDocCategory();
-        var myName = documentModels[0].getDocName();
-        //comment('myDoc=' + myDoc);
-        if (myDoc == 'Affidavit for No Zoning Inspection' && myMatch == false) {
-            AffNoZon3();
-        }
+    var documentModels = documentModelArray.toArray();
+    //comment('documentModels.length=' + documentModels.length);
+    //comment('documentModels[0]=' + documentModels[0].getDocCategory());
+    var myDoc = documentModels[0].getDocCategory();
+    var myName = documentModels[0].getDocName();
+    //comment('myDoc=' + myDoc);
+    if (myDoc == 'Affidavit for No Zoning Inspection' && myMatch == false) {
+        AffNoZon3();
+    }
 
-        if (myName == 'WaiveZoning.pdf' || myName == 'waivezoning.pdf' && myMatch == false) {
-            AffNoZon3();
-        }
+    if (myName == 'WaiveZoning.pdf' || myName == 'waivezoning.pdf' && myMatch == false) {
+        AffNoZon3();
+    }
     //end replaced branch: AffNoZon;
 }
 
