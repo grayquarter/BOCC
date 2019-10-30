@@ -2,36 +2,36 @@
 
 showMessage = true;
 var capIDString = capId.getCustomID();
-var inspObj = aa.inspection.getInspection(capId, inspId).getOutput(); 
+var inspObj = aa.inspection.getInspection(capId, inspId).getOutput();
 var inspGroup = inspObj.getInspection().getInspectionGroup();
 //update comments
 var inComm = inspObj.getInspectionComments();
 if (inComm == null) {
-	inComm = "";
+    inComm = "";
 }
 var mySearch = /Permit/i;
 var result = mySearch.test(inComm);
 if (result == true) {
-	result = false;
+    result = false;
 } else {
-	var inComm2 = inspObj.setInspectionComments(capIDString + " (Permit); " + inComm);
-	aa.inspection.editInspection(inspObj)
+    var inComm2 = inspObj.setInspectionComments(capIDString + " (Permit); " + inComm);
+    aa.inspection.editInspection(inspObj)
 }
-	
+
 comment(capIDString);
 oInspList = aa.inspection.getInspections(capId);
 inspArray = oInspList.getOutput();
 comment(inspArray);
 if (inspArray.length > 0) {
-	for (insp in inspArray) {
-		//replaced branch(fullInsps)
-		fullInsps();
-	}
+    for (insp in inspArray) {
+        //replaced branch(fullInsps)
+        fullInsps();
+    }
 }
 
 var BabFin = checkInspectionResult('Babcock Final', 'Scheduled');
 if (((BabFin == true) && (inspType == 'Babcock Final'))) {
-	assignInspection(inspId, 'AMY.WICKS@KIMLEY-HORN.COM', capId);
+    assignInspection(inspId, 'AMY.WICKS@KIMLEY-HORN.COM', capId);
 }
 
 var HealthInsp = checkInspectionResult('Health Approval', 'Scheduled');
@@ -43,7 +43,7 @@ var cap = aa.cap.getCap(capId).getOutput();
 var CapTypeResult = cap.getCapType();
 coastLightR = checkInspectionResult('COASTAL LIGHTING ROUGH', 'Scheduled');
 coastLightF = checkInspectionResult('COASTAL LIGHTING FINAL', 'Scheduled');
-if (coastLightR == true  && inspType == 'COASTAL LIGHTING ROUGH' ) {
+if (coastLightR == true && inspType == 'COASTAL LIGHTING ROUGH') {
     addrResult = aa.address.getAddressByCapId(capId);
     var addrArray = new Array();
     addrArray = addrResult.getOutput();
@@ -54,10 +54,10 @@ if (coastLightR == true  && inspType == 'COASTAL LIGHTING ROUGH' ) {
     var zip = addrArray[0].getZip();
     var etext;
     etext = CapTypeResult + ' -- Permit #' + capIDString + '<br> Inspection: ' + inspType + ' scheduled for: ' + inspSchedDate + '<br>ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + '' + '<br>';
-    aa.sendMail('Accela@CharlotteCountyFL.gov', 'Suzanne.Derheimer@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
-    //aa.sendMail('Accela@CharlotteCountyFL.gov', 'Rebekah.Augustinowicz@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
-    aa.sendMail('Accela@CharlotteCountyFL.gov', 'Susan.Foley-Pieri@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
-    aa.sendMail('AccelaCoastal@CharlotteCountyFL.gov', 'kevin.lapham@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
+    aa.sendMail('Accela@CharlotteCountyFL.gov', 'Suzanne.Derheimer@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for Permit ' + capIDString, etext);
+    //aa.sendMail('Accela@CharlotteCountyFL.gov', 'Rebekah.Augustinowicz@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for Permit ' + capIDString, etext);
+    aa.sendMail('Accela@CharlotteCountyFL.gov', 'Susan.Foley-Pieri@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for Permit ' + capIDString, etext);
+    aa.sendMail('AccelaCoastal@CharlotteCountyFL.gov', 'kevin.lapham@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for Permit ' + capIDString, etext);
     assignInspection(inspId, 'DERHEIMERS', capId);
 }
 
@@ -72,10 +72,10 @@ if (coastLightF == true && inspType == 'COASTAL LIGHTING FINAL') {
     var zip = addrArray[0].getZip();
     var etext;
     etext = CapTypeResult + ' -- Permit #' + capIDString + '<br> Inspection: ' + inspType + ' scheduled for: ' + inspSchedDate + '<br>ADDRESS: ' + hseNum + ' ' + streetName + ' ' + streetSuffix + ', ' + city + ' ' + zip + '' + '<br>';
-    aa.sendMail('Accela@CharlotteCountyFL.gov', 'Suzanne.Derheimer@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
-    //aa.sendMail('Accela@CharlotteCountyFL.gov', 'Rebekah.Augustinowicz@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
-    aa.sendMail('Accela@CharlotteCountyFL.gov', 'Susan.Foley-Pieri@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
-    aa.sendMail('AccelaCoastal@CharlotteCountyFL.gov', 'kevin.lapham@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for ' + capIDString, etext);
+    aa.sendMail('Accela@CharlotteCountyFL.gov', 'Suzanne.Derheimer@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for Permit ' + capIDString, etext);
+    //aa.sendMail('Accela@CharlotteCountyFL.gov', 'Rebekah.Augustinowicz@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for Permit ' + capIDString, etext);
+    aa.sendMail('Accela@CharlotteCountyFL.gov', 'Susan.Foley-Pieri@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for Permit ' + capIDString, etext);
+    aa.sendMail('AccelaCoastal@CharlotteCountyFL.gov', 'kevin.lapham@charlottecountyfl.gov', '', 'Coastal Lighting Inspection Scheduled for Permit ' + capIDString, etext);
     assignInspection(inspId, 'DERHEIMERS', capId);
 }
 
