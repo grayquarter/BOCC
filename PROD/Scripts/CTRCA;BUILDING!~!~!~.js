@@ -111,7 +111,7 @@ if (!appMatch('Building/Land Development/*/*')) {
 }
 
 if (appMatch('Building/Construction/Residential/Single Family-Babcock') && frACA == true) {
-    scheduleInspection('Babcock-Landscape', 100, 'AMY.WICKS@KIMLEY-HORN.COM', null, 'scheduled via script');
+    scheduleInspection('Babcock Final', 100, 'AMY.WICKS@KIMLEY-HORN.COM', null, 'scheduled via script');
 }
 
 if (appMatch('Building/Construction/Residential/Single Family-Babcock') && frACA == true) {
@@ -157,9 +157,9 @@ if (capPeopleArr != null || capPeopleArr.length > 0) {
         var capContactModel = capContactScriptModel.getCapContactModel();
         var peopleModel = capContactScriptModel.getPeople();
 
-        var thisPeop = capPeopleArr[i]; 
-        var allPeopData = thisPeop.getPeople();  
-        var firstName1 = peopleModel.getFirstName();  
+        var thisPeop = capPeopleArr[i];
+        var allPeopData = thisPeop.getPeople();
+        var firstName1 = peopleModel.getFirstName();
         var pEml = peopleModel.getEmail();
         var bizName = peopleModel.getBusinessName();
         var cType = peopleModel.getContactType();
@@ -184,7 +184,7 @@ if (capPeopleArr != null || capPeopleArr.length > 0) {
             contact.getCapContactModel().setPeople(peopleObj);
             var editResult = aa.people.editCapContact(contact.getCapContactModel());
             if (editResult.getSuccess()) {
-                aa.print(pCon +  " contact successfully set to Primary.");
+                aa.print(pCon + " contact successfully set to Primary.");
             }
         } else {
             aa.print("No people contact loaded...");
