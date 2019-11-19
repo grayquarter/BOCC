@@ -128,6 +128,12 @@ if (proximity('AGIS_CHARCO', 'DRI', 1) && !appMatch('Building/POS/*/*')) {
 }
 
 
+editAppSpecific('Flood Zone', GISFloodPlain('AGIS_CHARCO', 'FEMA Flood Zones (Effective 5/5/2003)', 0, 'FZONE'));
+
+if (getGISInfo('AGIS_CHARCO', 'FEMA Flood Zones (Effective 5/5/2003)', 'SFHA') == 'IN') {
+	editAppSpecific('In SFHA', 'Y');
+}
+
 //editAppSpecific('Expiration Date', dateAdd(null, 180));
 
 
