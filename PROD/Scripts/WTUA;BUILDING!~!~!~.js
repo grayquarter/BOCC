@@ -1,5 +1,16 @@
 //WTUA:BUILDING///
 
+
+if (wfTask == 'Intake / Sufficiency Review' && (wfStatus == 'Sufficient' || wfStatus == 'Sufficient - Online Application')) {
+
+    editAppSpecific('Flood Zone', GISFloodPlain('AGIS_CHARCO', 'FEMA Flood Zones (Effective 5/5/2003)', 0, 'FZONE'));
+
+    if (getGISInfo('AGIS_CHARCO', 'FEMA Flood Zones (Effective 5/5/2003)', 'SFHA') == 'IN') {
+        editAppSpecific('In SFHA', 'Y');
+    }
+}
+
+
 if (isTaskActive('Reviews') && matches(wfStatus, 'Approved', 'Not Required')) {
 	closeSubWorkflow(wfProcessID, 'Approved');
 }
@@ -24,12 +35,6 @@ if (isTaskActive('Reviews') && wfStatus == 'Denied') {
 
 if (wfTask == 'Permit Issuance' && wfStatus == 'Issued') {
 	editAppSpecific('Expiration Date', dateAdd(null, 180));
-
-        editAppSpecific('Flood Zone', GISFloodPlain('AGIS_CHARCO', 'FEMA Flood Zones (Effective 5/5/2003)', 0, 'FZONE'));
-
-       if (getGISInfo('AGIS_CHARCO', 'FEMA Flood Zones (Effective 5/5/2003)', 'SFHA') == 'IN') {
-	editAppSpecific('In SFHA', 'Y');
-       }
 }
 
 if (wfTask == 'Permit Issuance' && wfStatus == 'Permit Renewed') {
