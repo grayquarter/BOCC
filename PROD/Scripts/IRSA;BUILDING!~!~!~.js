@@ -86,6 +86,7 @@ if (vScriptName == "V360InspectionResultSubmitAfter") {
                     InspM.getInspection().getActivity().setAuditStatus('I');
                     aa.inspection.editInspection(InspM).getOutput();
                     comment(inspArray[insp].getIdNumber() + ' has been removed for inspType: ' + inspArray[insp].getInspectionType());
+                    aa.print(inspArray[insp].getIdNumber() + ' has been removed for inspType: ' + inspArray[insp].getInspectionType());
                 }
         }
     }
@@ -167,8 +168,11 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult) {
 
     if (matches(inspResult, 'Pass', 'Approved as Noted', 'Not Required') && balanceDue == 0) {
         pendingInspectionExists = checkForPendingInspections();
-        if (!pendingInspectionExists)
+        aa.print("Finals processing... checking for Pendings.");
+        if (!pendingInspectionExists) {
+            aa.print("No pendings, updating workflow to Finaled for " + capIDString);
             branchTask('Finaled', getFinaledWorkflowStatus());
+        }
     }
 
     if (inspResult.indexOf('Fail') > -1 || inspResult.indexOf('Partial') > -1 || inspResult.indexOf('Cancelled') > -1) {
