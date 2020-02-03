@@ -29,6 +29,10 @@ if (vScriptName == "InspectionMultipleScheduleBefore") {
             aa.print("capId: " + capId);
             var capIDString = capId.getCustomID();
             aa.print("capIDString : " + capIDString);
+            var capObj = aa.cap.getCap(capId).getOutput();
+            var capStatus = capObj.getCapStatus();
+            aa.print("Cap Status = " + capStatus);
+
 
             aa.print("InspectionIdArray = " + InspectionIdArray);
             var inspObj = aa.inspection.getInspection(capId, InspectionId).getOutput();
@@ -39,7 +43,7 @@ if (vScriptName == "InspectionMultipleScheduleBefore") {
             aa.print(" inspType(arr)== " + inspType);
 
 
-            doISBprocess(capId, capIDString, inspType);
+            doISBprocess(capId, capIDString, inspType, capStatus);
 
         }
     }
@@ -60,9 +64,14 @@ if (vScriptName == "InspectionScheduleBefore") {
         aa.print("capId: " + capId);
         var capIDString = capId.getCustomID();
         aa.print("capIDString : " + capIDString);
+        var capObj = aa.cap.getCap(capId).getOutput();
+        var capStatus = capObj.getCapStatus();
+        aa.print("Cap Status = " + capStatus);
+
+
         aa.print("Balance=" + balanceDue);
         aa.print("InspectionType=" + InspectionType);
-        doISBprocess(capId, capIDString, InspectionType);
+        doISBprocess(capId, capIDString, inspType, capStatus);
 
 
     }
@@ -71,7 +80,7 @@ if (vScriptName == "InspectionScheduleBefore") {
 
 
 
-function doISBprocess(capId, capIDString, inspType) {
+function doISBprocess(capId, capIDString, inspType,capStatus) {
 
     var scriptFlag = 0;
 
@@ -86,6 +95,14 @@ function doISBprocess(capId, capIDString, inspType) {
         cancel = true;
         comment("Cannot schedule inspections when the permit does not currently have a status of 'Issued'");
     }
+
+//test - debug
+    if (capStatus == 'Under Review') {
+        showMessage = true;
+        cancel = true;
+        comment("Cannot schedule inspections when the permit does not currently have a status of 'Issued'");
+    }
+
 
     if (appHasCondition(null, 'Applied', null, 'LOCK')) {
         showMessage = true;
