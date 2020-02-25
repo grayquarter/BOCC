@@ -179,7 +179,7 @@ function fullIRSA(capIDString, inspType, inspComment, inspGroup, inspResult) {
         createPendingInspection(inspGroup, inspType);
     }
 
-    if (matches(inspResult, 'Pass', 'Approved as Noted', 'Approved per Affidavit Program') && inspType != 'Plans Change Submitted') {
+    if (matches(inspResult, 'Pass', 'Approved as Noted', 'Approved per Affidavit Program', 'Audit - Pass', 'Audit - Approved') && inspType != 'Plans Change Submitted') {
         editAppSpecific('Expiration Date', dateAdd(null, 180));
     }
 
