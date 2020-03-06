@@ -1,0 +1,18 @@
+if (isDPRRecord(appTypeString)) {
+    eval(loadDprLibrary());
+    if (Dpr.dprProjectExists()) {
+        if (capStatus == "Ready for Issuance" && balanceDue <= 0) {
+            var approvedPlans = Dpr.getPrintSets();
+            var approvedPlansExist = false;
+            for (var i=0; i < approvedPlans.length; i++) {
+                if (matches(approvedPlans[i].type.toUpperCase(), "APPROVED PLANS", "APPROVED SUPPORTING DOCUMENTS")) {
+                    approvedPlansExist = true;
+                    break;
+                }
+            }
+            if (!approvedPlansExist) {
+                Dpr.Bocc.onFullPaymentReadyforIssuance();
+            }   
+        }
+    }
+}
