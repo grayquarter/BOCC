@@ -1,7 +1,7 @@
 //WTUA:BUILDING///
 
 
-if (wfTask == 'Intake / Sufficiency Review' && (wfStatus == 'Sufficient' || wfStatus == 'Sufficient - Online Application')) {
+if ((wfTask == 'Intake / Sufficiency Review' || wfTask == 'Intake Sufficiency Review')) && (wfStatus == 'Sufficient' || wfStatus == 'Sufficient - Online Application')) {
 
     editAppSpecific('Flood Zone', GISFloodPlain('AGIS_CHARCO', 'FEMA Flood Zones (Effective 5/5/2003)', 0, 'FZONE'));
 
