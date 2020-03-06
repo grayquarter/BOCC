@@ -1,0 +1,4 @@
+if (wfTask == 'Finaled' && matches(wfStatus, 'Certificate of Occupancy Issued', 'Certification Of Completion Issued','C of O Issued', 'C of Completion Issued') && !balanceDue == 0) {
+	comment('All Fees must be paid before this action can take place.');
+	cancel = true;
+}
