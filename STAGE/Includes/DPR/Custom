@@ -1,0 +1,48 @@
+//Plans Consolidation    
+              if (wfTask == "Plans Consolidation") && (wfStatus == "Approved") &&  (balanceDue <= 0)) {
+                   // create sheets printset
+                   var printSetObj = {};
+                   printSetObj.name = "APPROVED:" + capIDString;
+                   printSetObj.type = "Approved Plans";
+                   printSetObj.includeStamps = true;
+                   printSetObj.includeNotes = true;
+                   printSetObj.watermarks = new Array();
+
+ 
+
+                   var watermarksSC = "DPR_WATERMARKS";
+                   var watermarksConfigObj;
+                   watermarksConfigObj = Dpr.getDPRStandardChoiceConfigurationValueObj(watermarksSC, "BOCC Reviewed");
+                   if (watermarksConfigObj.id != undefined) {
+                        printSetObj.watermarks.push(watermarksConfigObj.id);
+                   }
+                   Dpr.createSheetsPrintSet(printSetObj);
+
+ 
+
+                   // Create documents print set
+                   var approvedDocuments = Dpr.getSupportingDocumentsByStatus(capId, "approved");
+                   if (approvedDocuments.supportingDocuments.length > 0 && approvedDocuments.invalidDocs.length == 0) {
+                        var approvedDocIds = new Array();
+                        for (var i = 0; i < approvedDocuments.supportingDocuments.length; i++) {
+                             approvedDocIds.push(approvedDocuments.supportingDocuments[i].id);
+                        }
+
+ 
+
+                        var docPrintSetObj = {};
+                        docPrintSetObj.name = "APPROVED DOCUMENTS:" + capIDString;
+                        docPrintSetObj.description = "Approved documents for permit " + capIDString;
+                        docPrintSetObj.type = "Approved Supporting Documents";
+                        docPrintSetObj.includeStamps = true;
+                        docPrintSetObj.documents = approvedDocIds;
+                        docPrintSetObj.watermarks = new Array();
+                        var watermarksSC = "DPR_WATERMARKS";
+                        var watermarksConfigObj;
+                        watermarksConfigObj = Dpr.getDPRStandardChoiceConfigurationValueObj(watermarksSC, "BOCC Reviewed Docs");
+                        if (watermarksConfigObj.id != undefined) {
+                             docPrintSetObj.watermarks.push(watermarksConfigObj.id);
+                        }
+                        Dpr.createDocumentsPrintSet(docPrintSetObj);
+                   }
+              }
