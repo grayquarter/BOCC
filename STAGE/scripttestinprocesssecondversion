@@ -44,14 +44,6 @@ return [
   {
     "isTask": "Intake / Sufficiency Review",
     "isStatus": "Sufficient - Online Application",
-    "recordId": 2020030669,
-    "newStatus": "Under Review",
-    "recType": "Building/Accessories/Residential/Shutters",
-    "newProcess": "WF-BLD_ACC"
-  },
-  {
-    "isTask": "Intake / Sufficiency Review",
-    "isStatus": "Sufficient - Online Application",
     "recordId": 20200306717,
     "newStatus": "Under Review",
     "recType": "Building/Accessories/Residential/Shutters",
