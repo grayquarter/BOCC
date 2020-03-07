@@ -1,0 +1,82 @@
+eval(getScriptText("INCLUDES_DPR_LIBRARY"));
+var currentUserID = "DPR";
+/*------------------------------------------------------------------------------------------------------/
+| Watermarks config here
+/------------------------------------------------------------------------------------------------------*/
+var wConfigs = [{
+        "id": "w1",
+        "name": "BOCC Reviewed",
+        "category": "t",
+        "type": "plan",
+        "properties": {
+            "template": "BOCC-ReviewedCodeCompliance.pdf",
+            "top": "10%",
+            "right": "2%",
+            "opacity": 50,
+            "width": "10%",
+            "height": "10%"
+        }
+    },
+    {
+        "id": "w2",
+        "name": "BOCC Reviewed Docs",
+        "category": "t",
+        "type": "document",
+        "properties": {
+            "template": "BOCC-ReviewedCodeCompliance_Docs.pdf",
+            "top": "10%",
+            "right": "2%",
+            "opacity": 50,
+            "width": "10%",
+            "height": "10%"
+        }
+    }
+];
+aa.print(Dpr.Api.updateWatermarkSettings(currentUserID, wConfigs).success);
+var watermarkSettings = Dpr.Api.getWatermarkSettings(currentUserID);
+if (watermarkSettings.success) {
+    for (var i = 0; i < watermarkSettings.data.length; i++) {
+        objExplore = watermarkSettings.data[i];
+        for (x in objExplore) {
+            if (typeof (objExplore[x]) != "function") aa.print("   " + x + " = " + objExplore[x]);
+        }
+    }
+}
+/*------------------------------------------------------------------------------------------------------/
+| External functions
+/------------------------------------------------------------------------------------------------------*/
+// functions
+function logDebug(dbg) {
+    aa.print(dbg);
+}
+function getApplication(appNum) {
+    var getCapResult = aa.cap.getCapID(appNum);
+    if (getCapResult.getSuccess())
+        return getCapResult.getOutput();
+    else {
+        logDebug("**ERROR: getting cap id (" + appNum + "): " + getCapResult.getErrorMessage())
+    }
+}
+function matches(eVal, argList) {
+    for (var i = 1; i < arguments.length; i++) {
+        if (arguments[i] == eVal) {
+            return true;
+        }
+    }
+    return false;
+}
+function getScriptText(vScriptName, servProvCode, useProductScripts) {
+    if (!servProvCode) servProvCode = aa.getServiceProviderCode();
+    vScriptName = vScriptName.toUpperCase();
+    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+    try {
+        if (useProductScripts) {
+            var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+        } else {
+            var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
+        }
+        return emseScript.getScriptText() + "";
+    } catch (err) {
+        return "";
+    }
+}
