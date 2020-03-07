@@ -1,0 +1,117 @@
+function getRecsToProcess() {
+
+return [
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306784,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Commercial/Fence",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306408,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Carport",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306401,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Dock",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306347,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306693,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 2020030669,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306717,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306728,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306735,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306768,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306383,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Swimming Pool",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306413,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Swimming Pool",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306749,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Swimming Pool",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306773,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Swimming Pool",
+    "newProcess": "WF-BLD_ACC"
+  },
+   ];
+}
