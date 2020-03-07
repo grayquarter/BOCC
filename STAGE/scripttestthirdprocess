@@ -1,0 +1,142 @@
+function getRecsToProcess() {
+
+return [
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306652,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306683,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306686,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306687,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306691,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306692,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306695,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306697,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306699,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306700,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306702,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306704,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306705,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306706,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  ,
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306755,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306780,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306785,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Window-Door",
+    "newProcess": "WF-BLD_ACC"
+  }
+   ];
+}
