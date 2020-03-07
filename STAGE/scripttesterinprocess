@@ -1,0 +1,256 @@
+var myCapId = "20200306199";
+var myUserId = "ADMIN";
+
+/* ASA  */  var eventName = "test";
+/* WTUA */  //var eventName = "WorkflowTaskUpdateAfter";  wfTask = "Application Submittal";	  wfStatus = "Admin Approved";  wfDateMMDDYYYY = "01/27/2015";
+/* IRSA */  //var eventName = "InspectionResultSubmitAfter" ; inspResult = "Failed"; inspResultComment = "Comment";  inspType = "Roofing"
+/* ISA  */  //var eventName = "InspectionScheduleAfter" ; inspType = "Roofing"
+/* PRA  */  //var eventName = "PaymentReceiveAfter";  
+
+var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
+var runEvent = true; // set to true to simulate the event and run all std choices/scripts for the record type.  
+
+/* master script code don't touch */ aa.env.setValue("EventName",eventName); var vEventName = eventName;  var controlString = eventName;  var tmpID = aa.cap.getCapID(myCapId).getOutput(); if(tmpID != null){aa.env.setValue("PermitId1",tmpID.getID1()); 	aa.env.setValue("PermitId2",tmpID.getID2()); 	aa.env.setValue("PermitId3",tmpID.getID3());} aa.env.setValue("CurrentUserID",myUserId); var preExecute = "PreExecuteForAfterEvents";var documentOnly = false;var SCRIPT_VERSION = 3.0;var useSA = false;var SA = null;var SAScript = null;var bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS","SUPER_AGENCY_FOR_EMSE"); if (bzr.getSuccess() && bzr.getOutput().getAuditStatus() != "I") { 	useSA = true; 		SA = bzr.getOutput().getDescription();	bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS","SUPER_AGENCY_INCLUDE_SCRIPT"); 	if (bzr.getSuccess()) { SAScript = bzr.getOutput().getDescription(); }	}if (SA) {	eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS",SA,useProductScript));	eval(getScriptText("INCLUDES_ACCELA_GLOBALS",SA,useProductScript));	/* force for script test*/ showDebug = true; eval(getScriptText(SAScript,SA,useProductScript));	}else {	eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS",null,useProductScript));	eval(getScriptText("INCLUDES_ACCELA_GLOBALS",null,useProductScript));	}	eval(getScriptText("INCLUDES_CUSTOM",null,useProductScript));if (documentOnly) {	doStandardChoiceActions2(controlString,false,0);	aa.env.setValue("ScriptReturnCode", "0");	aa.env.setValue("ScriptReturnMessage", "Documentation Successful.  No actions executed.");	aa.abortScript();	}var prefix = lookup("EMSE_VARIABLE_BRANCH_PREFIX",vEventName);var controlFlagStdChoice = "EMSE_EXECUTE_OPTIONS";var doStdChoices = true;  var doScripts = false;var bzr = aa.bizDomain.getBizDomain(controlFlagStdChoice ).getOutput().size() > 0;if (bzr) {	var bvr1 = aa.bizDomain.getBizDomainByValue(controlFlagStdChoice ,"STD_CHOICE");	doStdChoices = bvr1.getSuccess() && bvr1.getOutput().getAuditStatus() != "I";	var bvr1 = aa.bizDomain.getBizDomainByValue(controlFlagStdChoice ,"SCRIPT");	doScripts = bvr1.getSuccess() && bvr1.getOutput().getAuditStatus() != "I";	}	function getScriptText(vScriptName, servProvCode, useProductScripts) {	if (!servProvCode)  servProvCode = aa.getServiceProviderCode();	vScriptName = vScriptName.toUpperCase();	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();	try {		if (useProductScripts) {			var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);		} else {			var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");		}		return emseScript.getScriptText() + "";	} catch (err) {		return "";	}}logGlobals(AInfo); if (runEvent && typeof(doStandardChoiceActions) == "function" && doStdChoices) try {doStandardChoiceActions(controlString,true,0); } catch (err) { logDebug(err.message) } if (runEvent && typeof(doScriptActions) == "function" && doScripts) doScriptActions(); var z = debug.replace(/<BR>/g,"\r");  aa.print(z); 
+
+//
+// User code goes here
+//
+
+try {
+	
+
+showDebug = true;
+
+	var recs = getRecsToProcess();
+	
+	for (var i in recs) {
+		var map = recs[i];
+		capId = aa.cap.getCapID(String(map.recordId)).getOutput();
+		if (map.isStatus.equals(getTaskStatus(map.isTask))) {
+      // replacing workflow
+      logDebug("replacing workflow with " + map.newProcess);
+      var result = aa.workflow.deleteAndAssignWorkflow(capId, map.newProcess, false).getSuccess();
+      logDebug("did it work? " + result);
+      // setting inital status
+      resultWorkflowTask("Intake Sufficiency Review","Sufficient","","");
+      // insert new tasks
+      //adds tasks into workflow
+
+      // test wf mapping
+      var wfMap = getTaskMap();
+
+      for (var i in wfMap) {
+        // add by record type
+        if (wfMap[i].Records.indexOf(String(map.recType)) >= 0) {
+          for (var j in wfMap[i].Tasks) {
+            logDebug("inserting " + wfMap[i].Tasks[j]);
+            if (!appMatch('Building/Trade Permits/*/*')) 
+              {
+              insertTask("Building Plans Review", wfMap[i].Tasks[j], "P");
+              }
+        
+            if (appMatch('Building/Trade Permits/*/*')) 
+              {
+              insertTask("Electrical Plans Review", wfMap[i].Tasks[j], "P");
+              }
+          }
+        }
+
+}
+// end test wf mapping
+			}
+		}
+	}
+catch (err) {
+	logDebug("A JavaScript Error occurred: " + err.message);
+	}
+// end user code
+aa.env.setValue("ScriptReturnCode", "1"); 	aa.env.setValue("ScriptReturnMessage", debug)
+function getTaskStatus(stask) {
+	try{
+	// returns a string of task statuses for a workflow group
+	
+	var returnStr = ""
+	var taskResult = aa.workflow.getTaskItems(capId, stask, null, null, null, null);
+	
+	if (taskResult.getSuccess()) {
+		var taskArr = taskResult.getOutput();
+	} else {
+		logDebug("**ERROR: getting tasks : " + taskResult.getErrorMessage());
+		return false
+	}
+
+	for (xx in taskArr) {
+		if (taskArr[xx].getTaskDescription().equals(stask)) {
+			return taskArr[xx].getDisposition();
+		}
+		
+	}
+	}catch(err){
+		logDebug("An error occurred in custom function getTaskStatus: " + err.message + " in line: " + err.lineNumber);
+	}
+}
+
+function getRecsToProcess() {
+
+return [
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306199,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Canopy",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306208,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Canopy",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306290,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shed",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306373,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306524,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306528,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306531,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306533,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306535,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306542,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306544,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306546,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306548,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD-ACC"
+  },
+  {
+    "isTask": "Intake / Sufficiency Review",
+    "isStatus": "Sufficient - Online Application",
+    "recordId": 20200306579,
+    "newStatus": "Under Review",
+    "recType": "Building/Accessories/Residential/Shutters",
+    "newProcess": "WF-BLD-ACC"
+  },
+   ];
+}
+function resultWorkflowTask(wfstr, wfstat, wfcomment, wfnote) // optional process name
+{
+	var useProcess = false;
+	var processName = "";
+	if (arguments.length == 5) {
+		processName = arguments[4]; // subprocess
+		useProcess = true;
+	}
+
+	var workflowResult = aa.workflow.getTaskItems(capId, wfstr, processName, null, null, null);
+	if (workflowResult.getSuccess())
+		var wfObj = workflowResult.getOutput();
+	else {
+		logMessage("**ERROR: Failed to get workflow object: " + workflowResult.getErrorMessage());
+		return false;
+	}
+
+	if (!wfstat)
+		wfstat = "NA";
+
+	for (i in wfObj) {
+		var fTask = wfObj[i];
+		if (fTask.getTaskDescription().toUpperCase().equals(wfstr.toUpperCase()) && (!useProcess || fTask.getProcessCode().equals(processName))) {
+			var statObj = aa.workflow.getTaskStatus(fTask, wfstat);
+			var dispo = "U";
+			if (statObj.getSuccess()) {
+				var status = statObj.getOutput();
+				dispo = status.getResultAction();
+			} else {
+				logDebug("Could not get status action resulting to no change")
+			}
+
+			var dispositionDate = aa.date.getCurrentDate();
+			var stepnumber = fTask.getStepNumber();
+			var processID = fTask.getProcessID();
+
+			if (useProcess)
+				aa.workflow.handleDisposition(capId, stepnumber, processID, wfstat, dispositionDate, wfnote, wfcomment, systemUserObj, dispo);
+			else
+				aa.workflow.handleDisposition(capId, stepnumber, wfstat, dispositionDate, wfnote, wfcomment, systemUserObj, dispo);
+
+			logMessage("Resulting Workflow Task: " + wfstr + " with status " + wfstat);
+			logDebug("Resulting Workflow Task: " + wfstr + " with status " + wfstat);
+		}
+	}
+}
