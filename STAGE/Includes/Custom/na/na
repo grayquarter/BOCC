@@ -1,0 +1,539 @@
+/*adhoc task to convert old workflows for Pre-DPR Records*/
+
+function getRecsToProcess() {
+
+	return [
+		{
+			"recType": "Building/Accessories/Commercial/Boatlift",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Cage",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Canopy",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Carport",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Deck",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Dock",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Door",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Driveway",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Fence",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Garage",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Lanai",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Outdoor Storage",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Parking Lot",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Seawall",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Shed",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Shutters",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Sign",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Sign-Government",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Slab",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Solar Photovoltaic",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Wall Exterior",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Wall Interior",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Swimming Pool",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Commercial/Window-Door",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Baby Barrier",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Barn",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Boatlift",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Cage",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Canopy",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Carport",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Deck",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Door",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Driveway",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Garage",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Lanai",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Mobile Home Addition",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/RV Accessory Structure",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Seawall",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Shed",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Shutters",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Slab",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Solar Photovoltaic",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Swimming Pool",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Wall Exterior",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Wall Interior",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Window-Door",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Foundation",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Multi-Family - Babcock",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Public Works Infrastructure",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Temp Construction Trailer",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Coastal Lighting",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Duplex-Babcock",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Foundation",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Master Plan",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Master Plan-Babcock",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Single Family-Babcock",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Townhouse-Babcock",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Commercial/Demolitions",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Commercial/Irrigation System",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Residential/Demolitions",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Addition",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Build out",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Commercial Building",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Communication System",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Communication Tower",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/DCA Office",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Miscellaneous",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Modular",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Multi-Family",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Shell",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Addition",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/DCA Home",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Duplex",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Miscellaneous",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Mobile Home",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Modular",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Single Family",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Residential/Townhouse",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Residential/Fire",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Electrical Plans Review"
+		}, {
+			"recType": "Planning/Growth Mgmt/Zoning Permits/Residential Fence",
+			"newProcess": "WF-BLD_ACC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Construction/Commercial/Remodel",
+			"newProcess": "WF-BLD_CON",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Land Development/Grade & Fill/NA",
+			"newProcess": "WF-GRADEFILL",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Land Development/ROW/NA",
+			"newProcess": "WF-LAND",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Land Development/ROW/Utility",
+			"newProcess": "WF-LAND",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Land Development/Storm Water/NA",
+			"newProcess": "WF-LAND",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Land Development/ROW/Utility - Internet",
+			"newProcess": "WF-LAND",
+			"planReview": "Building Plans Review"
+		},{
+			"recType": "Building/Construction/Commercial/Landscape",
+			"newProcess": "WF-PLAN-MISC",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Planning/Growth Mgmt/Zoning Permits/Landscaping",
+			"newProcess": "WF-PLAN-MISC",
+			"planReview": "CCU Plans Review"
+		}, {
+			"recType": "Planning/Growth Mgmt/Zoning Permits/Special Event",
+			"newProcess": "WF-PLAN-MISC",
+			"planReview": "CCU Plans Review"
+		}, {
+			"recType": "Planning/Growth Mgmt/Zoning Permits/Tree",
+			"newProcess": "WF-PLAN-MISC",
+			"planReview": "CCU Plans Review"
+		}, {
+			"recType": "Planning/Growth Mgmt/Zoning Permits/Tree",
+			"newProcess": "WF-PLAN-MISC",
+			"planReview": "CCU Plans Review"
+		}, {
+			"recType": "Building/Accessories/Residential/Temporary Erosion Control",
+			"newProcess": "WF-TEMP",
+			"planReview": "Building Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Commercial/Roofing",
+			"newProcess": "WF-TRADEROF",
+			"planReview": "Electrical Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Commercial/Electrical",
+			"newProcess": "WF-TRADES",
+			"planReview": "Electrical Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Commercial/Fire",
+			"newProcess": "WF-TRADES",
+			"planReview": "Electrical Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Commercial/Gas",
+			"newProcess": "WF-TRADES",
+			"planReview": "Electrical Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Commercial/Hood",
+			"newProcess": "WF-TRADES",
+			"planReview": "Electrical Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Commercial/Mechanical",
+			"newProcess": "WF-TRADES",
+			"planReview": "Electrical Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Commercial/Plumbing",
+			"newProcess": "WF-TRADES",
+			"planReview": "Electrical Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Commercial/Pool Heat Pump",
+			"newProcess": "WF-TRADES",
+			"planReview": "Electrical Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Commercial/Water Heater",
+			"newProcess": "WF-TRADES",
+			"planReview": "Electrical Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Residential/Gas",
+			"newProcess": "WF-TRADES",
+			"planReview": "Electrical Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Residential/Pool Heat Pump",
+			"newProcess": "WF-TRADES",
+			"planReview": "Electrical Plans Review"
+		}, {
+			"recType": "Building/Trade Permits/Residential/Pool Solar System",
+			"newProcess": "WF-TRADES",
+			"planReview": "Electrical Plans Review"
+		}
+
+	];
+}
+
+function resultWorkflowTask(wfstr, wfstat, wfcomment, wfnote) // optional process name
+{
+	var useProcess = false;
+	var processName = "";
+	if (arguments.length == 5) {
+		processName = arguments[4]; // subprocess
+		useProcess = true;
+	}
+
+	var workflowResult = aa.workflow.getTaskItems(capId, wfstr, processName, null, null, null);
+	if (workflowResult.getSuccess())
+		var wfObj = workflowResult.getOutput();
+	else {
+		logMessage("**ERROR: Failed to get workflow object: " + workflowResult.getErrorMessage());
+		return false;
+	}
+
+	if (!wfstat)
+		wfstat = "NA";
+
+	for (i in wfObj) {
+		var fTask = wfObj[i];
+		if (fTask.getTaskDescription().toUpperCase().equals(wfstr.toUpperCase()) && (!useProcess || fTask.getProcessCode().equals(processName))) {
+			var statObj = aa.workflow.getTaskStatus(fTask, wfstat);
+			var dispo = "U";
+			if (statObj.getSuccess()) {
+				var status = statObj.getOutput();
+				dispo = status.getResultAction();
+			} else {
+				logDebug("Could not get status action resulting to no change")
+			}
+
+			var dispositionDate = aa.date.getCurrentDate();
+			var stepnumber = fTask.getStepNumber();
+			var processID = fTask.getProcessID();
+
+			if (useProcess)
+				aa.workflow.handleDisposition(capId, stepnumber, processID, wfstat, dispositionDate, wfnote, wfcomment, systemUserObj, dispo);
+			else
+				aa.workflow.handleDisposition(capId, stepnumber, wfstat, dispositionDate, wfnote, wfcomment, systemUserObj, dispo);
+
+			logMessage("Resulting Workflow Task: " + wfstr + " with status " + wfstat);
+			logDebug("Resulting Workflow Task: " + wfstr + " with status " + wfstat);
+		}
+	}
+}
+
+function getTaskStatus(stask) {
+	try {
+		// returns a string of task statuses for a workflow group
+
+		var returnStr = ""
+			var taskResult = aa.workflow.getTaskItems(capId, stask, null, null, null, null);
+
+		if (taskResult.getSuccess()) {
+			var taskArr = taskResult.getOutput();
+		} else {
+			logDebug("**ERROR: getting tasks : " + taskResult.getErrorMessage());
+			return false
+		}
+
+		for (xx in taskArr) {
+			if (taskArr[xx].getTaskDescription().equals(stask)) {
+				return taskArr[xx].getDisposition();
+			}
+
+		}
+	} catch (err) {
+		logDebug("An error occurred in custom function getTaskStatus: " + err.message + " in line: " + err.lineNumber);
+	}
+}
+
+function doConvertWorkflow2() {
+    //Creating DPR project
+    if (isDPRRecord(appTypeString)) {
+        eval(loadDprLibrary());
+        Dpr.Bocc.onApplicationSubmittal();
+        var successs = false;
+        var planReview = null;
+        var recs = getRecsToProcess();
+        for (var i in recs) {
+            var map = recs[i];
+            // add by record type
+            if (appTypeString.equals(map.recType)) {
+                // replacing workflow
+                logDebug("replacing workflow with " + map.newProcess + " " + capId);
+                var result = aa.workflow.deleteAndAssignWorkflow(capId, map.newProcess, false).getSuccess();
+                logDebug("did it work? " + result);
+                // setting inital status
+                resultWorkflowTask("Intake Sufficiency Review", "Awaiting Plans", "", "");
+                var successs = true;
+                planReview = map.planReview;
+            }
+        }
+
+ 
+
+        if (successs) {
+            var wfMap = getTaskMap();
+            for (var i in wfMap) { logDebug("wfMap:"+i+ " " + wfMap[i].Records[0]);
+                if (wfMap[i].Records.indexOf(String(appTypeString)) >= 0 ) {
+                    for (var j in wfMap[i].Tasks) {
+                        logDebug("inserting " + wfMap[i].Tasks[j]);
+                        // insert new tasks
+                        //adds tasks into workflow
+                        insertTask(planReview, wfMap[i].Tasks[j], "P");
+                    }
+                }
+            }
+        }
+    }
+}
+/*adhoc task to convert old workflows for Pre-DPR Records*/
