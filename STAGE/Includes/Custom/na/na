@@ -364,10 +364,6 @@ function getRecsToProcess() {
 			"newProcess": "WF-PLAN-MISC",
 			"planReview": "CCU Plans Review"
 		}, {
-			"recType": "Planning/Growth Mgmt/Zoning Permits/Tree",
-			"newProcess": "WF-PLAN-MISC",
-			"planReview": "CCU Plans Review"
-		}, {
 			"recType": "Building/Accessories/Residential/Temporary Erosion Control",
 			"newProcess": "WF-TEMP",
 			"planReview": "Building Plans Review"
